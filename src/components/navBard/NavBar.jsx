@@ -12,27 +12,32 @@ export const NavBar = () => {
 
   return (
     <nav>
-      <NavLink to="/">
+      <NavLink to="/" aria-label="redirectHome">
         <img src={logo} width="70" height=" 70" alt="Logo" />
         <div className="name-logo">M&C Fabric</div>
       </NavLink>
 
-      <NavLink to="/shop" style={getActiveStyle} className="shop">
-        <li>Boutique</li>
+      <NavLink
+        to="/shop"
+        style={getActiveStyle}
+        className="shop"
+        aria-label="redirectShop"
+      >
+        Boutique
       </NavLink>
 
-      <NavLink to="/cart">
+      <NavLink to="/cart" aria-label="redirectCart">
         <div className="position-cart">
-          <button className="cart">
+          <button className="cart" aria-label="btnCart">
             <CgShoppingCart size={22} />
             <span className="cart-item-qty">0</span>
           </button>
         </div>
       </NavLink>
 
-      <NavLink to="/login">
+      <NavLink to="/login" aria-label="redirectLogin">
         <div className="position-login">
-          <button className="login">
+          <button className="login" aria-label="btnLogin">
             <BiUser size={22} />
           </button>
         </div>
