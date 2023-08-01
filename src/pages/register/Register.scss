@@ -1,17 +1,17 @@
-.login-container {
+.register-container {
   padding: 1rem;
   text-align: center;
   width: 30rem;
   margin: auto;
 }
 
-.login-title {
+.register-title {
   font-size: 2.5rem;
   color: var(--color-blue-dark);
   margin-bottom: 3rem;
 }
 
-.login-form {
+.register-form {
   display: flex;
   flex-direction: column;
 
@@ -36,7 +36,7 @@
     }
   }
 
-  .identif-error {
+  .signup-error {
     margin-top: -1.9rem;
     margin-bottom: 0.65rem;
     color: var(--color-red);
@@ -46,11 +46,4 @@
     margin: auto;
     width: 100%;
   }
-}
-
-.new-account {
-  margin-top: 1rem;
-  font-size: 0.8rem;
-  text-align: left;
-  cursor: pointer;
 }

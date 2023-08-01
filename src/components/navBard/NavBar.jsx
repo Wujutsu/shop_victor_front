@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./NavBar.scss";
 import { NavLink } from "react-router-dom";
 import { CgShoppingCart } from "react-icons/cg";
 import { BiUser } from "react-icons/bi";
 import logo from "../../assets/logo.webp";
+import { UserContext } from "../../contexts/UserContext";
 
 export const NavBar = () => {
   const getActiveStyle = ({ isActive }) => {
     return { color: isActive ? "black" : "grey" };
   };
+  const { isLogged, handleSaveLogout } = useContext(UserContext);
 
   return (
     <nav>
@@ -35,13 +37,45 @@ export const NavBar = () => {
         </div>
       </NavLink>
 
-      <NavLink to="/login" aria-label="redirectLogin">
+      {!isLogged ? (
         <div className="position-login">
-          <button className="login" aria-label="btnLogin">
+          <div className="login">
             <BiUser size={22} />
-          </button>
+            <div className="user-options">
+              <NavLink to="/login" aria-label="redirectLogin">
+                <button className="btn" aria-label="btnLogin">
+                  Se connecter
+                </button>
+              </NavLink>
+              <NavLink to="/register" aria-label="redirectRegister">
+                <button className="btn" aria-label="btnRegister">
+                  S'inscrire
+                </button>
+              </NavLink>
+            </div>
+          </div>
         </div>
-      </NavLink>
+      ) : (
+        <div className="position-login">
+          <div className="login">
+            <BiUser size={22} />
+            <div className="user-options">
+              <NavLink to="/account" aria-label="redirectAccount">
+                <button className="btn" aria-label="btnAccount">
+                  Mon compte
+                </button>
+              </NavLink>
+              <button
+                className="btn btn-red"
+                aria-label="btnLogout"
+                onClick={() => handleSaveLogout()}
+              >
+                Déconnexion
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </nav>
   );
 };

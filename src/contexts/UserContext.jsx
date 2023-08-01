@@ -8,20 +8,20 @@ const UserProvider = ({ children }) => {
   const [token, setToken] = useState("");
   const [username, setUsername] = useState("");
   const [role, setRole] = useState("");
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogged, setIsLogged] = useState(false);
 
   //Récupére les données sauvegardées en local lors du chargement initial du composant
   useEffect(() => {
     const savedToken = localStorage.getItem("token");
     const savedUsername = localStorage.getItem("username");
     const savedRole = localStorage.getItem("role");
-    const savedIsLogin = localStorage.getItem("isLogin");
+    const savedisLogged = localStorage.getItem("isLogged");
 
-    if (savedToken && savedUsername && savedRole && savedIsLogin) {
+    if (savedToken && savedUsername && savedRole && savedisLogged) {
       setToken(savedToken);
       setUsername(savedUsername);
       setRole(savedRole);
-      setIsLogin(savedIsLogin === "true");
+      setIsLogged(savedisLogged === "true");
     }
   }, []);
 
@@ -30,28 +30,28 @@ const UserProvider = ({ children }) => {
     localStorage.setItem("token", token);
     localStorage.setItem("username", username);
     localStorage.setItem("role", role);
-    localStorage.setItem("isLogin", isLogin);
-  }, [token, username, role, isLogin]);
+    localStorage.setItem("isLogged", isLogged);
+  }, [token, username, role, isLogged]);
 
   const handleSaveLogin = (token, username, role) => {
     setToken(token);
     setUsername(username);
     setRole(role);
-    setIsLogin(true);
+    setIsLogged(true);
   };
 
   const handleSaveLogout = () => {
     setToken("");
     setUsername("");
     setRole("");
-    setIsLogin(false);
+    setIsLogged(false);
   };
 
   const dataList = {
     token,
     username,
     role,
-    isLogin,
+    isLogged,
     handleSaveLogin,
     handleSaveLogout,
   };

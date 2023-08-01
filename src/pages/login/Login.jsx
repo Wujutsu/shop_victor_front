@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import "./Login.scss";
 import axios from "axios";
 import { UserContext } from "../../contexts/UserContext";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
@@ -75,7 +75,9 @@ export const Login = () => {
         </button>
       </form>
 
-      <div className="new-account">Créer un compte</div>
+      <NavLink to="/register" aria-label="redirectRegister">
+        <div className="new-account">Créer un compte</div>
+      </NavLink>
     </div>
   );
 };
