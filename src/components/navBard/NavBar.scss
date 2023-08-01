@@ -1,0 +1,57 @@
+nav {
+  margin: 1rem 8rem;
+  display: flex;
+  align-items: center;
+  position: relative;
+
+  .name-logo {
+    position: absolute;
+    top: 1.8rem;
+    left: 4.5rem;
+  }
+
+  .shop {
+    position: absolute;
+    right: 8rem;
+  }
+
+  .position-login {
+    position: absolute;
+    right: 0;
+    top: 0.9rem;
+  }
+
+  .position-cart {
+    position: absolute;
+    right: 3.5rem;
+    top: 0.9rem;
+  }
+
+  .cart,
+  .login {
+    padding: 12px;
+    background-color: #f1f1f1;
+    border-radius: 50%;
+    border: none;
+    position: relative;
+    transition: transform 0.4s ease;
+
+    &:hover {
+      transform: scale(1.1, 1.1);
+    }
+
+    .cart-item-qty {
+      position: absolute;
+      top: 0;
+      right: 5px;
+      font-size: 12px;
+      color: #eee;
+      background-color: #f02d34;
+      width: 20px;
+      height: 14px;
+      border-radius: 50%;
+      text-align: center;
+      font-weight: 600;
+    }
+  }
+}

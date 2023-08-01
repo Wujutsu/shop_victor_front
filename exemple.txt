@@ -1,0 +1,27 @@
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+
+export const Home = () => {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const apiUrl = "http://localhost:8080/api/auth/signin";
+    const requestData = {
+      email: "kevin@gmail.com",
+      password: "mdp",
+    };
+
+    axios
+      .post(apiUrl, requestData)
+      .then((response) => {
+        // Traitement de la réponse de l'API en cas de succès
+        console.log("Response data:", response.data);
+      })
+      .catch((error) => {
+        // Gestion des erreurs en cas d'échec de la requête
+        console.error("Error making API request:", error);
+      });
+  }, []);
+
+  return <div>Home</div>;
+};

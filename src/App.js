@@ -1,12 +1,12 @@
 import "./App.scss";
 import { NavRoutes } from "./NavRoutes";
-import { Header } from "./components/header/Header";
+import { NavBar } from "./components/navBard/NavBar";
 import { ScrollToTop } from "./components/scrollToTop/ScrollToTop";
 
 function App() {
   return (
     <div className="App">
-      <Header />
+      <NavBar />
       <NavRoutes />
       <ScrollToTop />
     </div>
