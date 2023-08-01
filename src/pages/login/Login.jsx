@@ -2,12 +2,13 @@ import React, { useContext, useState } from "react";
 import "./Login.scss";
 import axios from "axios";
 import { UserContext } from "../../contexts/UserContext";
+import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [incorrectIdentifier, setIncorrectIdentifier] = useState(false);
-
+  const navigate = useNavigate();
   const { handleSaveLogin } = useContext(UserContext);
 
   const handleLogin = (event) => {
@@ -29,6 +30,7 @@ export const Login = () => {
           response.data.roles[0]
         );
         console.log("Welcome " + response.data.username);
+        navigate("/");
       })
       .catch((error) => {
         setIncorrectIdentifier(true);
@@ -77,3 +79,5 @@ export const Login = () => {
     </div>
   );
 };
+
+export default Login;

@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import { Home } from "./pages/home/Home";
-import { Login } from "./pages/login/Login";
+import Home from "./pages/home/Home";
+import Login from "./pages/login/Login";
 
 export const NavRoutes = () => {
   return (
@@ -11,3 +11,5 @@ export const NavRoutes = () => {
     </Routes>
   );
 };
+
+export default NavRoutes;
