@@ -1,3 +1,4 @@
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.scss";
 import NavRoutes from "./NavRoutes";
 import NavBar from "./components/navBard/NavBar";

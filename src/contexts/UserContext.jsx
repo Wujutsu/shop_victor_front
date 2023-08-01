@@ -45,6 +45,7 @@ const UserProvider = ({ children }) => {
     setUsername("");
     setRole("");
     setIsLogged(false);
+    window.location.reload();
   };
 
   const dataList = {

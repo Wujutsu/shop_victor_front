@@ -70,7 +70,11 @@ export const Login = () => {
           <div className="identif-error">Identifiants incorrects</div>
         )}
 
-        <button className="btn" type="submit" aria-label="Se connecter">
+        <button
+          className="btn btn-primary"
+          type="submit"
+          aria-label="Se connecter"
+        >
           Se connecter
         </button>
       </form>

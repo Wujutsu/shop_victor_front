@@ -43,12 +43,18 @@ export const NavBar = () => {
             <BiUser size={22} />
             <div className="user-options">
               <NavLink to="/login" aria-label="redirectLogin">
-                <button className="btn" aria-label="btnLogin">
+                <button
+                  className="btn btn-perso btn-primary"
+                  aria-label="btnLogin"
+                >
                   Se connecter
                 </button>
               </NavLink>
               <NavLink to="/register" aria-label="redirectRegister">
-                <button className="btn" aria-label="btnRegister">
+                <button
+                  className="btn btn-perso btn-primary"
+                  aria-label="btnRegister"
+                >
                   S'inscrire
                 </button>
               </NavLink>
@@ -61,12 +67,15 @@ export const NavBar = () => {
             <BiUser size={22} />
             <div className="user-options">
               <NavLink to="/account" aria-label="redirectAccount">
-                <button className="btn" aria-label="btnAccount">
+                <button
+                  className="btn btn-perso btn-primary"
+                  aria-label="btnAccount"
+                >
                   Mon compte
                 </button>
               </NavLink>
               <button
-                className="btn btn-red"
+                className="btn btn-perso btn-danger"
                 aria-label="btnLogout"
                 onClick={() => handleSaveLogout()}
               >

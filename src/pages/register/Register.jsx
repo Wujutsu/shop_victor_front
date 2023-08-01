@@ -92,7 +92,11 @@ const Register = () => {
           <div className="signup-error">{errorSignup}</div>
         )}
 
-        <button className="btn" type="submit" aria-label="S'enregistrer">
+        <button
+          className="btn btn-primary"
+          type="submit"
+          aria-label="S'enregistrer"
+        >
           S'inscrire
         </button>
       </form>

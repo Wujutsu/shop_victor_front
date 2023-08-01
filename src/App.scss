@@ -22,30 +22,28 @@ a {
   text-decoration: none;
 }
 
+//Personalise Bootstrap
 .btn {
-  font-family: "Sora", sans-serif;
-  font-weight: 600;
-  line-height: 18px;
-  background-color: var(--color-blue);
-  padding: 10px 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  color: white;
-  border: 0px solid black;
-  transition: background-color 0.3s;
+  border-radius: 0px;
+  height: 2.8rem;
+}
+
+.btn-primary {
+  background-color: var(--color-blue-dark);
+  border: 1px solid var(--color-blue-dark);
 
   &:hover {
-    background: var(--color-blue-dark);
+    background-color: var(--color-blue);
+    border: 1px solid var(--color-blue);
   }
 }
 
-.btn-red {
+.btn-danger {
   background-color: var(--color-red);
-  transition: background-color 0.3s;
+  border: 1px solid var(--color-red);
 
   &:hover {
-    background-color: #fd4d3d;
+    background-color: #f74838;
+    border: 1px solid #f74838;
   }
 }

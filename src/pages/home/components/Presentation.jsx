@@ -21,9 +21,9 @@ const Presentation = () => {
       </div>
 
       <NavLink to="/shop" className="shop" aria-label="redirectShop">
-        <button className="btn" aria-label="btnBoutique">
-          <CgShoppingCart size={30} />
-          <div>Accès boutique</div>
+        <button className="btn btn-primary" aria-label="btnBoutique">
+          <CgShoppingCart size={22} />
+          Accès boutique
         </button>
       </NavLink>
     </div>
