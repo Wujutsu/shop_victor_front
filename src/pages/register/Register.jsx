@@ -16,9 +16,10 @@ const Register = () => {
 
     const apiUrl = "http://localhost:8080/api/auth/signup";
     const requestData = {
-      username: firstName + " " + lastName,
       email: email,
       password: password,
+      firstName: firstName,
+      lastName: lastName,
     };
 
     axios
@@ -29,9 +30,7 @@ const Register = () => {
       })
       .catch((error) => {
         let message = error.response.data.message;
-        if (message === "Error: Username is already use") {
-          setErrorSignup("Le nom d'utilisateur est déjà utilisé");
-        } else if (message === "Error: Email is already use") {
+        if (message === "Error: Email is already use") {
           setErrorSignup("L'adresse E-mail est déjà utilisée");
         }
       });

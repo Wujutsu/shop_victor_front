@@ -1,0 +1,66 @@
+.profil {
+  margin-top: 2.5rem;
+
+  .title {
+    margin-bottom: 1.5rem;
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: var(--color-red);
+  }
+
+  .title-password {
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: var(--color-red);
+  }
+
+  .profil-box {
+    background-color: var(--color-light);
+    padding: 1.5rem;
+    border-radius: 5px;
+
+    .profil-form {
+      padding-top: 1.5rem;
+      margin-bottom: 5rem;
+      display: flex;
+      flex-direction: column;
+
+      .form-input {
+        position: relative;
+
+        label {
+          position: absolute;
+          font-size: 1rem;
+          text-align: left;
+          top: -25px;
+          color: black;
+        }
+
+        input {
+          margin-bottom: 2.8rem;
+          padding: 10px;
+          font-size: 16px;
+          outline: none;
+          width: 100%;
+        }
+
+        .input-error {
+          border: 1px solid red;
+        }
+      }
+
+      .signup-error {
+        margin-top: -1.9rem;
+        margin-bottom: 0.65rem;
+        color: var(--color-red);
+      }
+
+      button {
+        margin: auto;
+        width: 100%;
+      }
+    }
+  }
+}

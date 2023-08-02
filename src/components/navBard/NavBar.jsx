@@ -10,7 +10,7 @@ export const NavBar = () => {
   const getActiveStyle = ({ isActive }) => {
     return { color: isActive ? "black" : "grey" };
   };
-  const { isLogged, handleSaveLogout } = useContext(UserContext);
+  const { isLogged, handleLogout } = useContext(UserContext);
 
   return (
     <nav>
@@ -77,7 +77,7 @@ export const NavBar = () => {
               <button
                 className="btn btn-perso btn-danger"
                 aria-label="btnLogout"
-                onClick={() => handleSaveLogout()}
+                onClick={() => handleLogout()}
               >
                 Déconnexion
               </button>

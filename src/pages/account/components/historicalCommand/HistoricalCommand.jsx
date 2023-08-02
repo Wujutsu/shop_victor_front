@@ -7,23 +7,41 @@ const HistoricalCommand = () => {
     <div className="historicalCommand">
       <div className="recap-title">Vos dernières commandes</div>
 
-      {[0, 1, 2, 3, 4].map((data, index) => (
+      {[0, 1, 2].map((data, index) => (
         <div className="command" key={index}>
           <div>
             <div className="state">Votre commande a été expédiée</div>
             <div className="date">
-              Date de commande: <span>25 nov. 2022</span>
+              Date commande: <span>25 nov. 2022</span>
             </div>
             <div className="cost">
               Coût total: <span>105.66 €</span>
             </div>
           </div>
 
-          <div>
-            <img src={teeshirt} alt="teeshirt" width={75} />
-            <img src={teeshirt} alt="teeshirt" width={75} />
-            <img src={teeshirt} alt="teeshirt" width={75} />
-            <img src={teeshirt} alt="teeshirt" width={75} />
+          <div className="show-product">
+            <img src={teeshirt} alt="teeshirt" width={80} />
+            <div className="detail">
+              <div className="info">Tee-shirt noir mate en laine arabique</div>
+              <div className="info">
+                Quantité: <span>1</span>
+              </div>
+              <div className="info">
+                Coût: <span>50.99 €</span>
+              </div>
+            </div>
+          </div>
+          <div className="show-product">
+            <img src={teeshirt} alt="teeshirt" width={80} />
+            <div className="detail">
+              <div className="info">Tee-shirt noir mate en laine arabique</div>
+              <div className="info">
+                Quantité: <span>1</span>
+              </div>
+              <div className="info">
+                Coût: <span>50.99 €</span>
+              </div>
+            </div>
           </div>
         </div>
       ))}

@@ -26,10 +26,11 @@ export const Login = () => {
         setIncorrectIdentifier(false);
         handleSaveLogin(
           response.data.accessToken,
-          response.data.username,
+          response.data.firstName,
+          response.data.lastName,
+          response.data.email,
           response.data.roles[0]
         );
-        console.log("Welcome " + response.data.username);
         navigate("/");
       })
       .catch((error) => {
