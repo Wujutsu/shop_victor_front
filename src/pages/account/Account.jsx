@@ -8,7 +8,7 @@ const Account = () => {
   const { firstName } = useContext(UserContext);
 
   return (
-    <div className="account dimension-page">
+    <div className="account">
       <div className="title">Mon compte</div>
       <div className="welcome">Bonjour {firstName}</div>
       <div className="row">

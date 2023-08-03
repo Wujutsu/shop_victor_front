@@ -23,18 +23,6 @@ a {
 }
 
 //------------------------Ajout class perso------------------------//
-.dimension-page {
-  margin: 0rem 8rem;
-
-  @media screen and (max-width: 992px) {
-    margin: 0rem 4rem;
-  }
-
-  @media screen and (max-width: 768px) {
-    margin: 0rem 1rem;
-  }
-}
-
 input {
   height: 35px;
 }

@@ -4,7 +4,7 @@ import Presentation from "./components/Presentation";
 
 export const Home = () => {
   return (
-    <div className="dimension-page">
+    <div>
       <Presentation />
     </div>
   );

@@ -6,7 +6,7 @@ import ScrollToTop from "./components/scrollToTop/ScrollToTop";
 
 function App() {
   return (
-    <div className="App">
+    <div className="App  container-md">
       <NavBar />
       <NavRoutes />
       <ScrollToTop />
