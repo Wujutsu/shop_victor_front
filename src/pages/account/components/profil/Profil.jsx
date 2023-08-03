@@ -5,11 +5,19 @@ import axios from "axios";
 import ShowInfoPopup from "../../../../components/showInfoPopup/ShowInfoPopup";
 
 const Profil = () => {
-  const { firstName, lastName, email, token, handleUpdateInfos, handleLogout } =
-    useContext(UserContext);
+  const {
+    firstName,
+    lastName,
+    email,
+    token,
+    phoneNumber,
+    handleUpdateInfos,
+    handleLogout,
+  } = useContext(UserContext);
   const [valFirstName, setValFirstName] = useState(firstName);
   const [valLastName, setValLastName] = useState(lastName);
   const [valEmail, setValEmail] = useState(email);
+  const [valPhoneNumber, setValPhoneNumber] = useState(phoneNumber);
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [verifPassword, setVerifPassword] = useState("");
@@ -25,6 +33,7 @@ const Profil = () => {
       firstName: valFirstName,
       lastName: valLastName,
       email: valEmail,
+      phoneNumber: valPhoneNumber,
     };
     const config = {
       headers: {
@@ -41,7 +50,12 @@ const Profil = () => {
           localStorage.setItem("emailUpdated", true);
           handleLogout();
         } else {
-          handleUpdateInfos(valFirstName, valLastName, valEmail);
+          handleUpdateInfos(
+            valFirstName,
+            valLastName,
+            valEmail,
+            valPhoneNumber
+          );
           setUpdatedInformations(true);
           setTimeout(() => {
             setUpdatedInformations(false);
@@ -133,6 +147,17 @@ const Profil = () => {
               value={valEmail}
               onChange={(e) => setValEmail(e.target.value)}
               required
+            />
+          </div>
+          <div className="form-input">
+            <label htmlFor="phoneNumber">Téléphone</label>
+            <input
+              className={`${errorEmail && "input-error"}`}
+              type="text"
+              id="phoneNumber"
+              name="phoneNumber"
+              value={valPhoneNumber}
+              onChange={(e) => setValPhoneNumber(e.target.value)}
             />
           </div>
           <button

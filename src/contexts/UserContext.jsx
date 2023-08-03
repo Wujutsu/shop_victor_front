@@ -11,6 +11,7 @@ const UserProvider = ({ children }) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [role, setRole] = useState("");
   const [isLogged, setIsLogged] = useState(false);
 
@@ -20,6 +21,7 @@ const UserProvider = ({ children }) => {
     const savedFirstName = localStorage.getItem("firstName");
     const savedLastName = localStorage.getItem("lastName");
     const savedEmail = localStorage.getItem("email");
+    const savedPhoneNumber = localStorage.getItem("phoneNumber");
     const savedRole = localStorage.getItem("role");
     const savedisLogged = localStorage.getItem("isLogged");
 
@@ -28,6 +30,7 @@ const UserProvider = ({ children }) => {
       savedFirstName &&
       savedLastName &&
       savedEmail &&
+      savedPhoneNumber &&
       savedRole &&
       savedisLogged
     ) {
@@ -35,6 +38,7 @@ const UserProvider = ({ children }) => {
       setFirstName(savedFirstName);
       setLastName(savedLastName);
       setEmail(savedEmail);
+      setPhoneNumber(savedPhoneNumber);
       setRole(savedRole);
       setIsLogged(savedisLogged === "true");
     }
@@ -46,21 +50,31 @@ const UserProvider = ({ children }) => {
     localStorage.setItem("firstName", firstName);
     localStorage.setItem("lastName", lastName);
     localStorage.setItem("email", email);
+    localStorage.setItem("phoneNumber", phoneNumber);
     localStorage.setItem("role", role);
     localStorage.setItem("isLogged", isLogged);
-  }, [token, firstName, lastName, email, role, isLogged]);
+  }, [token, firstName, lastName, email, phoneNumber, role, isLogged]);
 
-  const handleUpdateInfos = (firstName, lastName, email) => {
+  const handleUpdateInfos = (firstName, lastName, email, phoneNumber) => {
     setFirstName(firstName);
     setLastName(lastName);
     setEmail(email);
+    setPhoneNumber(phoneNumber);
   };
 
-  const handleSaveLogin = (token, firstName, lastName, email, role) => {
+  const handleSaveLogin = (
+    token,
+    firstName,
+    lastName,
+    email,
+    phoneNumber,
+    role
+  ) => {
     setToken(token);
     setFirstName(firstName);
     setLastName(lastName);
     setEmail(email);
+    setPhoneNumber(phoneNumber == null ? "" : phoneNumber);
     setRole(role);
     setIsLogged(true);
   };
@@ -70,6 +84,7 @@ const UserProvider = ({ children }) => {
     setFirstName("");
     setLastName("");
     setEmail("");
+    setPhoneNumber("");
     setRole("");
     setIsLogged(false);
     navigate("/login");
@@ -80,6 +95,7 @@ const UserProvider = ({ children }) => {
     firstName,
     lastName,
     email,
+    phoneNumber,
     role,
     isLogged,
     handleUpdateInfos,

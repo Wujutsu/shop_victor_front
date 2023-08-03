@@ -39,11 +39,13 @@ export const Login = () => {
       .post(apiUrl, requestData)
       .then((response) => {
         setIncorrectIdentifier(false);
+        console.log(response);
         handleSaveLogin(
           response.data.accessToken,
           response.data.firstName,
           response.data.lastName,
           response.data.email,
+          response.data.phoneNumber,
           response.data.roles[0]
         );
         navigate("/");
