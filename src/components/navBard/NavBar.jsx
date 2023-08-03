@@ -44,7 +44,7 @@ export const NavBar = () => {
             <div className="user-options">
               <NavLink to="/login" aria-label="redirectLogin">
                 <button
-                  className="btn btn-perso btn-primary"
+                  className="btn btn-perso btn-dark"
                   aria-label="btnLogin"
                 >
                   Se connecter
@@ -52,7 +52,7 @@ export const NavBar = () => {
               </NavLink>
               <NavLink to="/register" aria-label="redirectRegister">
                 <button
-                  className="btn btn-perso btn-primary"
+                  className="btn btn-perso btn-dark"
                   aria-label="btnRegister"
                 >
                   S'inscrire
@@ -68,7 +68,7 @@ export const NavBar = () => {
             <div className="user-options">
               <NavLink to="/account" aria-label="redirectAccount">
                 <button
-                  className="btn btn-perso btn-primary"
+                  className="btn btn-perso btn-dark"
                   aria-label="btnAccount"
                 >
                   Mon compte

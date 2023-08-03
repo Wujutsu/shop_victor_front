@@ -25,7 +25,7 @@ const Register = () => {
     axios
       .post(apiUrl, requestData)
       .then((response) => {
-        setErrorSignup("");
+        localStorage.setItem("accountCreatedSuccess", true);
         navigate("/login");
       })
       .catch((error) => {

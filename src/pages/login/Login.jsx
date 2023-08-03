@@ -1,8 +1,9 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Login.scss";
 import axios from "axios";
 import { UserContext } from "../../contexts/UserContext";
 import { NavLink, useNavigate } from "react-router-dom";
+import ShowInfoPopup from "../../components/showInfoPopup/ShowInfoPopup";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
@@ -10,6 +11,20 @@ export const Login = () => {
   const [incorrectIdentifier, setIncorrectIdentifier] = useState(false);
   const navigate = useNavigate();
   const { handleSaveLogin } = useContext(UserContext);
+  const [accountCreatedSuccess, setAccountCreatedSuccess] = useState(false);
+  const [emailUpdated, setEmailUpdated] = useState(false);
+
+  useEffect(() => {
+    if (localStorage.getItem("accountCreatedSuccess")) {
+      setAccountCreatedSuccess(true);
+      localStorage.removeItem("accountCreatedSuccess");
+    }
+
+    if (localStorage.getItem("emailUpdated")) {
+      setEmailUpdated(true);
+      localStorage.removeItem("emailUpdated");
+    }
+  }, []);
 
   const handleLogin = (event) => {
     event.preventDefault();
@@ -83,6 +98,17 @@ export const Login = () => {
       <NavLink to="/register" aria-label="redirectRegister">
         <div className="new-account">Créer un compte</div>
       </NavLink>
+
+      {accountCreatedSuccess && (
+        <ShowInfoPopup
+          msg="Votre compte a été créé avec succès !"
+          type="success"
+        />
+      )}
+
+      {emailUpdated && (
+        <ShowInfoPopup msg="Votre e-mail a été mis à jour" type="success" />
+      )}
     </div>
   );
 };

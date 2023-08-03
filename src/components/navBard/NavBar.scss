@@ -5,6 +5,10 @@ nav {
   position: relative;
   height: 75px;
 
+  @media screen and (max-width: 992px) {
+    margin: 1rem 4rem;
+  }
+
   @media screen and (max-width: 768px) {
     margin: 1rem 1rem;
   }

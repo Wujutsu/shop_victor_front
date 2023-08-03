@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import "./Profil.scss";
 import { UserContext } from "../../../../contexts/UserContext";
 import axios from "axios";
+import ShowInfoPopup from "../../../../components/showInfoPopup/ShowInfoPopup";
 
 const Profil = () => {
   const { firstName, lastName, email, token, handleUpdateInfos, handleLogout } =
@@ -14,6 +15,7 @@ const Profil = () => {
   const [verifPassword, setVerifPassword] = useState("");
   const [errorPassword, setErrorPassword] = useState("");
   const [errorEmail, setErrorEmail] = useState(false);
+  const [updatedInformations, setUpdatedInformations] = useState(false);
 
   const updateInformations = (e) => {
     e.preventDefault();
@@ -34,21 +36,24 @@ const Profil = () => {
     axios
       .put(apiUrl, requestData, config)
       .then((response) => {
-        setErrorEmail(false);
-
         //Si le mail a été modifié, on déconnecte l'utilisateur
         if (email !== valEmail) {
-          //TODO: afficher un popup regarder myprotein
+          localStorage.setItem("emailUpdated", true);
           handleLogout();
         } else {
-          //TODO: afficher un popup
           handleUpdateInfos(valFirstName, valLastName, valEmail);
+          setUpdatedInformations(true);
+          setTimeout(() => {
+            setUpdatedInformations(false);
+          }, 3000);
         }
       })
       .catch((error) => {
         if (error.response.data === "Error: Email is already use") {
-          //TODO: afficher un popup
           setErrorEmail(true);
+          setTimeout(() => {
+            setErrorEmail(false);
+          }, 3000);
         }
       });
   };
@@ -75,18 +80,19 @@ const Profil = () => {
         setOldPassword("");
         setNewPassword("");
         setVerifPassword("");
-        setErrorPassword("");
-        //TODO: afficher un popup regarder myprotein
+        setErrorPassword("success");
       })
       .catch((error) => {
         if (error.response.data === "Error: incorrect old password") {
-          //TODO: afficher un popup
           setErrorPassword("old");
         } else if (error.response.data === "Error: incorrect new password") {
-          //TODO: afficher un popup
           setErrorPassword("new");
         }
       });
+
+    setTimeout(() => {
+      setErrorPassword("");
+    }, 3000);
   };
 
   return (
@@ -130,7 +136,7 @@ const Profil = () => {
             />
           </div>
           <button
-            className="btn btn-primary"
+            className="btn btn-dark"
             type="submit"
             aria-label="UpdateInfos"
           >
@@ -177,7 +183,7 @@ const Profil = () => {
           </div>
 
           <button
-            className="btn btn-primary"
+            className="btn btn-dark"
             type="submit"
             aria-label="updatePassword"
           >
@@ -185,6 +191,41 @@ const Profil = () => {
           </button>
         </form>
       </div>
+
+      {updatedInformations && (
+        <ShowInfoPopup
+          msg="Vos informations ont été mises à jour"
+          type="success"
+        ></ShowInfoPopup>
+      )}
+
+      {errorEmail && (
+        <ShowInfoPopup
+          msg="L'e-mail est déjà utilisé par un autre compte"
+          type="error"
+        ></ShowInfoPopup>
+      )}
+
+      {errorPassword === "old" && (
+        <ShowInfoPopup
+          msg="Votre mot de passe est incorrect"
+          type="error"
+        ></ShowInfoPopup>
+      )}
+
+      {errorPassword === "new" && (
+        <ShowInfoPopup
+          msg="Les mots de passe ne correspondent pas"
+          type="error"
+        ></ShowInfoPopup>
+      )}
+
+      {errorPassword === "success" && (
+        <ShowInfoPopup
+          msg="Votre mot de passe a été mis à jour"
+          type="success"
+        ></ShowInfoPopup>
+      )}
     </div>
   );
 };

@@ -1,0 +1,21 @@
+.popup {
+  position: fixed;
+  bottom: 0.7rem;
+  left: 0.7rem;
+  padding: 1rem;
+  font-size: 0.8rem;
+  opacity: 1;
+
+  animation: slidePopup 0.8s;
+}
+
+@keyframes slidePopup {
+  from {
+    bottom: 0rem;
+    opacity: 0;
+  }
+  to {
+    bottom: 0.7rem;
+    opacity: 1;
+  }
+}
