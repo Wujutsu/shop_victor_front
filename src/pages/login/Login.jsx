@@ -39,7 +39,6 @@ export const Login = () => {
       .post(apiUrl, requestData)
       .then((response) => {
         setIncorrectIdentifier(false);
-        console.log(response);
         handleSaveLogin(
           response.data.accessToken,
           response.data.firstName,

@@ -30,7 +30,6 @@ const UserProvider = ({ children }) => {
       savedFirstName &&
       savedLastName &&
       savedEmail &&
-      savedPhoneNumber &&
       savedRole &&
       savedisLogged
     ) {
