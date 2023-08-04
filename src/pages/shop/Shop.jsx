@@ -4,9 +4,11 @@ import axios from "axios";
 import { UserContext } from "../../contexts/UserContext";
 import "./components/product/Product";
 import Product from "./components/product/Product";
+import Filter from "./components/filter/Filter";
 
 const Shop = () => {
   const { token } = useContext(UserContext);
+  const [listProductSave, setListProductSave] = useState([]);
   const [listProduct, setListProduct] = useState([]);
 
   useEffect(() => {
@@ -23,49 +25,36 @@ const Shop = () => {
         .get(apiUrl, config)
         .then((response) => {
           console.log(response.data);
+          setListProductSave(response.data);
           setListProduct(response.data);
         })
         .catch((error) => {});
     };
 
     getAllProducts();
-  }, [token, setListProduct]);
+  }, [token, setListProductSave]);
+
+  //Permet de mettre à jour la catégorie et filtrer les articles en fonction
+  const handleCategorie = (categorie) => {
+    const listArticles = listProductSave;
+
+    if (categorie !== "") {
+      const filteredListArticles = listArticles.filter(
+        (article) => article.categorie.name === categorie
+      );
+      setListProduct(filteredListArticles);
+    } else {
+      setListProduct(listArticles);
+    }
+  };
 
   return (
-    <div className="">
+    <div className="page-shop">
+      <div className="title-page">Boutique</div>
+
+      <Filter handleCategorie={handleCategorie} />
+
       <div className="row">
-        {listProduct.map((item) => (
-          <div className="col-lg-3 col-md-4 col-sm-6" key={item.id}>
-            <Product info={item} />
-          </div>
-        ))}
-
-        {listProduct.map((item) => (
-          <div className="col-lg-3 col-md-4 col-sm-6" key={item.id}>
-            <Product info={item} />
-          </div>
-        ))}
-
-        {listProduct.map((item) => (
-          <div className="col-lg-3 col-md-4 col-sm-6" key={item.id}>
-            <Product info={item} />
-          </div>
-        ))}
-        {listProduct.map((item) => (
-          <div className="col-lg-3 col-md-4 col-sm-6" key={item.id}>
-            <Product info={item} />
-          </div>
-        ))}
-        {listProduct.map((item) => (
-          <div className="col-lg-3 col-md-4 col-sm-6" key={item.id}>
-            <Product info={item} />
-          </div>
-        ))}
-        {listProduct.map((item) => (
-          <div className="col-lg-3 col-md-4 col-sm-6" key={item.id}>
-            <Product info={item} />
-          </div>
-        ))}
         {listProduct.map((item) => (
           <div className="col-lg-3 col-md-4 col-sm-6" key={item.id}>
             <Product info={item} />

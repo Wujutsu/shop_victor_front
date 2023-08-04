@@ -32,6 +32,10 @@ const Shop = () => {
         stockQuantity: 2,
         active: true,
         listPicture: [byteArrayAsArray],
+        categorie: {
+          id: "64cd019f54bf41039da4e3a9",
+          name: "Coussin",
+        },
       };
 
       const config = {

@@ -1,9 +1,9 @@
 .product {
+  margin-top: 2.5rem;
+
   .product-box {
-    max-width: 300px;
+    max-width: 250px;
     margin: auto;
-    margin-bottom: 2rem;
-    padding: 1rem;
 
     .picture {
       width: 100%;
@@ -13,25 +13,37 @@
       background-repeat: no-repeat;
       background-size: cover;
       background-position: center center;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
     }
 
     .infos {
-      position: relative;
-
       .title {
-        margin-top: 1rem;
-        padding-right: 75px;
+        margin-top: 0.8rem;
+        margin-bottom: 0.5rem;
         font-weight: bold;
+        color: var(--color-green);
       }
-      .quantity {
-        color: gray;
+
+      div {
+        position: relative;
+
+        .quantity {
+          color: gray;
+          font-size: 0.7rem;
+          position: absolute;
+          top: 5px;
+          right: 0;
+        }
       }
-      .price {
-        position: absolute;
-        top: 1.05rem;
-        right: 0rem;
-        font-weight: bold;
-      }
+    }
+
+    button {
+      width: 100%;
+      margin-top: 1rem;
+      border-radius: 0px;
+      border-bottom-left-radius: 5px;
+      border-bottom-right-radius: 5px;
     }
   }
 }

@@ -29,7 +29,7 @@ input {
 
 //------------------------Personnalisation class Bootstrap------------------------//
 .btn {
-  border-radius: 0px;
+  //border-radius: 0px;
   height: 2.8rem;
 }
 
@@ -43,6 +43,16 @@ input {
   }
 }
 
+.btn-outline-primary {
+  border: 1px solid var(--color-blue-dark);
+  color: black;
+
+  &:hover {
+    border: 1px solid var(--color-blue);
+    background-color: var(--color-blue);
+  }
+}
+
 .btn-danger {
   background-color: var(--color-red);
   border: 1px solid var(--color-red);
@@ -50,5 +60,38 @@ input {
   &:hover {
     background-color: #f74838;
     border: 1px solid #f74838;
+  }
+}
+
+.btn-outline-danger {
+  border: 1px solid var(--color-red);
+  color: black;
+
+  &:hover {
+    background-color: #f74838;
+    border: 1px solid #f74838;
+  }
+}
+
+.btn-success {
+  background-color: var(--color-green);
+  border: 2px solid var(--color-green);
+
+  &:hover,
+  &:active {
+    background-color: var(--color-green);
+    border: 2px solid var(--color-green);
+  }
+}
+
+.btn-outline-success {
+  border: 2px solid var(--color-green);
+  color: black;
+
+  &:hover,
+  &:active {
+    background-color: white;
+    color: black;
+    border: 2px solid #75aa70;
   }
 }

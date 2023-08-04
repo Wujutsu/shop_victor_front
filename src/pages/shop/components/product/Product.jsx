@@ -21,9 +21,13 @@ const Product = ({ info }) => {
         ></div>
         <div className="infos">
           <div className="title">{info.name} collection</div>
-          <div className="quantity">x{info.stockQuantity} en stock</div>
-          <div className="price">{info.price} €</div>
+          <div>
+            <div className="price">{info.price} €</div>
+            <div className="quantity">x{info.stockQuantity} en stock</div>
+          </div>
         </div>
+
+        <button className="btn btn-dark">Ajouter au panier</button>
       </div>
     </div>
   );
