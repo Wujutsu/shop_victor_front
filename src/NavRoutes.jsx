@@ -6,6 +6,7 @@ import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
 import Account from "./pages/account/Account";
 import Shop from "./pages/shop/Shop";
+import Cart from "./pages/cart/Cart";
 
 export const NavRoutes = () => {
   const { isLogged } = useContext(UserContext);
@@ -17,6 +18,7 @@ export const NavRoutes = () => {
       <Route path="/register" element={<Register />} />
       <Route path="/account" element={isLogged ? <Account /> : <Login />} />
       <Route path="/shop" element={<Shop />} />
+      <Route path="/cart" element={isLogged ? <Cart /> : <Shop />} />
 
       {/* Nouvelle route pour les détails du produit 
         <Route path="/product/:productId" element={<ProductDetails />} />*/}

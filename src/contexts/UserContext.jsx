@@ -14,6 +14,8 @@ const UserProvider = ({ children }) => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [role, setRole] = useState("");
   const [isLogged, setIsLogged] = useState(false);
+  const [cartItem, setCartItem] = useState([]);
+  const [nbCartItem, setNbCartItem] = useState("0");
 
   //Récupére les données sauvegardées en local lors du chargement initial du composant
   useEffect(() => {
@@ -24,6 +26,8 @@ const UserProvider = ({ children }) => {
     const savedPhoneNumber = localStorage.getItem("phoneNumber");
     const savedRole = localStorage.getItem("role");
     const savedisLogged = localStorage.getItem("isLogged");
+    const savedCartItem = JSON.parse(localStorage.getItem("cartItem"));
+    const savedNbCartItem = localStorage.getItem("nbCartItem");
 
     if (
       savedToken &&
@@ -41,6 +45,11 @@ const UserProvider = ({ children }) => {
       setRole(savedRole);
       setIsLogged(savedisLogged === "true");
     }
+
+    if (savedCartItem.length > 0) {
+      setCartItem(savedCartItem);
+      setNbCartItem(savedNbCartItem);
+    }
   }, []);
 
   //Permet de sauvegarder les données de l'utilisateur en local chaque fois qu'elles sont mises à jour
@@ -52,8 +61,21 @@ const UserProvider = ({ children }) => {
     localStorage.setItem("phoneNumber", phoneNumber);
     localStorage.setItem("role", role);
     localStorage.setItem("isLogged", isLogged);
-  }, [token, firstName, lastName, email, phoneNumber, role, isLogged]);
+    localStorage.setItem("cartItem", JSON.stringify(cartItem));
+    localStorage.setItem("nbCartItem", nbCartItem);
+  }, [
+    token,
+    firstName,
+    lastName,
+    email,
+    phoneNumber,
+    role,
+    isLogged,
+    cartItem,
+    nbCartItem,
+  ]);
 
+  //Met à jour info utilisateur
   const handleUpdateInfos = (firstName, lastName, email, phoneNumber) => {
     setFirstName(firstName);
     setLastName(lastName);
@@ -61,6 +83,7 @@ const UserProvider = ({ children }) => {
     setPhoneNumber(phoneNumber);
   };
 
+  //Mémorise info utilisateur à la connexion
   const handleSaveLogin = (
     token,
     firstName,
@@ -78,15 +101,59 @@ const UserProvider = ({ children }) => {
     setIsLogged(true);
   };
 
+  //Supprimer info utilisateur à la déconnexion
   const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("firstName");
+    localStorage.removeItem("lastName");
+    localStorage.removeItem("email");
+    localStorage.removeItem("phoneNumber");
+    localStorage.removeItem("role");
     setToken("");
     setFirstName("");
     setLastName("");
     setEmail("");
     setPhoneNumber("");
     setRole("");
+
+    /* setCartItem([]);
+    setNbCartItem("0");
+    localStorage.removeItem("nbCartItem");
+    localStorage.removeItem("cartItem");*/
+
     setIsLogged(false);
     navigate("/login");
+  };
+
+  //Ajout des items dans le panier
+  const handleAddCartItem = (id, name, price) => {
+    let newItem = { id: id, name: name, quantity: 1, price: price };
+    let updatedCartItems = [];
+
+    if (cartItem !== null) {
+      // Vérifiez si un élément avec le même id existe déjà dans cartItem
+      const itemIndex = cartItem.findIndex((item) => item.id === newItem.id);
+
+      if (itemIndex !== -1) {
+        // L'élément existe, incrémente la quantité
+        updatedCartItems = [...cartItem];
+        updatedCartItems[itemIndex].quantity += 1;
+        updatedCartItems[itemIndex].price += price;
+      } else {
+        // L'élément n'existe pas encore, on ajoute
+        updatedCartItems = [...cartItem, newItem];
+      }
+    } else {
+      updatedCartItems.push(newItem);
+    }
+
+    let updateNbCartItem = parseInt(nbCartItem) + 1;
+
+    setNbCartItem(updateNbCartItem);
+    setCartItem(updatedCartItems);
+
+    console.log("cartItem => ", updatedCartItems);
+    console.log("nbCartItem => ", updateNbCartItem);
   };
 
   const dataList = {
@@ -100,6 +167,9 @@ const UserProvider = ({ children }) => {
     handleUpdateInfos,
     handleSaveLogin,
     handleLogout,
+    cartItem,
+    nbCartItem,
+    handleAddCartItem,
   };
 
   return (

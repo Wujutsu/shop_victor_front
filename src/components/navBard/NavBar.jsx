@@ -1,16 +1,26 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import "./NavBar.scss";
 import { NavLink } from "react-router-dom";
 import { CgShoppingCart } from "react-icons/cg";
 import { BiUser } from "react-icons/bi";
 import logo from "../../assets/logo.webp";
 import { UserContext } from "../../contexts/UserContext";
+import ShowInfoPopup from "../showInfoPopup/ShowInfoPopup";
 
 export const NavBar = () => {
   const getActiveStyle = ({ isActive }) => {
     return { color: isActive ? "black" : "grey" };
   };
-  const { isLogged, handleLogout } = useContext(UserContext);
+  const { isLogged, handleLogout, nbCartItem } = useContext(UserContext);
+  const [accessCartError, setAccessCartError] = useState(false);
+
+  const handleAccessCartError = () => {
+    setAccessCartError(true);
+
+    setTimeout(() => {
+      setAccessCartError(false);
+    }, 3000);
+  };
 
   return (
     <nav>
@@ -28,14 +38,27 @@ export const NavBar = () => {
         Boutique
       </NavLink>
 
-      <NavLink to="/cart" aria-label="redirectCart">
+      {!isLogged ? (
         <div className="position-cart">
-          <button className="cart" aria-label="btnCart">
+          <button
+            className="cart"
+            aria-label="btnCart"
+            onClick={() => handleAccessCartError()}
+          >
             <CgShoppingCart size={22} />
-            <span className="cart-item-qty">0</span>
+            <span className="cart-item-qty">{nbCartItem}</span>
           </button>
         </div>
-      </NavLink>
+      ) : (
+        <NavLink to="/cart" aria-label="redirectCart">
+          <div className="position-cart">
+            <button className="cart" aria-label="btnCart">
+              <CgShoppingCart size={22} />
+              <span className="cart-item-qty">{nbCartItem}</span>
+            </button>
+          </div>
+        </NavLink>
+      )}
 
       {!isLogged ? (
         <div className="position-login">
@@ -84,6 +107,13 @@ export const NavBar = () => {
             </div>
           </div>
         </div>
+      )}
+
+      {accessCartError && (
+        <ShowInfoPopup
+          msg="Veuillez vous identifier pour accéder à votre panier"
+          type="error"
+        ></ShowInfoPopup>
       )}
     </nav>
   );
