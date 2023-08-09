@@ -2,12 +2,14 @@ import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../contexts/UserContext";
 import axios from "axios";
 import "./Cart.scss";
+import Spinner from "../../components/spinner/Spinner";
 
 const Cart = () => {
   const { cartItem, token } = useContext(UserContext);
   const [showCartItem, setShowCartItem] = useState([]);
   const [totalCommandItem, setTotalCommandItem] = useState(0);
   const [totalCommandDelivery, setTotalCommandDelivery] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const getAllProducts = () => {
@@ -47,8 +49,11 @@ const Cart = () => {
             setTotalCommandItem(sommeItem);
             setTotalCommandDelivery(sommeItem + 5);
             setShowCartItem(updatedCartItems);
+            setIsLoading(false);
           })
-          .catch((error) => {});
+          .catch((error) => {
+            setIsLoading(false);
+          });
       }
     };
 
@@ -90,6 +95,8 @@ const Cart = () => {
             </div>
           </div>
 
+          {isLoading && <Spinner page={false} />}
+
           {showCartItem.map((item, index) => (
             <div
               key={index}
@@ -109,7 +116,7 @@ const Cart = () => {
                     <div className="name">{item.name}</div>
                   </div>
                 </div>
-                <div className="col-sm-4 price">{item.price} €</div>
+                <div className="col-sm-4 price">{item.price.toFixed(2)} €</div>
               </div>
             </div>
           ))}
@@ -126,7 +133,7 @@ const Cart = () => {
               <div className="col" style={{ paddingLeft: "10px" }}>
                 3 articles
               </div>
-              <div className="col t-right">{totalCommandItem} €</div>
+              <div className="col t-right">{totalCommandItem.toFixed(2)} €</div>
             </div>
             <div className="row total-item">
               <div className="col" style={{ paddingLeft: "10px" }}>
@@ -140,7 +147,9 @@ const Cart = () => {
             </form>
             <div className="row total-cost">
               <div className="col">Prix total</div>
-              <div className="col t-right">{totalCommandDelivery} €</div>
+              <div className="col t-right">
+                {totalCommandDelivery.toFixed(2)} €
+              </div>
             </div>
             <button className="btn btn-dark">Continuer</button>
           </div>

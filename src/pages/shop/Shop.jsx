@@ -5,11 +5,13 @@ import { UserContext } from "../../contexts/UserContext";
 import "./components/product/Product";
 import Product from "./components/product/Product";
 import Filter from "./components/filter/Filter";
+import Spinner from "../../components/spinner/Spinner";
 
 const Shop = () => {
   const { token } = useContext(UserContext);
   const [listProductSave, setListProductSave] = useState([]);
   const [listProduct, setListProduct] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const getAllProducts = () => {
@@ -27,8 +29,11 @@ const Shop = () => {
           console.log("Data=>", response.data);
           setListProductSave(response.data);
           setListProduct(response.data);
+          setIsLoading(false);
         })
-        .catch((error) => {});
+        .catch((error) => {
+          setIsLoading(false);
+        });
     };
 
     getAllProducts();
@@ -49,19 +54,25 @@ const Shop = () => {
   };
 
   return (
-    <div className="page-shop">
-      <div className="title-page">Boutique</div>
+    <>
+      {!isLoading ? (
+        <div className="page-shop">
+          <div className="title-page">Boutique</div>
 
-      <Filter handleCategorie={handleCategorie} />
+          <Filter handleCategorie={handleCategorie} />
 
-      <div className="row">
-        {listProduct.map((item) => (
-          <div className="col-lg-3 col-md-4 col-sm-6" key={item.id}>
-            <Product info={item} />
+          <div className="row">
+            {listProduct.map((item) => (
+              <div className="col-lg-3 col-md-4 col-sm-6" key={item.id}>
+                <Product info={item} />
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
-    </div>
+        </div>
+      ) : (
+        <Spinner />
+      )}
+    </>
   );
 };
 
