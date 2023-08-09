@@ -19,6 +19,12 @@ nav {
     color: var(--color-green);
   }
 
+  @media screen and (max-width: 500px) {
+    .name-logo {
+      display: none;
+    }
+  }
+
   .shop {
     position: absolute;
     right: 8rem;

@@ -92,7 +92,7 @@ const Register = () => {
         )}
 
         <button
-          className="btn btn-primary"
+          className="btn btn-success"
           type="submit"
           aria-label="S'enregistrer"
         >

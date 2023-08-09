@@ -5,7 +5,13 @@ import "./Cart.scss";
 import Spinner from "../../components/spinner/Spinner";
 
 const Cart = () => {
-  const { cartItem, token, nbCartItem } = useContext(UserContext);
+  const {
+    cartItem,
+    token,
+    nbCartItem,
+    handleAddCartItem,
+    handleDeleteCartItem,
+  } = useContext(UserContext);
   const [showCartItem, setShowCartItem] = useState([]);
   const [totalCommandItem, setTotalCommandItem] = useState(0);
   const [totalCommandDelivery, setTotalCommandDelivery] = useState(0);
@@ -34,7 +40,7 @@ const Cart = () => {
             let sommeItem = 0;
 
             const updatedCartItems = cartItem.map((item) => {
-              sommeItem += item.price;
+              sommeItem += item.price * item.quantity;
               const matchingResponseItem = response.data.find(
                 (itemResponse) => itemResponse.id === item.id
               );
@@ -54,6 +60,9 @@ const Cart = () => {
           .catch((error) => {
             setIsLoading(false);
           });
+      } else {
+        setTotalCommandItem(0);
+        setTotalCommandDelivery(0);
       }
     };
 
@@ -95,43 +104,69 @@ const Cart = () => {
             </div>
           </div>
 
-          {isLoading && <Spinner page={false} />}
+          {isLoading && cartItem.length > 0 && <Spinner page={false} />}
 
-          {showCartItem.map((item, index) => (
-            <div
-              key={index}
-              className="row space-article border-top border-bottom"
-            >
-              <div className="row align-items-center">
-                <div className="col-sm-2">
-                  <img className="img-fluid" src={item.picture} alt="Item 1" />
-                </div>
-                <div className="col-sm-6">
-                  <div className="row text-muted">
-                    <div className="categorie">
-                      {item.categorie} (x {item.quantity})
+          {nbCartItem > 0 &&
+            showCartItem.map((item, index) => (
+              <div
+                key={index}
+                className="row space-article border-top border-bottom"
+              >
+                <div className="row align-items-center">
+                  <div className="col-sm-2">
+                    <img
+                      className="img-fluid"
+                      src={item.picture}
+                      alt="Item 1"
+                    />
+                  </div>
+                  <div className="col-sm-6">
+                    <div className="row text-muted">
+                      <div className="categorie">{item.categorie}</div>
+                    </div>
+                    <div className="row">
+                      <div className="name">{item.name}</div>
                     </div>
                   </div>
-                  <div className="row">
-                    <div className="name">{item.name}</div>
-                  </div>
-                </div>
-                <div className="col-sm-4 price-quantity">
-                  <div className="price">{item.price.toFixed(2)} €</div>
-                  <div className="quantity">
-                    <button className="btn-quantity">-</button>
-                    <input
-                      className="show-quantity"
-                      type="text"
-                      disabled
-                      value={item.quantity}
-                    />
-                    <button className="btn-quantity">+</button>
+                  <div className="col-sm-4 price-quantity">
+                    <div className="price">
+                      {(item.price * item.quantity).toFixed(2)} €
+                    </div>
+                    <div className="quantity">
+                      <button
+                        className="btn-quantity"
+                        onClick={() => handleDeleteCartItem(item.id)}
+                      >
+                        -
+                      </button>
+                      <input
+                        className="show-quantity"
+                        type="text"
+                        disabled
+                        value={item.quantity}
+                      />
+                      <button
+                        className="btn-quantity"
+                        onClick={() =>
+                          handleAddCartItem(
+                            item.id,
+                            item.categorie,
+                            item.name,
+                            item.price
+                          )
+                        }
+                      >
+                        +
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+
+          {(nbCartItem === "0" || nbCartItem === 0) && (
+            <h5>Votre panier est vide !</h5>
+          )}
         </div>
 
         <div className="col-lg-4 col-md-5">
@@ -163,7 +198,12 @@ const Cart = () => {
                 {totalCommandDelivery.toFixed(2)} €
               </div>
             </div>
-            <button className="btn btn-dark">Continuer</button>
+            <button
+              className="btn btn-dark"
+              disabled={cartItem.length > 0 ? false : true}
+            >
+              Continuer
+            </button>
           </div>
         </div>
       </div>

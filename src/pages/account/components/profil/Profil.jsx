@@ -152,7 +152,6 @@ const Profil = () => {
           <div className="form-input">
             <label htmlFor="phoneNumber">Téléphone</label>
             <input
-              className={`${errorEmail && "input-error"}`}
               type="text"
               id="phoneNumber"
               name="phoneNumber"

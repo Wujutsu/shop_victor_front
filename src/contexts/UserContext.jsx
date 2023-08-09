@@ -144,7 +144,6 @@ const UserProvider = ({ children }) => {
         // L'élément existe, incrémente la quantité
         updatedCartItems = [...cartItem];
         updatedCartItems[itemIndex].quantity += 1;
-        updatedCartItems[itemIndex].price += price;
       } else {
         // L'élément n'existe pas encore, on ajoute
         updatedCartItems = [...cartItem, newItem];
@@ -161,6 +160,23 @@ const UserProvider = ({ children }) => {
     console.log("cartItem => ", updatedCartItems);
   };
 
+  const handleDeleteCartItem = (id) => {
+    const itemIndex = cartItem.findIndex((item) => item.id === id);
+
+    if (itemIndex !== -1) {
+      let updatedCartItems = [...cartItem];
+
+      if (updatedCartItems[itemIndex].quantity > 1) {
+        updatedCartItems[itemIndex].quantity -= 1;
+      } else {
+        updatedCartItems.splice(itemIndex, 1);
+      }
+
+      setCartItem(updatedCartItems);
+      setNbCartItem(nbCartItem - 1);
+    }
+  };
+
   const dataList = {
     token,
     firstName,
@@ -175,6 +191,7 @@ const UserProvider = ({ children }) => {
     cartItem,
     nbCartItem,
     handleAddCartItem,
+    handleDeleteCartItem,
   };
 
   return (

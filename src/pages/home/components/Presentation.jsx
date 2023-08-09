@@ -21,7 +21,7 @@ const Presentation = () => {
       </div>
 
       <NavLink to="/shop" className="shop" aria-label="redirectShop">
-        <button className="btn btn-primary" aria-label="btnBoutique">
+        <button className="btn btn-success" aria-label="btnBoutique">
           <CgShoppingCart size={22} />
           Accès boutique
         </button>

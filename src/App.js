@@ -17,7 +17,7 @@ function App() {
   const { isLogged } = useContext(UserContext);
 
   return (
-    <div className="App  container-md">
+    <div className="App container-md">
       <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />

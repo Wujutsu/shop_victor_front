@@ -3,7 +3,9 @@
 html,
 body {
   max-width: 100vw;
-  overflow-x: hidden;
+  min-width: 320px;
+  min-height: 100vh;
+
   font-family: "Sora", sans-serif;
 }
 
@@ -75,12 +77,6 @@ input {
 .btn-success {
   background-color: var(--color-green);
   border: 2px solid var(--color-green);
-
-  &:hover,
-  &:active {
-    background-color: var(--color-green);
-    border: 2px solid var(--color-green);
-  }
 }
 
 .btn-outline-success {

@@ -21,10 +21,20 @@
     border-bottom-left-radius: 0.5rem;
     border-top-left-radius: 0.5rem;
     cursor: default;
+
+    .back-shop {
+      display: flex;
+      justify-content: center;
+      margin-left: -22px;
+      button {
+        width: 200px;
+        margin-top: 2rem;
+      }
+    }
   }
 
   img {
-    width: 4rem;
+    width: 7rem;
   }
 
   .summary {

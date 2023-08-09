@@ -5,7 +5,7 @@
     margin-bottom: 1.5rem;
     font-weight: bold;
     font-size: 1.2rem;
-    color: var(--color-red);
+    color: var(--color-green);
   }
 
   .title-password {
@@ -21,7 +21,7 @@
   }
 
   .profil-box {
-    background-color: var(--color-light);
+    box-shadow: 3px 3px 10px grey;
     padding: 1.5rem;
     border-radius: 5px;
 

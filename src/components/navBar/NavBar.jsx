@@ -98,7 +98,7 @@ export const NavBar = () => {
                 </button>
               </NavLink>
               <button
-                className="btn btn-perso btn-danger"
+                className="btn btn-perso btn-dark"
                 aria-label="btnLogout"
                 onClick={() => handleLogout()}
               >
