@@ -24,7 +24,7 @@ const Shop = () => {
       axios
         .get(apiUrl, config)
         .then((response) => {
-          console.log(response.data);
+          console.log("Data=>", response.data);
           setListProductSave(response.data);
           setListProduct(response.data);
         })
@@ -32,7 +32,7 @@ const Shop = () => {
     };
 
     getAllProducts();
-  }, [token, setListProductSave]);
+  }, [token]);
 
   //Permet de mettre à jour la catégorie et filtrer les articles en fonction
   const handleCategorie = (categorie) => {
