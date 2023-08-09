@@ -20,6 +20,7 @@
     padding-right: 1.5rem;
     border-bottom-left-radius: 0.5rem;
     border-top-left-radius: 0.5rem;
+    cursor: default;
   }
 
   img {
@@ -70,8 +71,31 @@
     }
   }
 
-  .price {
+  .price-quantity {
     text-align: right;
+
+    .quantity {
+      margin-right: -5px;
+      .btn-quantity {
+        height: 30px;
+        width: 1.3rem;
+        text-align: center;
+        border: none;
+        transition: background-color 0.2s;
+
+        &:hover {
+          background: rgb(174, 174, 174);
+        }
+      }
+
+      .show-quantity {
+        height: 30px;
+        border-radius: 0px;
+        width: 2rem;
+        text-align: center;
+        border: none;
+      }
+    }
   }
 
   @media (max-width: 768px) {
@@ -96,6 +120,16 @@
     .categorie,
     .price {
       text-align: center;
+    }
+
+    .price-quantity {
+      .price {
+        margin-top: 0.5rem;
+      }
+      .quantity {
+        display: flex;
+        justify-content: center;
+      }
     }
   }
 }

@@ -159,7 +159,6 @@ const UserProvider = ({ children }) => {
     setCartItem(updatedCartItems);
 
     console.log("cartItem => ", updatedCartItems);
-    console.log("nbCartItem => ", updateNbCartItem);
   };
 
   const dataList = {

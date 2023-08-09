@@ -5,7 +5,7 @@ import "./Cart.scss";
 import Spinner from "../../components/spinner/Spinner";
 
 const Cart = () => {
-  const { cartItem, token } = useContext(UserContext);
+  const { cartItem, token, nbCartItem } = useContext(UserContext);
   const [showCartItem, setShowCartItem] = useState([]);
   const [totalCommandItem, setTotalCommandItem] = useState(0);
   const [totalCommandDelivery, setTotalCommandDelivery] = useState(0);
@@ -116,7 +116,19 @@ const Cart = () => {
                     <div className="name">{item.name}</div>
                   </div>
                 </div>
-                <div className="col-sm-4 price">{item.price.toFixed(2)} €</div>
+                <div className="col-sm-4 price-quantity">
+                  <div className="price">{item.price.toFixed(2)} €</div>
+                  <div className="quantity">
+                    <button className="btn-quantity">-</button>
+                    <input
+                      className="show-quantity"
+                      type="text"
+                      disabled
+                      value={item.quantity}
+                    />
+                    <button className="btn-quantity">+</button>
+                  </div>
+                </div>
               </div>
             </div>
           ))}
@@ -131,7 +143,7 @@ const Cart = () => {
             </div>
             <div className="row total-item">
               <div className="col" style={{ paddingLeft: "10px" }}>
-                3 articles
+                {nbCartItem} {nbCartItem === 1 ? "article" : "articles"}
               </div>
               <div className="col t-right">{totalCommandItem.toFixed(2)} €</div>
             </div>
