@@ -126,8 +126,14 @@ const UserProvider = ({ children }) => {
   };
 
   //Ajout des items dans le panier
-  const handleAddCartItem = (id, name, price) => {
-    let newItem = { id: id, name: name, quantity: 1, price: price };
+  const handleAddCartItem = (id, categorie, name, price) => {
+    let newItem = {
+      id: id,
+      categorie: categorie,
+      name: name,
+      quantity: 1,
+      price: price,
+    };
     let updatedCartItems = [];
 
     if (cartItem !== null) {

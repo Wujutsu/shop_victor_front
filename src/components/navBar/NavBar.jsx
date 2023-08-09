@@ -25,7 +25,7 @@ export const NavBar = () => {
   return (
     <nav>
       <NavLink to="/" aria-label="redirectHome">
-        <img src={logo} width="70" height=" 70" alt="Logo" />
+        <img src={logo} width="80" alt="Logo" />
         <div className="name-logo">M&C Fabric</div>
       </NavLink>
 

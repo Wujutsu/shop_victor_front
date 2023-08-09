@@ -47,7 +47,14 @@ const Product = ({ info }) => {
 
         <button
           className="btn btn-dark"
-          onClick={() => handleAddCartItem(info.id, info.name, info.price)}
+          onClick={() =>
+            handleAddCartItem(
+              info.id,
+              info.categorie.name,
+              info.name,
+              info.price
+            )
+          }
         >
           Ajouter au panier
         </button>
