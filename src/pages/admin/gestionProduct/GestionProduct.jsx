@@ -43,6 +43,8 @@ const GestionProduct = () => {
 
   return (
     <div className="gestion-product">
+      <h2>Gestion des Produits</h2>
+
       {listProduct.length > 0 &&
         !isLoading &&
         listProduct.map((item, index) => (

@@ -22,7 +22,6 @@ const GestionCategorie = () => {
       axios
         .get(apiUrl, config)
         .then((response) => {
-          console.log("Data catégorie =>", response.data);
           setCategories(response.data);
         })
         .catch((error) => {});
@@ -46,7 +45,6 @@ const GestionCategorie = () => {
     axios
       .post(apiUrl, requestData, config)
       .then((response) => {
-        console.log("New catégorie =>", response.data);
         const updateCategories = [...categories];
         updateCategories.push(response.data);
         setCategories(updateCategories);
@@ -56,23 +54,30 @@ const GestionCategorie = () => {
   };
 
   const handleDeleteCategory = (id) => {
-    const apiUrl = "http://localhost:8080/api/categorie/delete/" + id;
-    const config = {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    };
+    const shouldDelete = window.confirm(
+      "Êtes-vous sûr de vouloir supprimer la catégorie ?"
+    );
+    if (!shouldDelete) {
+      return; // Abort the deletion if the user cancels
+    } else {
+      const apiUrl = "http://localhost:8080/api/categorie/delete/" + id;
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      };
 
-    axios
-      .delete(apiUrl, config)
-      .then((response) => {
-        if (response.data) {
-          const updatedCategories = categories.filter((cat) => cat.id !== id);
-          setCategories(updatedCategories);
-        }
-      })
-      .catch((error) => {});
+      axios
+        .delete(apiUrl, config)
+        .then((response) => {
+          if (response.data) {
+            const updatedCategories = categories.filter((cat) => cat.id !== id);
+            setCategories(updatedCategories);
+          }
+        })
+        .catch((error) => {});
+    }
   };
 
   return (

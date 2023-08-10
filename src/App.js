@@ -31,6 +31,14 @@ function App() {
           path="/admin"
           element={isLogged && role === "ROLE_ADMIN" && <Admin />}
         />
+        <Route
+          path="/admin/product"
+          element={isLogged && role === "ROLE_ADMIN" && <Admin />}
+        />
+        <Route
+          path="/admin/order"
+          element={isLogged && role === "ROLE_ADMIN" && <Admin />}
+        />
 
         {/* Nouvelle route pour les détails du produit 
         <Route path="/product/:productId" element={<ProductDetails />} />*/}
