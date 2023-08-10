@@ -11,7 +11,7 @@ export const NavBar = () => {
   const getActiveStyle = ({ isActive }) => {
     return { color: isActive ? "black" : "grey" };
   };
-  const { isLogged, handleLogout, nbCartItem } = useContext(UserContext);
+  const { isLogged, handleLogout, nbCartItem, role } = useContext(UserContext);
   const [accessCartError, setAccessCartError] = useState(false);
 
   const handleAccessCartError = () => {
@@ -89,6 +89,17 @@ export const NavBar = () => {
           <div className="login">
             <BiUser size={22} />
             <div className="user-options">
+              {role === "ROLE_ADMIN" && (
+                <NavLink to="/admin" aria-label="redirectAdmin">
+                  <button
+                    className="btn btn-perso btn-danger"
+                    aria-label="btnAdmin"
+                  >
+                    Gestion admin
+                  </button>
+                </NavLink>
+              )}
+
               <NavLink to="/account" aria-label="redirectAccount">
                 <button
                   className="btn btn-perso btn-dark"
@@ -97,6 +108,7 @@ export const NavBar = () => {
                   Mon compte
                 </button>
               </NavLink>
+
               <button
                 className="btn btn-perso btn-dark"
                 aria-label="btnLogout"

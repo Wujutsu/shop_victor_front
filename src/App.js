@@ -12,9 +12,10 @@ import Register from "./pages/register/Register";
 import Account from "./pages/account/Account";
 import Shop from "./pages/shop/Shop";
 import Cart from "./pages/cart/Cart";
+import Admin from "./pages/admin/Admin";
 
 function App() {
-  const { isLogged } = useContext(UserContext);
+  const { isLogged, role } = useContext(UserContext);
 
   return (
     <div className="App container-md">
@@ -26,6 +27,10 @@ function App() {
         <Route path="/account" element={isLogged ? <Account /> : <Login />} />
         <Route path="/shop" element={<Shop />} />
         <Route path="/cart" element={isLogged ? <Cart /> : <Shop />} />
+        <Route
+          path="/admin"
+          element={isLogged && role === "ROLE_ADMIN" && <Admin />}
+        />
 
         {/* Nouvelle route pour les détails du produit 
         <Route path="/product/:productId" element={<ProductDetails />} />*/}

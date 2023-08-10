@@ -1,0 +1,31 @@
+.gestion-product {
+  img {
+    width: 7rem;
+  }
+
+  .categorie {
+  }
+
+  .quantity {
+    margin-right: -5px;
+    .btn-quantity {
+      height: 30px;
+      width: 1.3rem;
+      text-align: center;
+      border: none;
+      transition: background-color 0.2s;
+
+      &:hover {
+        background: rgb(174, 174, 174);
+      }
+    }
+
+    .show-quantity {
+      height: 30px;
+      border-radius: 0px;
+      width: 2rem;
+      text-align: center;
+      border: none;
+    }
+  }
+}

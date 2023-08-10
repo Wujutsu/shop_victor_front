@@ -1,33 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./Product.scss";
 import { UserContext } from "../../../../contexts/UserContext";
+import { convertDataImg } from "../../../../utils/imageUtils";
 
 const Product = ({ info }) => {
   const [img, setImg] = useState("");
   const { handleAddCartItem } = useContext(UserContext);
 
   useEffect(() => {
-    const convertDataImg = () => {
-      // Convertir la chaîne de données d'image en un tableau d'octets
-      const byteCharacters = atob(info.listPicture[0]);
-
-      // Convertir le tableau d'octets en un tableau d'octets sans signe
-      const byteArray = new Uint8Array(byteCharacters.length);
-      for (let i = 0; i < byteCharacters.length; i++) {
-        byteArray[i] = byteCharacters.charCodeAt(i);
-      }
-
-      // Créer un objet Blob à partir du tableau d'octets
-      const blob = new Blob([byteArray], { type: "image/png" });
-
-      // Créer une URL blob à partir de l'objet Blob
-      const imgUrl = URL.createObjectURL(blob);
-
-      // Définir l'URL blob en tant qu'état d'image
-      setImg(imgUrl);
-    };
-
-    convertDataImg();
+    setImg(convertDataImg(info.listPicture[0]));
   }, [info.listPicture]);
 
   return (
