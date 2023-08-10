@@ -55,12 +55,11 @@ const Shop = () => {
 
   return (
     <>
-      {!isLoading ? (
-        <div className="page-shop">
-          <div className="title-page">Boutique</div>
+      <div className="page-shop">
+        <div className="title-page">Boutique</div>
 
-          <Filter handleCategorie={handleCategorie} />
-
+        <Filter handleCategorie={handleCategorie} />
+        {!isLoading ? (
           <div className="row">
             {listProduct.map((item) => (
               <div className="col-lg-3 col-md-4 col-sm-6" key={item.id}>
@@ -68,10 +67,10 @@ const Shop = () => {
               </div>
             ))}
           </div>
-        </div>
-      ) : (
-        <Spinner />
-      )}
+        ) : (
+          <Spinner />
+        )}
+      </div>
     </>
   );
 };

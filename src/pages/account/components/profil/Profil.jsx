@@ -123,6 +123,7 @@ const Profil = () => {
               name="firstName"
               value={valFirstName}
               onChange={(e) => setValFirstName(e.target.value)}
+              autoComplete="off"
               required
             />
           </div>
@@ -134,6 +135,7 @@ const Profil = () => {
               name="lastName"
               value={valLastName}
               onChange={(e) => setValLastName(e.target.value)}
+              autoComplete="off"
               required
             />
           </div>
@@ -146,6 +148,7 @@ const Profil = () => {
               name="email"
               value={valEmail}
               onChange={(e) => setValEmail(e.target.value)}
+              autoComplete="off"
               required
             />
           </div>
@@ -157,6 +160,7 @@ const Profil = () => {
               name="phoneNumber"
               value={valPhoneNumber}
               onChange={(e) => setValPhoneNumber(e.target.value)}
+              autoComplete="off"
             />
           </div>
           <button
@@ -178,6 +182,7 @@ const Profil = () => {
               name="oldPassword"
               value={oldPassword}
               onChange={(e) => setOldPassword(e.target.value)}
+              autoComplete="off"
               required
             />
           </div>
@@ -190,6 +195,7 @@ const Profil = () => {
               name="newPassword"
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
+              autoComplete="off"
               required
             />
           </div>
@@ -202,6 +208,7 @@ const Profil = () => {
               name="verifPassword"
               value={verifPassword}
               onChange={(e) => setVerifPassword(e.target.value)}
+              autoComplete="off"
               required
             />
           </div>

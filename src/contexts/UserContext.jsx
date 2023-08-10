@@ -46,9 +46,11 @@ const UserProvider = ({ children }) => {
       setIsLogged(savedisLogged === "true");
     }
 
-    if (savedCartItem.length > 0) {
-      setCartItem(savedCartItem);
-      setNbCartItem(savedNbCartItem);
+    if (savedCartItem) {
+      if (savedCartItem.length > 0) {
+        setCartItem(savedCartItem);
+        setNbCartItem(savedNbCartItem);
+      }
     }
   }, []);
 

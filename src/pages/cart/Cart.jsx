@@ -144,6 +144,7 @@ const Cart = () => {
                         type="text"
                         disabled
                         value={item.quantity}
+                        autoComplete="off"
                       />
                       <button
                         className="btn-quantity"
@@ -190,7 +191,7 @@ const Cart = () => {
             </div>
             <form>
               <p>Code réduction</p>
-              <input disabled id="code" placeholder="" />
+              <input disabled id="code" placeholder="" autoComplete="off" />
             </form>
             <div className="row total-cost">
               <div className="col">Prix total</div>
