@@ -27,8 +27,13 @@ const Shop = () => {
         .get(apiUrl, config)
         .then((response) => {
           console.log("Data=>", response.data);
-          setListProductSave(response.data);
-          setListProduct(response.data);
+
+          //On ne met que dans la liste les produits avec un stock supérieur à 0
+          const listProductWithItem = response.data.filter(
+            (item) => item.stockQuantity > 0
+          );
+          setListProductSave(listProductWithItem);
+          setListProduct(listProductWithItem);
           setIsLoading(false);
         })
         .catch((error) => {

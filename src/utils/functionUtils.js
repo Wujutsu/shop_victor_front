@@ -18,3 +18,8 @@ export const convertDataImg = (dataImg) => {
   // Définir l'URL blob en tant qu'état d'image
   return imgUrl;
 };
+
+//Remplace les "," par des "."
+export const replaceCommaWithDot = (string) => {
+  return string.replace(/,/g, ".");
+};

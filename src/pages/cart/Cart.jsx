@@ -3,7 +3,7 @@ import { UserContext } from "../../contexts/UserContext";
 import axios from "axios";
 import "./Cart.scss";
 import Spinner from "../../components/spinner/Spinner";
-import { convertDataImg } from "../../utils/imageUtils";
+import { convertDataImg } from "../../utils/functionUtils";
 
 const Cart = () => {
   const {

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./Product.scss";
 import { UserContext } from "../../../../contexts/UserContext";
-import { convertDataImg } from "../../../../utils/imageUtils";
+import { convertDataImg } from "../../../../utils/functionUtils";
 
 const Product = ({ info }) => {
   const [img, setImg] = useState("");
@@ -19,26 +19,56 @@ const Product = ({ info }) => {
           style={{ backgroundImage: `url(${img})` }}
         ></div>
         <div className="infos">
-          <div className="title">{info.name} collection</div>
+          <div className="title">{info.name}</div>
           <div>
             <div className="price">{info.price} €</div>
-            <div className="quantity">x{info.stockQuantity} en stock</div>
+            <div className="quantity">
+              {info.stockQuantity > 0 ? (
+                <>x{info.stockQuantity} en stock</>
+              ) : (
+                <>épuisé</>
+              )}
+            </div>
           </div>
         </div>
 
-        <button
-          className="btn btn-dark"
-          onClick={() =>
-            handleAddCartItem(
-              info.id,
-              info.categorie.name,
-              info.name,
-              info.price
-            )
-          }
-        >
-          Ajouter au panier
-        </button>
+        {info.stockQuantity > 0 ? (
+          <>
+            {" "}
+            <button
+              disabled={false}
+              className="btn btn-dark"
+              onClick={() =>
+                handleAddCartItem(
+                  info.id,
+                  info.categorie.name,
+                  info.name,
+                  info.price
+                )
+              }
+            >
+              Ajouter au panier
+            </button>
+          </>
+        ) : (
+          <>
+            {" "}
+            <button
+              disabled={true}
+              className="btn btn-dark"
+              onClick={() =>
+                handleAddCartItem(
+                  info.id,
+                  info.categorie.name,
+                  info.name,
+                  info.price
+                )
+              }
+            >
+              Ajouter au panier
+            </button>
+          </>
+        )}
       </div>
     </div>
   );
