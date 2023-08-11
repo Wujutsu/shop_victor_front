@@ -9,7 +9,7 @@ const GestionCategorie = () => {
   const { token } = useContext(UserContext);
   const [categories, setCategories] = useState([]);
   const [newCategory, setNewCategory] = useState("");
-  const [newCategoryError, setNewCategoryError] = useState(false);
+  const [newCategoryError, setNewCategoryError] = useState(0);
   const [categoryUsedByProductError, setCategoryUsedByProductError] =
     useState(false);
 
@@ -36,30 +36,45 @@ const GestionCategorie = () => {
 
   const handleAddCategory = () => {
     if (newCategory !== "") {
-      const apiUrl = "http://localhost:8080/api/categorie/add";
-      const requestData = {
-        name: newCategory,
-      };
-      const config = {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      };
+      //On vérifie que la catégorie n'existe pas déjà
+      const verifDoublou = categories.findIndex(
+        (cat) => cat.name === newCategory
+      );
 
-      axios
-        .post(apiUrl, requestData, config)
-        .then((response) => {
-          const updateCategories = [...categories];
-          updateCategories.push(response.data);
-          setCategories(updateCategories);
-          setNewCategory("");
-        })
-        .catch((error) => {});
+      if (verifDoublou === -1) {
+        const apiUrl = "http://localhost:8080/api/categorie/add";
+        const requestData = {
+          name: newCategory,
+        };
+        const config = {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        };
+
+        axios
+          .post(apiUrl, requestData, config)
+          .then((response) => {
+            const updateCategories = [...categories];
+            updateCategories.push(response.data);
+            setCategories(updateCategories);
+            setNewCategory("");
+          })
+          .catch((error) => {});
+      } else {
+        setNewCategory("");
+        //Si la catégorie est déjà présente dans la BDD
+        setNewCategoryError(2);
+        setTimeout(() => {
+          setNewCategoryError(0);
+        }, 3000);
+      }
     } else {
-      setNewCategoryError(true);
+      //Si la catégorie est vide
+      setNewCategoryError(1);
       setTimeout(() => {
-        setNewCategoryError(false);
+        setNewCategoryError(0);
       }, 3000);
     }
   };
@@ -129,9 +144,15 @@ const GestionCategorie = () => {
           </button>
         </div>
       ))}
-      {newCategoryError && (
+      {newCategoryError === 1 && (
         <ShowInfoPopup
           msg="Impossible d'ajouter une catégorie vide"
+          type="error"
+        ></ShowInfoPopup>
+      )}
+      {newCategoryError === 2 && (
+        <ShowInfoPopup
+          msg="Impossible d'ajouter 2 fois la même catégorie"
           type="error"
         ></ShowInfoPopup>
       )}

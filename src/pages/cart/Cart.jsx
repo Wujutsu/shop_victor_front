@@ -159,7 +159,7 @@ const Cart = () => {
             </div>
             <div className="row total-item">
               <div className="col" style={{ paddingLeft: "10px" }}>
-                {nbCartItem} {nbCartItem === 1 ? "article" : "articles"}
+                {nbCartItem} {nbCartItem > 1 ? "articles" : "article"}
               </div>
               <div className="col t-right">{totalCommandItem.toFixed(2)} €</div>
             </div>
