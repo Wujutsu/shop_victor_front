@@ -19,7 +19,9 @@ export const convertDataImg = (dataImg) => {
   return imgUrl;
 };
 
-//Remplace les "," par des "."
-export const replaceCommaWithDot = (string) => {
-  return string.replace(/,/g, ".");
+//Format du tarif
+export const formatTarif = (str) => {
+  str = str.toString().replace(/,/g, ".");
+  const parsedNumber = parseFloat(str);
+  return parsedNumber.toFixed(2);
 };

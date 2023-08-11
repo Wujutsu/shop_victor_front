@@ -3,10 +3,7 @@ import "./GestionProduct.scss";
 import axios from "axios";
 import { UserContext } from "../../../contexts/UserContext";
 import Spinner from "../../../components/spinner/Spinner";
-import {
-  convertDataImg,
-  replaceCommaWithDot,
-} from "../../../utils/functionUtils";
+import { convertDataImg, formatTarif } from "../../../utils/functionUtils";
 import { BsPen } from "react-icons/bs";
 import { RxCrossCircled } from "react-icons/rx";
 import { AiOutlineCheckCircle } from "react-icons/ai";
@@ -16,6 +13,7 @@ const GestionProduct = () => {
   const [saveListProduct, setSaveListProduct] = useState([]);
   const [listProduct, setListProduct] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [loadingUpdate, setLoadingUpdate] = useState(false);
 
   useEffect(() => {
     const getAllProducts = () => {
@@ -102,14 +100,15 @@ const GestionProduct = () => {
 
   //Permet de valider la modification pour qu'elle soit effective en BDD
   const handleValideUpdateProduct = (index) => {
+    setLoadingUpdate(true);
     const productToUpdate = listProduct[index];
 
     //On vérifie que la quantité en stock n'est pas inférieur à 0
     if (productToUpdate.stockQuantity < 0) {
       productToUpdate.stockQuantity = 0;
     }
-    //On remplace les "," par des "." dans le tarif
-    productToUpdate.price = replaceCommaWithDot(productToUpdate.price);
+    //formatte le tarif
+    productToUpdate.price = formatTarif(productToUpdate.price);
 
     const apiUrl = "http://localhost:8080/api/product/update";
     const requestData = {
@@ -137,8 +136,11 @@ const GestionProduct = () => {
 
         setListProduct(finalUpdateProduct);
         setSaveListProduct(finalUpdateProduct);
+        setLoadingUpdate(false);
       })
-      .catch((error) => {});
+      .catch((error) => {
+        setLoadingUpdate(false);
+      });
   };
 
   return (
@@ -161,21 +163,40 @@ const GestionProduct = () => {
                   </button>
                 ) : (
                   <>
-                    <button
-                      className="btn btn-disabled btn-danger"
-                      onClick={() => handleDisabledTrue()}
-                      aria-label="Annuler modification"
-                    >
-                      <RxCrossCircled size={25} />
-                    </button>
+                    {loadingUpdate ? (
+                      <div className="loading-update-product">
+                        <div
+                          className="spinner-grow spin-1 text-success m-1"
+                          role="status"
+                        ></div>
+                        <div
+                          className="spinner-grow spin-2 text-success m-1"
+                          role="status"
+                        ></div>
+                        <div
+                          className="spinner-grow spin-3 text-success m-1"
+                          role="status"
+                        ></div>
+                      </div>
+                    ) : (
+                      <>
+                        <button
+                          className="btn btn-disabled btn-danger"
+                          onClick={() => handleDisabledTrue()}
+                          aria-label="Annuler modification"
+                        >
+                          <RxCrossCircled size={25} />
+                        </button>
 
-                    <button
-                      className="btn btn-update btn-success"
-                      onClick={() => handleValideUpdateProduct(index)}
-                      aria-label="Confirmer modification"
-                    >
-                      <AiOutlineCheckCircle size={25} />
-                    </button>
+                        <button
+                          className="btn btn-update btn-success"
+                          onClick={() => handleValideUpdateProduct(index)}
+                          aria-label="Confirmer modification"
+                        >
+                          <AiOutlineCheckCircle size={25} />
+                        </button>
+                      </>
+                    )}
                   </>
                 )}
 

@@ -17,6 +17,28 @@
     padding: 10px;
     padding-bottom: 4px;
 
+    .loading-update-product {
+      position: relative;
+      .spinner-grow {
+        position: absolute;
+        z-index: 10;
+        width: 15px;
+        height: 15px;
+      }
+      .spin-1 {
+        top: 0px;
+        right: 0px;
+      }
+      .spin-2 {
+        top: 0px;
+        right: 25px;
+      }
+      .spin-3 {
+        top: 0px;
+        right: 50px;
+      }
+    }
+
     .btn-disabled {
       position: absolute;
       top: 0;

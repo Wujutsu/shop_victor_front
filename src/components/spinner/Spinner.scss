@@ -1,14 +1,16 @@
-.spinner-center-page,
-.spinner-center-div {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+.spinner {
+  .spinner-center-page,
+  .spinner-center-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-.spinner-center-page {
-  height: 50vh;
-}
+  .spinner-center-page {
+    height: 50vh;
+  }
 
-.spinner-center-div {
-  height: 80%;
+  .spinner-center-div {
+    height: 80%;
+  }
 }
