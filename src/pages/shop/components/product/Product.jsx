@@ -21,7 +21,7 @@ const Product = ({ info }) => {
         <div className="infos">
           <div className="title">{info.name}</div>
           <div>
-            <div className="price">{info.price} €</div>
+            <div className="price">{info.price.toFixed(2)} €</div>
             <div className="quantity">
               {info.stockQuantity > 0 ? (
                 <>x{info.stockQuantity} en stock</>

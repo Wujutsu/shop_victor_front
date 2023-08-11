@@ -32,10 +32,6 @@ function App() {
           element={isLogged && role === "ROLE_ADMIN" && <Admin />}
         />
         <Route
-          path="/admin/product"
-          element={isLogged && role === "ROLE_ADMIN" && <Admin />}
-        />
-        <Route
           path="/admin/order"
           element={isLogged && role === "ROLE_ADMIN" && <Admin />}
         />

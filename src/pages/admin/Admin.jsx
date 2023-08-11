@@ -17,19 +17,8 @@ const Admin = () => {
     <div className="admin">
       <NavLink to="/admin">
         <button
-          className={`btn ${
-            navigationAdmin === "/admin"
-              ? "btn btn-success"
-              : "btn btn-outline-success"
-          }`}
-        >
-          Catégories
-        </button>
-      </NavLink>
-      <NavLink to="/admin/product">
-        <button
           className={`btn m-2 ${
-            navigationAdmin === "/admin/product"
+            navigationAdmin === "/admin"
               ? "btn btn-success"
               : "btn btn-outline-success"
           }`}
@@ -49,8 +38,16 @@ const Admin = () => {
         </button>
       </NavLink>
 
-      {navigationAdmin === "/admin" && <GestionCategorie />}
-      {navigationAdmin === "/admin/product" && <GestionProduct />}
+      {navigationAdmin === "/admin" && (
+        <div>
+          <div>
+            <GestionCategorie />
+          </div>
+          <div>
+            <GestionProduct />
+          </div>
+        </div>
+      )}
       {navigationAdmin === "/admin/order" && <GestionOrder />}
     </div>
   );

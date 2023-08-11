@@ -31,6 +31,7 @@ const GestionProduct = () => {
           const updatedCartItems = response.data.map((item) => {
             return {
               ...item,
+              price: formatTarif(item.price),
               urlPicture: convertDataImg(item.listPicture[0]),
               isDisabled: true,
             };
