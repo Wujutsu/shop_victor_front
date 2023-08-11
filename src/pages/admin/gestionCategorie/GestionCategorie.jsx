@@ -3,11 +3,15 @@ import "./GestionCategorie.scss";
 import { UserContext } from "../../../contexts/UserContext";
 import axios from "axios";
 import { AiOutlineDelete } from "react-icons/ai";
+import ShowInfoPopup from "../../../components/showInfoPopup/ShowInfoPopup";
 
 const GestionCategorie = () => {
   const { token } = useContext(UserContext);
   const [categories, setCategories] = useState([]);
   const [newCategory, setNewCategory] = useState("");
+  const [newCategoryError, setNewCategoryError] = useState(false);
+  const [categoryUsedByProductError, setCategoryUsedByProductError] =
+    useState(false);
 
   useEffect(() => {
     const getAllCategories = () => {
@@ -31,26 +35,33 @@ const GestionCategorie = () => {
   }, [token]);
 
   const handleAddCategory = () => {
-    const apiUrl = "http://localhost:8080/api/categorie/add";
-    const requestData = {
-      name: newCategory,
-    };
-    const config = {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    };
+    if (newCategory !== "") {
+      const apiUrl = "http://localhost:8080/api/categorie/add";
+      const requestData = {
+        name: newCategory,
+      };
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      };
 
-    axios
-      .post(apiUrl, requestData, config)
-      .then((response) => {
-        const updateCategories = [...categories];
-        updateCategories.push(response.data);
-        setCategories(updateCategories);
-        setNewCategory("");
-      })
-      .catch((error) => {});
+      axios
+        .post(apiUrl, requestData, config)
+        .then((response) => {
+          const updateCategories = [...categories];
+          updateCategories.push(response.data);
+          setCategories(updateCategories);
+          setNewCategory("");
+        })
+        .catch((error) => {});
+    } else {
+      setNewCategoryError(true);
+      setTimeout(() => {
+        setNewCategoryError(false);
+      }, 3000);
+    }
   };
 
   const handleDeleteCategory = (id) => {
@@ -76,7 +87,17 @@ const GestionCategorie = () => {
             setCategories(updatedCategories);
           }
         })
-        .catch((error) => {});
+        .catch((error) => {
+          if (
+            error.response.data ===
+            "Cannot delete category. It is used by existing products."
+          ) {
+            setCategoryUsedByProductError(true);
+            setTimeout(() => {
+              setCategoryUsedByProductError(false);
+            }, 3000);
+          }
+        });
     }
   };
 
@@ -97,7 +118,6 @@ const GestionCategorie = () => {
           Ajouter
         </button>
       </div>
-
       {categories.map((category, index) => (
         <div className="categorie-list" key={index}>
           <input type="text" value={category.name} disabled />
@@ -109,6 +129,18 @@ const GestionCategorie = () => {
           </button>
         </div>
       ))}
+      {newCategoryError && (
+        <ShowInfoPopup
+          msg="Impossible d'ajouter une catégorie vide"
+          type="error"
+        ></ShowInfoPopup>
+      )}
+      {categoryUsedByProductError && (
+        <ShowInfoPopup
+          msg="Impossible de supprimer une catégorie utilisée par des produits"
+          type="error"
+        ></ShowInfoPopup>
+      )}
     </div>
   );
 };

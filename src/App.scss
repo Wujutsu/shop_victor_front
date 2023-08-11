@@ -24,6 +24,20 @@ a {
   text-decoration: none;
 }
 
+input:disabled {
+  opacity: 0.6;
+  background-color: #c8c5c5;
+  color: black;
+}
+
+textarea:disabled {
+  opacity: 0.6;
+  background-color: #c8c5c5;
+  color: black;
+  border-radius: 5px;
+  padding: 5px 7px;
+}
+
 //------------------------Ajout class perso------------------------//
 input {
   height: 35px;
