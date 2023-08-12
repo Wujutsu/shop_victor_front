@@ -1,0 +1,40 @@
+.list-product {
+  position: relative;
+
+  .file-upload {
+    position: absolute;
+    width: fit-content;
+    top: 0;
+    right: 0;
+    border-radius: 0px;
+    border-top-right-radius: 5px;
+
+    .input-perso {
+      cursor: pointer;
+    }
+
+    .input-file {
+      display: none;
+    }
+  }
+
+  .save-product {
+    position: absolute;
+    top: 35px;
+    right: 0;
+
+    button {
+      width: 48.8px;
+      border-radius: 0px;
+      height: 35px;
+
+      .check {
+        margin-left: -2px;
+        margin-top: -7px;
+      }
+      svg {
+        margin-top: -5px;
+      }
+    }
+  }
+}
