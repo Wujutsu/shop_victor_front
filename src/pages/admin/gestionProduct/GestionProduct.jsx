@@ -180,7 +180,7 @@ const GestionProduct = () => {
     setListProduct(saveListProduct);
   };
 
-  //Permet de modifier les champs d'un produit
+  //Permet de modifier les champs input d'un produit
   const handleInputChange = (index, field, value) => {
     const updatedListProduct = listProduct.map((item, i) => {
       if (index === i) {
@@ -191,6 +191,20 @@ const GestionProduct = () => {
     });
 
     setListProduct(updatedListProduct);
+  };
+
+  //Permet de modifier les champs select d'un produit
+  const handleSelectChange = (categorySelect, indexProduit) => {
+    //Vérifie que le nom de la catégorie existe bien en bdd
+    const verifCategory = categories.find(
+      (item) => item.name === categorySelect
+    );
+
+    if (verifCategory !== undefined) {
+      const updateListProduct = [...listProduct];
+      updateListProduct[indexProduit].categorie = verifCategory;
+      setListProduct(updateListProduct);
+    }
   };
 
   //Permet de modifier la quantité en stock d'un produit
@@ -231,6 +245,7 @@ const GestionProduct = () => {
       description: productToUpdate.description,
       price: productToUpdate.price,
       stockQuantity: productToUpdate.stockQuantity,
+      categorie: productToUpdate.categorie,
       active: true,
     };
     const config = {
@@ -417,18 +432,23 @@ const GestionProduct = () => {
                         <div className="row mb-2">
                           <div className="categorie">
                             <div className="label">Catégorie:</div>
-                            <input
-                              type="text"
-                              value={item.categorie.name}
-                              onChange={(e) =>
-                                handleInputChange(
-                                  index,
-                                  "categorie",
-                                  e.target.value
-                                )
-                              }
+                            <select
+                              name="categorieSelect"
                               disabled={item.isDisabled}
-                            />
+                              onChange={(e) =>
+                                handleSelectChange(e.target.value, index)
+                              }
+                              value={item.categorie.name}
+                            >
+                              {categories.map((category, i) => (
+                                <option
+                                  key={category.name}
+                                  value={category.name}
+                                >
+                                  {category.name}
+                                </option>
+                              ))}
+                            </select>
                           </div>
                         </div>
                         <div className="row mb-2">

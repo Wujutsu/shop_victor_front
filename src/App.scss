@@ -24,7 +24,8 @@ a {
   text-decoration: none;
 }
 
-input:disabled {
+input:disabled,
+select:disabled {
   opacity: 0.6;
   background-color: #c8c5c5;
   color: black;
