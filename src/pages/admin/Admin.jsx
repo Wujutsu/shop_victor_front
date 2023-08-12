@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "./Admin.scss";
-import GestionCategorie from "./gestionCategorie/GestionCategorie";
 import GestionProduct from "./gestionProduct/GestionProduct";
 import GestionOrder from "./gestionOrder/GestionOrder";
 import { NavLink, useLocation } from "react-router-dom";
@@ -38,16 +37,7 @@ const Admin = () => {
         </button>
       </NavLink>
 
-      {navigationAdmin === "/admin" && (
-        <div>
-          <div>
-            <GestionCategorie />
-          </div>
-          <div>
-            <GestionProduct />
-          </div>
-        </div>
-      )}
+      {navigationAdmin === "/admin" && <GestionProduct />}
       {navigationAdmin === "/admin/order" && <GestionOrder />}
     </div>
   );
