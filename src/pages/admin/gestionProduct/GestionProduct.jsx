@@ -25,6 +25,8 @@ const GestionProduct = () => {
   const [listProduct, setListProduct] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [loadingUpdate, setLoadingUpdate] = useState(false);
+  const [btnAddProduct, setBtnAddProduct] = useState(false);
+  const [newProduct, setNewProduct] = useState({});
 
   useEffect(() => {
     const getAllCategories = () => {
@@ -163,6 +165,9 @@ const GestionProduct = () => {
     }
   };
 
+  //Permet de mettre à jour les champs pour la création d'un nouveau produit
+  const handleAddInputChange = (field, value) => {};
+
   //Permet de undisabled un item pour modifier des champs du produit
   const handleDisabledFalse = (index) => {
     const unDisabledProduct = saveListProduct.map((item, i) => {
@@ -284,7 +289,7 @@ const GestionProduct = () => {
             onChange={(e) => setNewCategory(e.target.value)}
           />
           <button
-            className="btn btn-admin btn-primary"
+            className="btn btn-admin btn-primary margin-left"
             onClick={handleAddCategory}
           >
             Ajouter
@@ -294,7 +299,7 @@ const GestionProduct = () => {
           <div className="categorie-list" key={index}>
             <input type="text" value={category.name} disabled />
             <button
-              className="btn btn-admin btn-danger"
+              className="btn btn-admin btn-danger margin-left"
               onClick={() => handleDeleteCategory(category.id)}
             >
               <AiOutlineDelete />
@@ -324,7 +329,120 @@ const GestionProduct = () => {
       <div className="gestion-product">
         <h2>Gestion des Produits</h2>
 
+        <button className="btn btn-admin btn-primary mb-3">
+          Ajouter produit
+        </button>
         <div className="row">
+          {btnAddProduct && (
+            <>
+              {/* Ajouter un produit */}
+              <div className="col-lg-6">
+                <div className="list-product">
+                  <div className="row">
+                    <div className="col-sm-3">
+                      <div className="info-detail">
+                        <img className="img-fluid" src={""} alt={`item add`} />
+                        <div className="price-quantity">
+                          <div className="price">
+                            <input
+                              type="text"
+                              value={newProduct.price}
+                              onChange={(e) =>
+                                handleAddInputChange("price", e.target.value)
+                              }
+                            />
+                            <span>€</span>
+                          </div>
+                          <div className="quantity">
+                            <button
+                              className="btn-quantity"
+                              onClick={() =>
+                                handleAddInputChange("quantity", "-")
+                              }
+                            >
+                              -
+                            </button>
+                            <input
+                              className="show-quantity"
+                              type="text"
+                              value={newProduct.stockQuantity}
+                              autoComplete="off"
+                            />
+                            <button
+                              className="btn-quantity"
+                              onClick={() =>
+                                handleAddInputChange("quantity", "+")
+                              }
+                            >
+                              +
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-sm-9">
+                      <div className="info-product">
+                        <div className="row mb-2">
+                          <div className="categorie">
+                            <div className="label">Catégorie:</div>
+                            <select
+                              name="categorieSelect"
+                              onChange={(e) =>
+                                handleAddInputChange(
+                                  "categorie",
+                                  e.target.value
+                                )
+                              }
+                              value={newProduct.categorie.name}
+                            >
+                              <option value=""></option>
+                              {categories.map((category, i) => (
+                                <option
+                                  key={category.name}
+                                  value={category.name}
+                                >
+                                  {category.name}
+                                </option>
+                              ))}
+                            </select>
+                          </div>
+                        </div>
+                        <div className="row mb-2">
+                          <div className="name">
+                            <div className="label">Nom:</div>
+                            <input
+                              type="text"
+                              value={newProduct.name}
+                              onChange={(e) =>
+                                handleAddInputChange("name", e.target.value)
+                              }
+                            />
+                          </div>
+                        </div>
+                        <div className="row">
+                          <div className="label">Description:</div>
+                          <div className="description">
+                            <textarea
+                              name="descriptionText"
+                              id="descriptionText"
+                              cols="30"
+                              rows="3"
+                              value={newCategory.description}
+                              onChange={(e) =>
+                                handleInputChange("description", e.target.value)
+                              }
+                            ></textarea>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </>
+          )}
+
+          {/* Liste des produits */}
           {listProduct.length > 0 &&
             !isLoading &&
             listProduct.map((item, index) => (
