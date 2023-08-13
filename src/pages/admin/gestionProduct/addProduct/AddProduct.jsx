@@ -145,6 +145,17 @@ const AddProduct = ({
           };
           updateListProduct.push(dataNewProduct);
 
+          console.log(
+            "Original image size:",
+            productToAdd.listPicture[0].length,
+            "bytes"
+          );
+          console.log(
+            "Compressed image size:",
+            response.data.listPicture[0].length,
+            "bytes"
+          );
+
           setListProduct(updateListProduct);
           handleCancleAddProduct();
           setLoadingUpdate(false);
