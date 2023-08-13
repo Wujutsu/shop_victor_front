@@ -88,6 +88,9 @@ const GestionProduct = () => {
           <AddProduct
             categories={categories}
             showModalNewProduct={showModalNewProduct}
+            setShowModalNewProduct={setShowModalNewProduct}
+            listProduct={listProduct}
+            setListProduct={setListProduct}
           />
 
           {/* Liste des produits && update */}

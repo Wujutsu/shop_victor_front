@@ -6,6 +6,7 @@ import { RxCrossCircled } from "react-icons/rx";
 import { AiOutlineCheckCircle } from "react-icons/ai";
 import { formatTarif } from "../../../../utils/functionUtils";
 import "./ShowListProduct.scss";
+import ShowInfoPopup from "../../../../components/showInfoPopup/ShowInfoPopup";
 
 const ShowListProduct = ({
   listProduct,
@@ -17,6 +18,7 @@ const ShowListProduct = ({
 }) => {
   const [loadingUpdate, setLoadingUpdate] = useState(false);
   const { token } = useContext(UserContext);
+  const [updateError, setUpdateError] = useState("0");
 
   //Permet de undisabled un item pour modifier des champs du produit
   const handleDisabledFalse = (index) => {
@@ -83,48 +85,72 @@ const ShowListProduct = ({
 
   //Permet de valider la modification pour qu'elle soit effective en BDD
   const handleValideUpdateProduct = (index) => {
-    setLoadingUpdate(true);
     const productToUpdate = listProduct[index];
+
+    //formatte le tarif
+    productToUpdate.price = formatTarif(productToUpdate.price);
 
     //On vérifie que la quantité en stock n'est pas inférieur à 0
     if (productToUpdate.stockQuantity < 0) {
       productToUpdate.stockQuantity = 0;
     }
-    //formatte le tarif
-    productToUpdate.price = formatTarif(productToUpdate.price);
 
-    const apiUrl = "http://localhost:8080/api/product/update";
-    const requestData = {
-      id: productToUpdate.id,
-      name: productToUpdate.name,
-      description: productToUpdate.description,
-      price: productToUpdate.price,
-      stockQuantity: productToUpdate.stockQuantity,
-      categorie: productToUpdate.categorie,
-      active: true,
-    };
-    const config = {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    };
+    if (
+      productToUpdate.name !== "" &&
+      productToUpdate.description !== "" &&
+      productToUpdate.price !== "" &&
+      !isNaN(productToUpdate.price) &&
+      productToUpdate.categorie !== ""
+    ) {
+      setLoadingUpdate(true);
 
-    axios
-      .put(apiUrl, requestData, config)
-      .then((response) => {
-        //Après modification on disabled tous les éléments
-        const finalUpdateProduct = listProduct.map((item, i) => {
-          return { ...item, isDisabled: true };
+      const apiUrl = "http://localhost:8080/api/product/update";
+      const requestData = {
+        id: productToUpdate.id,
+        name: productToUpdate.name,
+        description: productToUpdate.description,
+        price: productToUpdate.price,
+        stockQuantity: productToUpdate.stockQuantity,
+        categorie: productToUpdate.categorie,
+        active: true,
+      };
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      };
+
+      axios
+        .put(apiUrl, requestData, config)
+        .then((response) => {
+          //Après modification on disabled tous les éléments
+          const finalUpdateProduct = listProduct.map((item, i) => {
+            return { ...item, isDisabled: true };
+          });
+
+          setListProduct(finalUpdateProduct);
+          setSaveListProduct(finalUpdateProduct);
+          setLoadingUpdate(false);
+          setUpdateError("ok");
+          setTimeout(() => {
+            setUpdateError("0");
+          }, 3000);
+        })
+        .catch((error) => {
+          setLoadingUpdate(false);
         });
-
-        setListProduct(finalUpdateProduct);
-        setSaveListProduct(finalUpdateProduct);
-        setLoadingUpdate(false);
-      })
-      .catch((error) => {
-        setLoadingUpdate(false);
-      });
+    } else {
+      if (isNaN(productToUpdate.price)) {
+        setUpdateError("2");
+        productToUpdate.price = "";
+      } else {
+        setUpdateError("1");
+      }
+      setTimeout(() => {
+        setUpdateError("0");
+      }, 3000);
+    }
   };
 
   return (
@@ -198,6 +224,7 @@ const ShowListProduct = ({
                             handleInputChange(index, "price", e.target.value)
                           }
                           disabled={item.isDisabled}
+                          required
                         />
                         <span>€</span>
                       </div>
@@ -214,6 +241,7 @@ const ShowListProduct = ({
                           type="text"
                           disabled={item.isDisabled}
                           value={item.stockQuantity}
+                          onChange={() => false}
                           autoComplete="off"
                         />
                         <button
@@ -258,6 +286,7 @@ const ShowListProduct = ({
                             handleInputChange(index, "name", e.target.value)
                           }
                           disabled={item.isDisabled}
+                          required
                         />
                       </div>
                     </div>
@@ -278,6 +307,7 @@ const ShowListProduct = ({
                             )
                           }
                           disabled={item.isDisabled}
+                          required
                         ></textarea>
                       </div>
                     </div>
@@ -287,6 +317,27 @@ const ShowListProduct = ({
             </div>
           </div>
         ))}
+
+      {updateError === "ok" && (
+        <ShowInfoPopup
+          msg="Le produit vient d'être modifié"
+          type="success"
+        ></ShowInfoPopup>
+      )}
+
+      {updateError === "1" && (
+        <ShowInfoPopup
+          msg="Tous les champs du produit doivent être renseignés"
+          type="error"
+        ></ShowInfoPopup>
+      )}
+
+      {updateError === "2" && (
+        <ShowInfoPopup
+          msg="Erreur dans le prix renseigné"
+          type="error"
+        ></ShowInfoPopup>
+      )}
     </>
   );
 };

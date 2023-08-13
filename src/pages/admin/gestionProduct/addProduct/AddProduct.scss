@@ -1,16 +1,26 @@
 .list-product {
   position: relative;
 
+  .img-wait {
+    height: 2px;
+  }
+
   .file-upload {
-    position: absolute;
-    width: fit-content;
-    top: 0;
-    right: 0;
-    border-radius: 0px;
-    border-top-right-radius: 5px;
+    padding: 5px;
+    width: 100px;
+    margin: auto;
+    margin-top: -5px;
+    margin-bottom: 5px;
 
     .input-perso {
       cursor: pointer;
+      z-index: 10;
+      padding: 5px 15px;
+
+      .select-img {
+        z-index: 10;
+        font-size: 12px;
+      }
     }
 
     .input-file {
@@ -20,20 +30,41 @@
 
   .save-product {
     position: absolute;
-    top: 35px;
+    top: 0px;
     right: 0;
 
     button {
       width: 48.8px;
       border-radius: 0px;
-      height: 35px;
 
       .check {
         margin-left: -2px;
-        margin-top: -7px;
       }
-      svg {
-        margin-top: -5px;
+    }
+    .btn-danger {
+      border-top-right-radius: 5px;
+    }
+  }
+
+  @media screen and (max-width: 576px) {
+    .box-img {
+      margin-top: 35px;
+    }
+
+    .file-upload {
+      position: absolute;
+      .input-perso {
+        cursor: pointer;
+        z-index: 10;
+
+        .select-img {
+          z-index: 10;
+          font-size: 12px;
+        }
+      }
+
+      .input-file {
+        display: none;
       }
     }
   }
