@@ -57,13 +57,14 @@
         right: 0px;
         border-radius: 0px;
         border-top-right-radius: 5px;
-        height: 40px;
+        border-bottom-right-radius: 5px;
+        height: 82px;
       }
     }
 
     .focus {
       border: 1px solid var(--color-green);
-      background: #e3f1ea;
+      background: #e4eef4;
     }
 
     .form-add-address {

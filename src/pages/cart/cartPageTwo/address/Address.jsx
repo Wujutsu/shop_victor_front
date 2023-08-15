@@ -4,6 +4,7 @@ import { AiOutlinePlus } from "react-icons/ai";
 import axios from "axios";
 import { UserContext } from "../../../../contexts/UserContext";
 import { AiOutlineDelete } from "react-icons/ai";
+import { BsPen } from "react-icons/bs";
 import ShowInfoPopup from "../../../../components/showInfoPopup/ShowInfoPopup";
 import { formatPhoneNumber } from "../../../../utils/functionUtils";
 
@@ -213,7 +214,7 @@ const Address = () => {
                         </div>
 
                         <button
-                          className="btn btn-danger btn-delete"
+                          className="btn btn-primary btn-delete"
                           onClick={() => handleDeleteAddress(item.id)}
                         >
                           <AiOutlineDelete size={20} />
