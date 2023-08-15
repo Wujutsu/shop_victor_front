@@ -1,4 +1,9 @@
 .spinner {
+  .spinner-grow {
+    width: 20px;
+    height: 20px;
+  }
+
   .spinner-center-page,
   .spinner-center-div {
     display: flex;
@@ -11,6 +16,6 @@
   }
 
   .spinner-center-div {
-    height: 80%;
+    height: 200px;
   }
 }

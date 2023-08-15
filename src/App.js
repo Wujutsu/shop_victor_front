@@ -13,6 +13,7 @@ import Account from "./pages/account/Account";
 import Shop from "./pages/shop/Shop";
 import Cart from "./pages/cart/Cart";
 import Admin from "./pages/admin/Admin";
+import NotFound from "./pages/notFound/NotFound";
 
 function App() {
   const { isLogged, role } = useContext(UserContext);
@@ -29,12 +30,14 @@ function App() {
         <Route path="/cart" element={isLogged ? <Cart /> : <Shop />} />
         <Route
           path="/admin"
-          element={isLogged && role === "ROLE_ADMIN" && <Admin />}
+          element={isLogged && role === "ROLE_ADMIN" ? <Admin /> : <NotFound />}
         />
         <Route
           path="/admin/order"
-          element={isLogged && role === "ROLE_ADMIN" && <Admin />}
+          element={isLogged && role === "ROLE_ADMIN" ? <Admin /> : <NotFound />}
         />
+
+        <Route path="*" element={<NotFound />} />
 
         {/* Nouvelle route pour les détails du produit 
         <Route path="/product/:productId" element={<ProductDetails />} />*/}
