@@ -3,6 +3,7 @@ import "./Profil.scss";
 import { UserContext } from "../../../../contexts/UserContext";
 import axios from "axios";
 import ShowInfoPopup from "../../../../components/showInfoPopup/ShowInfoPopup";
+import { formatPhoneNumber } from "../../../../utils/functionUtils";
 
 const Profil = () => {
   const {
@@ -109,6 +110,13 @@ const Profil = () => {
     }, 3000);
   };
 
+  const formatTelephone = (val) => {
+    const formattedPhoneNumber = formatPhoneNumber(val);
+    if (formattedPhoneNumber.length <= 14) {
+      setValPhoneNumber(formattedPhoneNumber);
+    }
+  };
+
   return (
     <div className="profil">
       <div className="title">Informations personnels</div>
@@ -159,7 +167,7 @@ const Profil = () => {
               id="phoneNumber"
               name="phoneNumber"
               value={valPhoneNumber}
-              onChange={(e) => setValPhoneNumber(e.target.value)}
+              onChange={(e) => formatTelephone(e.target.value)}
               autoComplete="off"
             />
           </div>

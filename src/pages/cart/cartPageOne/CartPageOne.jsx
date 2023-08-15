@@ -1,11 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
-import { UserContext } from "../../contexts/UserContext";
+import { UserContext } from "../../../contexts/UserContext";
 import axios from "axios";
-import "./Cart.scss";
-import Spinner from "../../components/spinner/Spinner";
-import { convertDataImg } from "../../utils/functionUtils";
+import "./CartPageOne.scss";
+import Spinner from "../../../components/spinner/Spinner";
+import { convertDataImg } from "../../../utils/functionUtils";
+import { NavLink } from "react-router-dom";
 
-const Cart = () => {
+const CartPageOne = () => {
   const {
     cartItem,
     token,
@@ -19,7 +20,7 @@ const Cart = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const getAllProducts = () => {
+    const getPictureProducts = () => {
       if (cartItem !== null && cartItem.length > 0) {
         const apiUrl = "http://localhost:8080/api/product/picture";
 
@@ -67,7 +68,7 @@ const Cart = () => {
       }
     };
 
-    getAllProducts();
+    getPictureProducts();
   }, [cartItem, token]);
 
   return (
@@ -179,12 +180,14 @@ const Cart = () => {
                 {totalCommandDelivery.toFixed(2)} €
               </div>
             </div>
-            <button
-              className="btn btn-dark"
-              disabled={cartItem.length > 0 ? false : true}
-            >
-              Continuer
-            </button>
+            <NavLink to="/cart/paiement" aria-label="paiement">
+              <button
+                className="btn btn-dark"
+                disabled={cartItem.length > 0 ? false : true}
+              >
+                Continuer
+              </button>
+            </NavLink>
           </div>
         </div>
       </div>
@@ -192,4 +195,4 @@ const Cart = () => {
   );
 };
 
-export default Cart;
+export default CartPageOne;

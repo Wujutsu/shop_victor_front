@@ -1,0 +1,106 @@
+.card-address {
+  margin-top: 3rem;
+
+  .resume {
+    font-size: 1rem;
+  }
+
+  .btn {
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    margin-bottom: 0px;
+  }
+
+  .btn-success {
+    margin-left: -5px;
+  }
+
+  .cart {
+    margin-bottom: 1rem;
+    padding: 2rem 2rem;
+    border-bottom-left-radius: 0.5rem;
+    border-top-left-radius: 0.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 3px 3px 10px grey;
+    font-size: 0.9rem;
+    cursor: default;
+
+    h4 {
+      margin-bottom: 1rem;
+    }
+
+    .text-right {
+      text-align: right;
+    }
+
+    .loop-address {
+      position: relative;
+
+      .address-saved {
+        cursor: pointer;
+        border: 1px solid black;
+        padding: 0.5rem 0.8rem;
+        border-radius: 0.5rem;
+        margin-bottom: 0.3rem;
+
+        svg {
+          margin-top: -3px;
+        }
+      }
+
+      .btn-delete {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        border-radius: 0px;
+        border-top-right-radius: 5px;
+        height: 40px;
+      }
+    }
+
+    .focus {
+      border: 1px solid var(--color-green);
+      background: #e3f1ea;
+    }
+
+    .form-add-address {
+      border: 1px solid black;
+      padding: 0.5rem 0.8rem;
+      padding-bottom: 1.1rem;
+      border-radius: 0.5rem;
+      margin: 0;
+      margin-bottom: 1rem;
+
+      button {
+        margin-left: 11px;
+        margin-top: 8px;
+      }
+    }
+
+    .form-input {
+      position: relative;
+      margin-top: 2rem;
+
+      label {
+        position: absolute;
+        text-align: left;
+        top: -23px;
+        color: black;
+      }
+
+      input {
+        padding: 10px;
+        font-size: 16px;
+        outline: none;
+        width: 100%;
+      }
+
+      .input-error {
+        border: 1px solid red;
+      }
+    }
+  }
+}
