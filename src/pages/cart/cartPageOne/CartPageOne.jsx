@@ -6,6 +6,8 @@ import Spinner from "../../../components/spinner/Spinner";
 import { convertDataImg } from "../../../utils/functionUtils";
 import { NavLink } from "react-router-dom";
 
+//TODO: Ne pas pouvoir ajouter plus d'item que disponible en stock
+
 const CartPageOne = () => {
   const {
     cartItem,
@@ -13,10 +15,10 @@ const CartPageOne = () => {
     nbCartItem,
     handleAddCartItem,
     handleDeleteCartItem,
+    totalCommandItem,
+    setTotalCommandItem,
   } = useContext(UserContext);
   const [showCartItem, setShowCartItem] = useState([]);
-  const [totalCommandItem, setTotalCommandItem] = useState(0);
-  const [totalCommandDelivery, setTotalCommandDelivery] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -55,7 +57,6 @@ const CartPageOne = () => {
             });
 
             setTotalCommandItem(sommeItem);
-            setTotalCommandDelivery(sommeItem + 5);
             setShowCartItem(updatedCartItems);
             setIsLoading(false);
           })
@@ -63,13 +64,12 @@ const CartPageOne = () => {
             setIsLoading(false);
           });
       } else {
-        setTotalCommandItem(0);
-        setTotalCommandDelivery(0);
+        setTotalCommandItem("0");
       }
     };
 
     getPictureProducts();
-  }, [cartItem, token]);
+  }, [cartItem, token, setTotalCommandItem]);
 
   return (
     <div className="card">
@@ -162,7 +162,9 @@ const CartPageOne = () => {
               <div className="col" style={{ paddingLeft: "10px" }}>
                 {nbCartItem} {nbCartItem > 1 ? "articles" : "article"}
               </div>
-              <div className="col t-right">{totalCommandItem.toFixed(2)} €</div>
+              <div className="col t-right">
+                {parseFloat(totalCommandItem).toFixed(2)} €
+              </div>
             </div>
             <div className="row total-item">
               <div className="col" style={{ paddingLeft: "10px" }}>
@@ -177,7 +179,7 @@ const CartPageOne = () => {
             <div className="row total-cost">
               <div className="col">Prix total</div>
               <div className="col t-right">
-                {totalCommandDelivery.toFixed(2)} €
+                {(parseFloat(totalCommandItem) + 5).toFixed(2)} €
               </div>
             </div>
             <NavLink to="/cart/paiement" aria-label="paiement">

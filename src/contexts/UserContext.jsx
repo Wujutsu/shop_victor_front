@@ -16,6 +16,7 @@ const UserProvider = ({ children }) => {
   const [isLogged, setIsLogged] = useState(false);
   const [cartItem, setCartItem] = useState([]);
   const [nbCartItem, setNbCartItem] = useState("0");
+  const [totalCommandItem, setTotalCommandItem] = useState(0);
 
   //Récupére les données sauvegardées en local lors du chargement initial du composant
   useEffect(() => {
@@ -28,6 +29,7 @@ const UserProvider = ({ children }) => {
     const savedisLogged = localStorage.getItem("isLogged");
     const savedCartItem = JSON.parse(localStorage.getItem("cartItem"));
     const savedNbCartItem = localStorage.getItem("nbCartItem");
+    const savedTotalCommandItem = localStorage.getItem("totalCommandItem");
 
     if (
       savedToken &&
@@ -52,6 +54,10 @@ const UserProvider = ({ children }) => {
         setNbCartItem(savedNbCartItem);
       }
     }
+
+    if (savedTotalCommandItem) {
+      setTotalCommandItem(savedTotalCommandItem);
+    }
   }, []);
 
   //Permet de sauvegarder les données de l'utilisateur en local chaque fois qu'elles sont mises à jour
@@ -65,6 +71,7 @@ const UserProvider = ({ children }) => {
     localStorage.setItem("isLogged", isLogged);
     localStorage.setItem("cartItem", JSON.stringify(cartItem));
     localStorage.setItem("nbCartItem", nbCartItem);
+    localStorage.setItem("totalCommandItem", totalCommandItem);
   }, [
     token,
     firstName,
@@ -75,6 +82,7 @@ const UserProvider = ({ children }) => {
     isLogged,
     cartItem,
     nbCartItem,
+    totalCommandItem,
   ]);
 
   //Met à jour info utilisateur
@@ -117,11 +125,6 @@ const UserProvider = ({ children }) => {
     setEmail("");
     setPhoneNumber("");
     setRole("");
-
-    /* setCartItem([]);
-    setNbCartItem("0");
-    localStorage.removeItem("nbCartItem");
-    localStorage.removeItem("cartItem");*/
 
     setIsLogged(false);
     navigate("/login");
@@ -194,6 +197,8 @@ const UserProvider = ({ children }) => {
     nbCartItem,
     handleAddCartItem,
     handleDeleteCartItem,
+    totalCommandItem,
+    setTotalCommandItem,
   };
 
   return (

@@ -26,8 +26,6 @@ const Shop = () => {
       axios
         .get(apiUrl, config)
         .then((response) => {
-          console.log("Data=>", response.data);
-
           //On ne met que dans la liste les produits avec un stock supérieur à 0
           const listProductWithItem = response.data.filter(
             (item) => item.stockQuantity > 0

@@ -55,7 +55,6 @@ const GestionProduct = () => {
             };
           });
 
-          console.log("KEV => ", updatedCartItems);
           setListProduct(updatedCartItems);
           setSaveListProduct(updatedCartItems);
           setIsLoading(false);

@@ -4,12 +4,12 @@ import { AiOutlinePlus } from "react-icons/ai";
 import axios from "axios";
 import { UserContext } from "../../../../contexts/UserContext";
 import { AiOutlineDelete } from "react-icons/ai";
-import { BsPen } from "react-icons/bs";
 import ShowInfoPopup from "../../../../components/showInfoPopup/ShowInfoPopup";
 import { formatPhoneNumber } from "../../../../utils/functionUtils";
 
 const Address = () => {
-  const { token, phoneNumber } = useContext(UserContext);
+  const { token, phoneNumber, totalCommandItem, nbCartItem } =
+    useContext(UserContext);
   const [showInputAddress, setShowInputAddress] = useState(false);
   const [dataNewAddress, setDataNewAddress] = useState({
     country: "",
@@ -363,8 +363,12 @@ const Address = () => {
             </h4>
 
             <div className="row mb-2">
-              <div className="col-8">5 articles</div>
-              <div className="col-4 text-right">11 €</div>
+              <div className="col-8">
+                {nbCartItem} {nbCartItem <= 1 ? "article" : "articles"}
+              </div>
+              <div className="col-4 text-right">
+                {parseFloat(totalCommandItem).toFixed(2)} €
+              </div>
             </div>
             <div className="row mb-2">
               <div className="col-8">Livraison</div>
@@ -377,7 +381,9 @@ const Address = () => {
             <div className="border-bottom mb-2"></div>
             <div className="row">
               <div className="col-8">Total à payer</div>
-              <div className="col-4 text-right">16 €</div>
+              <div className="col-4 text-right">
+                {parseFloat(totalCommandItem + 5).toFixed(2)} €
+              </div>
             </div>
 
             <div className="row">
