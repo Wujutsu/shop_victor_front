@@ -41,10 +41,7 @@ const CartPageOne = () => {
         axios
           .post(apiUrl, requestData, config)
           .then((response) => {
-            let sommeItem = 0;
-
             const updatedCartItems = cartItem.map((item) => {
-              sommeItem += item.price * item.quantity;
               const matchingResponseItem = response.data.find(
                 (itemResponse) => itemResponse.id === item.id
               );
@@ -56,7 +53,6 @@ const CartPageOne = () => {
                 : item;
             });
 
-            setTotalCommandItem(sommeItem);
             setShowCartItem(updatedCartItems);
             setIsLoading(false);
           })
@@ -69,7 +65,52 @@ const CartPageOne = () => {
     };
 
     getPictureProducts();
-  }, [cartItem, token, setTotalCommandItem]);
+
+    //eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [token]);
+
+  //Permet de modifier les quantités d'un item sans avoir à recharger les images
+  const handleUpdateItem = (id, type) => {
+    let sommeItem = 0;
+
+    const updatedCartItems = showCartItem
+      .map((item) => {
+        let updateItem = null;
+
+        if (item.id === id) {
+          if (type === "add") {
+            item.quantity += 1;
+            updateItem = { ...item };
+          } else {
+            if (item.quantity > 1) {
+              item.quantity -= 1;
+              updateItem = { ...item };
+            }
+          }
+        } else {
+          updateItem = { ...item };
+        }
+
+        sommeItem += item.price * item.quantity;
+        return updateItem;
+      })
+      .filter((item) => item !== null);
+
+    setTotalCommandItem(sommeItem);
+    setShowCartItem(updatedCartItems);
+  };
+
+  //Permet de delete les items sans avoir à recharger les images
+  const deleteCartItem = (id) => {
+    handleDeleteCartItem(id);
+    handleUpdateItem(id, "delete");
+  };
+
+  //Permet d'ajouter un item sans avoir à recharger les images
+  const addCartItem = (id, categorie, name, price) => {
+    handleAddCartItem(id, categorie, name, price);
+    handleUpdateItem(id, "add");
+  };
 
   return (
     <div className="card">
@@ -116,7 +157,7 @@ const CartPageOne = () => {
                     <div className="quantity">
                       <button
                         className="btn-quantity"
-                        onClick={() => handleDeleteCartItem(item.id)}
+                        onClick={() => deleteCartItem(item.id)}
                       >
                         -
                       </button>
@@ -130,7 +171,7 @@ const CartPageOne = () => {
                       <button
                         className="btn-quantity"
                         onClick={() =>
-                          handleAddCartItem(
+                          addCartItem(
                             item.id,
                             item.categorie,
                             item.name,
