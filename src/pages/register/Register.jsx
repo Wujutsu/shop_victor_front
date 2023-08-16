@@ -3,6 +3,7 @@ import "./Register.scss";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+//TODO: Ajouter systeme de validation par mail
 const Register = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");

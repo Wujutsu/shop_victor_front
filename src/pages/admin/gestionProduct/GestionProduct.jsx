@@ -8,6 +8,7 @@ import ShowCategory from "./showCategory/ShowCategory";
 import ShowListProduct from "./showListProduct/ShowListProduct";
 import AddProduct from "./addProduct/AddProduct";
 
+//TODO: Permettre d'archiver des produits ???
 const GestionProduct = () => {
   const { token } = useContext(UserContext);
   const [categories, setCategories] = useState([]);

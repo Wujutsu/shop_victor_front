@@ -5,6 +5,7 @@ import { UserContext } from "../../contexts/UserContext";
 import { NavLink, useNavigate } from "react-router-dom";
 import ShowInfoPopup from "../../components/showInfoPopup/ShowInfoPopup";
 
+//TODO: Ajouter mdp oublier et donc recup via mail
 export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
