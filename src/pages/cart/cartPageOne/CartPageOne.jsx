@@ -41,7 +41,11 @@ const CartPageOne = () => {
         axios
           .post(apiUrl, requestData, config)
           .then((response) => {
+            let sommeItem = 0;
+
             const updatedCartItems = cartItem.map((item) => {
+              sommeItem += item.price * item.quantity;
+
               const matchingResponseItem = response.data.find(
                 (itemResponse) => itemResponse.id === item.id
               );
@@ -53,6 +57,7 @@ const CartPageOne = () => {
                 : item;
             });
 
+            setTotalCommandItem(sommeItem);
             setShowCartItem(updatedCartItems);
             setIsLoading(false);
           })
@@ -75,26 +80,18 @@ const CartPageOne = () => {
 
     const updatedCartItems = showCartItem
       .map((item) => {
-        let updateItem = null;
-
         if (item.id === id) {
           if (type === "add") {
             item.quantity += 1;
-            updateItem = { ...item };
           } else {
-            if (item.quantity > 1) {
-              item.quantity -= 1;
-              updateItem = { ...item };
-            }
+            item.quantity -= 1;
           }
-        } else {
-          updateItem = { ...item };
         }
 
         sommeItem += item.price * item.quantity;
-        return updateItem;
+        return { ...item };
       })
-      .filter((item) => item !== null);
+      .filter((item) => item.quantity > 0);
 
     setTotalCommandItem(sommeItem);
     setShowCartItem(updatedCartItems);
@@ -223,14 +220,16 @@ const CartPageOne = () => {
                 {(parseFloat(totalCommandItem) + 5).toFixed(2)} €
               </div>
             </div>
-            <NavLink to="/cart/paiement" aria-label="paiement">
-              <button
-                className="btn btn-dark"
-                disabled={cartItem.length > 0 ? false : true}
-              >
+
+            {cartItem.length > 0 ? (
+              <NavLink to="/cart/paiement" aria-label="paiement">
+                <button className="btn btn-dark">Continuer</button>
+              </NavLink>
+            ) : (
+              <button className="btn btn-dark" disabled={true}>
                 Continuer
               </button>
-            </NavLink>
+            )}
           </div>
         </div>
       </div>

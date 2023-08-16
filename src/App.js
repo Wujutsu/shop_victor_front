@@ -17,7 +17,7 @@ import NotFound from "./pages/notFound/NotFound";
 import CartPageTwo from "./pages/cart/cartPageTwo/CartPageTwo";
 
 function App() {
-  const { isLogged, role } = useContext(UserContext);
+  const { isLogged, role, nbCartItem } = useContext(UserContext);
 
   return (
     <div className="App container-md">
@@ -31,7 +31,17 @@ function App() {
         <Route path="/cart" element={isLogged ? <CartPageOne /> : <Shop />} />
         <Route
           path="/cart/paiement"
-          element={isLogged ? <CartPageTwo /> : <Shop />}
+          element={
+            isLogged ? (
+              nbCartItem > 0 ? (
+                <CartPageTwo />
+              ) : (
+                <CartPageOne />
+              )
+            ) : (
+              <Shop />
+            )
+          }
         />
         <Route
           path="/admin"
