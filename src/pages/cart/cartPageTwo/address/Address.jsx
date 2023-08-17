@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from "react";
-import "./Address.scss";
 import { AiOutlinePlus } from "react-icons/ai";
 import axios from "axios";
 import { UserContext } from "../../../../contexts/UserContext";

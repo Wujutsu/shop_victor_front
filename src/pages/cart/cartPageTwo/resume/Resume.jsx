@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import "./Resume.scss";
 import { UserContext } from "../../../../contexts/UserContext";
 
 const Resume = () => {

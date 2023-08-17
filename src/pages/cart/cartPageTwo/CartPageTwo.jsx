@@ -2,7 +2,7 @@ import React from "react";
 import "./CartPageTwo.scss";
 import Address from "./address/Address";
 import Resume from "./resume/Resume";
-import Paiement from "./paiement/Paiement";
+import Payment from "./payment/Payment";
 
 const CartPageTwo = () => {
   return (
@@ -15,7 +15,7 @@ const CartPageTwo = () => {
             </div>
 
             <div className="col-12">
-              <Paiement />
+              <Payment />
             </div>
           </div>
         </div>
