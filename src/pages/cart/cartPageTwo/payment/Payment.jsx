@@ -63,7 +63,7 @@ const Payment = () => {
           <div className="col-12">
             {options && (
               <Elements stripe={stripePromise} options={options}>
-                <StripePayment options={options} />
+                <StripePayment />
               </Elements>
             )}
           </div>
