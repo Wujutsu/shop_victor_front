@@ -17,20 +17,18 @@ const StripePayment = () => {
       return;
     }
 
-    stripe
-      .confirmPayment({
-        elements,
-        confirmParams: {
-          // Make sure to change this to your payment completion page
-          return_url: `${window.location.origin}/completion`,
-        },
-      })
-      .then((response) => {
-        console.log("response => ", response.data);
-      })
-      .catch((error) => {
-        console.log("error => ", error);
-      });
+    const { error } = await stripe.confirmPayment({
+      elements,
+      confirmParams: {
+        return_url: `${window.location.origin}/completion`,
+      },
+    });
+
+    if (error.type === "card_error" || error.type === "validation_error") {
+      console.log(error.message);
+    } else {
+      console.log("Une erreur inattendue s'est produite.");
+    }
   };
 
   return (
