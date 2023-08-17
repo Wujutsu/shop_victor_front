@@ -30,7 +30,7 @@ const Resume = () => {
       <div className="row">
         <div className="col-8">Total à payer</div>
         <div className="col-4 text-right">
-          {(parseFloat(totalCommandItem) + 5).toFixed(2)}&nbsp;€
+          {parseFloat(totalCommandItem).toFixed(2)}&nbsp;€
         </div>
       </div>
     </div>

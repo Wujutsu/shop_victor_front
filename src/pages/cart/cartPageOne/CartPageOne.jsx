@@ -217,7 +217,7 @@ const CartPageOne = () => {
             <div className="row total-cost">
               <div className="col">Prix total</div>
               <div className="col t-right">
-                {(parseFloat(totalCommandItem) + 5).toFixed(2)}&nbsp;€
+                {parseFloat(totalCommandItem).toFixed(2)}&nbsp;€
               </div>
             </div>
 

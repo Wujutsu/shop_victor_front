@@ -40,3 +40,30 @@ export const formatPhoneNumber = (phoneNumber) => {
 
   return phoneNumber;
 };
+
+//Formatteur timestamp
+export const formatTimestamp = (timestamp) => {
+  const date = new Date(timestamp);
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  const hours = date.getHours().toString().padStart(2, "0");
+  const minutes = date.getMinutes().toString().padStart(2, "0");
+
+  const realMonth = [
+    "Janv.",
+    "Févr.",
+    "Mars",
+    "Avr.",
+    "Mai",
+    "Juin",
+    "Juil.",
+    "Août",
+    "Sept.",
+    "Oct.",
+    "Nov.",
+    "Déc.",
+  ];
+
+  return `${day} ${realMonth[month]} ${year} à ${hours}:${minutes}`;
+};
