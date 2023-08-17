@@ -9,7 +9,7 @@ const stripePromise = loadStripe(
   "pk_test_51NZgpADKTTYZVfPmdjut3v8ytT3ztpbfMlntbHpf31FMw2nHlwm2HPO5sjpcPwRWpTU4gSVhsDINcrf9VQeIQY7d00lEZxvmEw"
 );
 
-const Payment = () => {
+const Payment = ({ setIsLoading }) => {
   const {
     token,
     totalCommandItem,
@@ -70,7 +70,7 @@ const Payment = () => {
             <div className="col-12">
               {stripeClientSecret !== "" && (
                 <Elements stripe={stripePromise} options={stripeClientSecret}>
-                  <StripePayment />
+                  <StripePayment setIsLoading={setIsLoading} />
                 </Elements>
               )}
             </div>

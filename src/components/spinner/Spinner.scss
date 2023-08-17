@@ -3,6 +3,11 @@
     width: 20px;
     height: 20px;
   }
+  .spinner-border {
+    width: 80px;
+    height: 80px;
+    font-size: 40px;
+  }
 
   .spinner-center-page,
   .spinner-center-div {
@@ -21,24 +26,17 @@
 }
 
 .spinner-fixed {
+  z-index: 10;
   position: fixed;
+  left: calc(50% - 50px);
+  top: calc(50% - 50px);
   .spinner-grow {
     width: 20px;
     height: 20px;
   }
-
-  .spinner-center-page,
-  .spinner-center-div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .spinner-center-page {
-    height: 50vh;
-  }
-
-  .spinner-center-div {
-    height: 200px;
+  .spinner-border {
+    width: 100px;
+    height: 100px;
+    font-size: 40px;
   }
 }

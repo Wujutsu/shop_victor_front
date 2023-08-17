@@ -208,7 +208,7 @@ const Address = () => {
             onClick={() => setShowInputAddress(true)}
           >
             <div>
-              <AiOutlinePlus size={18} /> Ajouter une nouvelle adresse
+              <AiOutlinePlus size={18} /> Ajouter une adresse
             </div>
           </button>
 

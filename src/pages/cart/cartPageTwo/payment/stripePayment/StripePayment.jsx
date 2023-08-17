@@ -8,7 +8,7 @@ import ShowInfoPopup from "../../../../../components/showInfoPopup/ShowInfoPopup
 import { UserContext } from "../../../../../contexts/UserContext";
 import axios from "axios";
 
-const StripePayment = () => {
+const StripePayment = ({ setIsLoading }) => {
   const stripe = useStripe();
   const elements = useElements();
   const [errorPayment, setErrorPayment] = useState("");
@@ -17,11 +17,13 @@ const StripePayment = () => {
   // Permet d'envoyer les données de la CB pour valider ou non le paiement par stripe
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
 
     //On vérifie si la commande est possible
     const validationArticle = await handleVerifCommandPossible();
 
     if (!stripe || !elements || !validationArticle) {
+      setIsLoading(false);
       return;
     }
 
@@ -37,6 +39,8 @@ const StripePayment = () => {
     } else {
       setErrorPayment("Une erreur inattendue s'est produite.");
     }
+
+    setIsLoading(false);
 
     setTimeout(() => {
       setErrorPayment("");

@@ -185,7 +185,7 @@ const CartPageOne = () => {
             ))}
 
           {(nbCartItem === "0" || nbCartItem === 0) && (
-            <h5>Votre panier est vide !</h5>
+            <h5>Votre panier est vide ! 😕</h5>
           )}
         </div>
 

@@ -1,14 +1,22 @@
 import React from "react";
 import "./Spinner.scss";
 
-const Spinner = ({ page = true, fixed = false }) => {
+const Spinner = ({ page = true, fixed = false, point = true }) => {
   return (
     <div className={`${fixed ? "spinner-fixed" : "spinner"}`}>
-      <div className={`${page ? "spinner-center-page" : "spinner-center-div"}`}>
-        <div className="spinner-grow text-success m-1" role="status"></div>
-        <div className="spinner-grow text-success m-1" role="status"></div>
-        <div className="spinner-grow text-success m-1" role="status"></div>
-      </div>
+      {point ? (
+        <div
+          className={`${page ? "spinner-center-page" : "spinner-center-div"}`}
+        >
+          <div className="spinner-grow text-success m-1" role="status"></div>
+          <div className="spinner-grow text-success m-1" role="status"></div>
+          <div className="spinner-grow text-success m-1" role="status"></div>
+        </div>
+      ) : (
+        <div>
+          <div className="spinner-border text-success" role="status"></div>
+        </div>
+      )}
     </div>
   );
 };

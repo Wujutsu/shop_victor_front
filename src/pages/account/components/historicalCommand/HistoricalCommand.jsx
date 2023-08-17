@@ -76,7 +76,7 @@ const HistoricalCommand = () => {
               Commandé le: <span>{order.orderDate}</span>
             </div>
             <div className="cost">
-              Coût total: <span>{order.totalAmount}&nbsp;€</span>
+              Prix total: <span>{order.totalAmount}&nbsp;€</span>
             </div>
           </div>
 
@@ -91,7 +91,7 @@ const HistoricalCommand = () => {
                       Quantité: <span>{product.quantity}</span>
                     </div>
                     <div className="info">
-                      Coût: <span>{product.price}&nbsp;€</span>
+                      Prix: <span>{product.price}&nbsp;€</span>
                     </div>
                   </div>
                 </div>
