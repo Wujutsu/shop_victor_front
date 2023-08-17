@@ -15,7 +15,7 @@ const HistoricalCommand = () => {
               Date commande: <span>25 nov. 2022</span>
             </div>
             <div className="cost">
-              Coût total: <span>105.66 €</span>
+              Coût total: <span>105.66&nbsp;€</span>
             </div>
           </div>
 
@@ -27,7 +27,7 @@ const HistoricalCommand = () => {
                 Quantité: <span>1</span>
               </div>
               <div className="info">
-                Coût: <span>50.99 €</span>
+                Coût: <span>50.99&nbsp;€</span>
               </div>
             </div>
           </div>
@@ -39,7 +39,7 @@ const HistoricalCommand = () => {
                 Quantité: <span>1</span>
               </div>
               <div className="info">
-                Coût: <span>50.99 €</span>
+                Coût: <span>50.99&nbsp;€</span>
               </div>
             </div>
           </div>

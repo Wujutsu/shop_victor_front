@@ -149,7 +149,7 @@ const CartPageOne = () => {
                   </div>
                   <div className="col-sm-4 price-quantity">
                     <div className="price">
-                      {(item.price * item.quantity).toFixed(2)} €
+                      {(item.price * item.quantity).toFixed(2)}&nbsp;€
                     </div>
                     <div className="quantity">
                       <button
@@ -201,14 +201,14 @@ const CartPageOne = () => {
                 {nbCartItem} {nbCartItem > 1 ? "articles" : "article"}
               </div>
               <div className="col t-right">
-                {parseFloat(totalCommandItem).toFixed(2)} €
+                {parseFloat(totalCommandItem).toFixed(2)}&nbsp;€
               </div>
             </div>
             <div className="row total-item">
               <div className="col" style={{ paddingLeft: "10px" }}>
                 Livraison
               </div>
-              <div className="col t-right">5.00 €</div>
+              <div className="col t-right">5.00&nbsp;€</div>
             </div>
             <form>
               <p>Code réduction</p>
@@ -217,7 +217,7 @@ const CartPageOne = () => {
             <div className="row total-cost">
               <div className="col">Prix total</div>
               <div className="col t-right">
-                {(parseFloat(totalCommandItem) + 5).toFixed(2)} €
+                {(parseFloat(totalCommandItem) + 5).toFixed(2)}&nbsp;€
               </div>
             </div>
 
