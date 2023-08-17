@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   useStripe,
   useElements,
   PaymentElement,
 } from "@stripe/react-stripe-js";
-import "./StripePayment.scss";
 
 const StripePayment = () => {
   const stripe = useStripe();
@@ -18,13 +17,20 @@ const StripePayment = () => {
       return;
     }
 
-    const { error } = await stripe.confirmPayment({
-      elements,
-      confirmParams: {
-        // Make sure to change this to your payment completion page
-        return_url: `${window.location.origin}/completion`,
-      },
-    });
+    stripe
+      .confirmPayment({
+        elements,
+        confirmParams: {
+          // Make sure to change this to your payment completion page
+          return_url: `${window.location.origin}/completion`,
+        },
+      })
+      .then((response) => {
+        console.log("response => ", response.data);
+      })
+      .catch((error) => {
+        console.log("error => ", error);
+      });
   };
 
   return (
