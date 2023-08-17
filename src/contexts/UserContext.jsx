@@ -15,8 +15,10 @@ const UserProvider = ({ children }) => {
   const [role, setRole] = useState("");
   const [isLogged, setIsLogged] = useState(false);
   const [cartItem, setCartItem] = useState([]);
-  const [nbCartItem, setNbCartItem] = useState("0");
+  const [nbCartItem, setNbCartItem] = useState(0);
   const [totalCommandItem, setTotalCommandItem] = useState(0);
+  const [addressOrder, setAddressOrder] = useState({});
+  const [stripeClientSecret, setStripeClientSecret] = useState("");
 
   //Récupére les données sauvegardées en local lors du chargement initial du composant
   useEffect(() => {
@@ -30,6 +32,8 @@ const UserProvider = ({ children }) => {
     const savedCartItem = JSON.parse(localStorage.getItem("cartItem"));
     const savedNbCartItem = localStorage.getItem("nbCartItem");
     const savedTotalCommandItem = localStorage.getItem("totalCommandItem");
+    const savedAddressOrder = JSON.parse(localStorage.getItem("addressOrder"));
+    const savedStripeClientSecret = localStorage.getItem("stripeClientSecret");
 
     if (
       savedToken &&
@@ -58,6 +62,14 @@ const UserProvider = ({ children }) => {
     if (savedTotalCommandItem) {
       setTotalCommandItem(savedTotalCommandItem);
     }
+
+    if (savedAddressOrder) {
+      setAddressOrder(savedAddressOrder);
+    }
+
+    if (savedStripeClientSecret) {
+      setStripeClientSecret(savedStripeClientSecret);
+    }
   }, []);
 
   //Permet de sauvegarder les données de l'utilisateur en local chaque fois qu'elles sont mises à jour
@@ -72,6 +84,8 @@ const UserProvider = ({ children }) => {
     localStorage.setItem("cartItem", JSON.stringify(cartItem));
     localStorage.setItem("nbCartItem", nbCartItem);
     localStorage.setItem("totalCommandItem", totalCommandItem);
+    localStorage.setItem("addressOrder", JSON.stringify(addressOrder));
+    localStorage.setItem("stripeClientSecret", stripeClientSecret);
   }, [
     token,
     firstName,
@@ -83,6 +97,8 @@ const UserProvider = ({ children }) => {
     cartItem,
     nbCartItem,
     totalCommandItem,
+    addressOrder,
+    stripeClientSecret,
   ]);
 
   //Met à jour info utilisateur
@@ -183,6 +199,14 @@ const UserProvider = ({ children }) => {
     }
   };
 
+  //On reset les valeurs lorsqu'une commande à été effectutée
+  const handleEraseAfterOrder = () => {
+    setCartItem([]);
+    setNbCartItem(0);
+    setTotalCommandItem(0);
+    setAddressOrder({});
+  };
+
   const dataList = {
     token,
     firstName,
@@ -196,10 +220,15 @@ const UserProvider = ({ children }) => {
     handleLogout,
     cartItem,
     nbCartItem,
-    handleAddCartItem,
-    handleDeleteCartItem,
     totalCommandItem,
     setTotalCommandItem,
+    addressOrder,
+    setAddressOrder,
+    handleAddCartItem,
+    handleDeleteCartItem,
+    handleEraseAfterOrder,
+    stripeClientSecret,
+    setStripeClientSecret,
   };
 
   return (

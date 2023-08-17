@@ -1,0 +1,22 @@
+.payment-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 70vh;
+
+  h1 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: var(--color-green);
+  }
+
+  p {
+    font-size: 1.3rem;
+    color: #666;
+  }
+
+  button {
+    margin-top: 1.5rem;
+  }
+}

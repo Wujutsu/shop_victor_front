@@ -15,9 +15,11 @@ import CartPageOne from "./pages/cart/cartPageOne/CartPageOne";
 import Admin from "./pages/admin/Admin";
 import NotFound from "./pages/notFound/NotFound";
 import CartPageTwo from "./pages/cart/cartPageTwo/CartPageTwo";
+import SuccessPayment from "./pages/cart/successPayment/SuccessPayment";
 
 function App() {
-  const { isLogged, role, nbCartItem } = useContext(UserContext);
+  const { isLogged, role, nbCartItem, stripeClientSecret } =
+    useContext(UserContext);
 
   return (
     <div className="App container-md">
@@ -40,6 +42,20 @@ function App() {
               )
             ) : (
               <Shop />
+            )
+          }
+        />
+        <Route
+          path="/success/payment"
+          element={
+            isLogged ? (
+              stripeClientSecret !== "" ? (
+                <SuccessPayment />
+              ) : (
+                <Shop />
+              )
+            ) : (
+              <NotFound />
             )
           }
         />

@@ -6,7 +6,7 @@ import { AiOutlineDelete } from "react-icons/ai";
 import { formatPhoneNumber } from "../../../../utils/functionUtils";
 
 const Address = () => {
-  const { token, phoneNumber } = useContext(UserContext);
+  const { token, phoneNumber, setAddressOrder } = useContext(UserContext);
   const [showInputAddress, setShowInputAddress] = useState(false);
   const [dataNewAddress, setDataNewAddress] = useState({
     country: "",
@@ -51,6 +51,18 @@ const Address = () => {
 
     getListAddressSave();
   }, [token]);
+
+  //Permet de mettre à jour l'adresse focus dans le UserContext
+  useEffect(() => {
+    const updateAddressOrderFocus = () => {
+      const selectAddressFocus = listAddress.find((adr) => adr.focus);
+      console.log("selectAddressFocus", selectAddressFocus);
+      setAddressOrder(selectAddressFocus);
+    };
+
+    updateAddressOrderFocus();
+    //eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [listAddress]);
 
   // Permet de modifier la valeur des champs input
   const handleUpdateInput = (field, val) => {
@@ -98,11 +110,12 @@ const Address = () => {
           ...address,
           focus: false,
         }));
-        //Enregistre avec la nouvelle adresse focus
+        //Enregistre avec la nouvelle adresse et la focus
         setListAddress([
           ...updateListAddress,
           { ...response.data, focus: true },
         ]);
+
         handleCancleAddAddress();
       })
       .catch((error) => {});
