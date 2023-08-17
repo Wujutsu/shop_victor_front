@@ -21,10 +21,7 @@ const StripePayment = () => {
     //On vérifie si la commande est possible
     const validationArticle = await handleVerifCommandPossible();
 
-    console.log("BIBABOU => ", validationArticle);
-
     if (!stripe || !elements || !validationArticle) {
-      console.log("in...");
       return;
     }
 

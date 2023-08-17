@@ -17,7 +17,6 @@ const SuccessPayment = () => {
   } = useContext(UserContext);
 
   useEffect(() => {
-    console.log("ADRESSE => ", addressOrder);
     const createOrder = () => {
       const apiUrl = "http://localhost:8080/api/order/add";
 
@@ -39,14 +38,12 @@ const SuccessPayment = () => {
       axios
         .post(apiUrl, requestData, config)
         .then((response) => {
-          console.log("response => ", response.data);
           handleEraseAfterOrder();
           setTimeout(() => {
             setStripeClientSecret("");
           }, 5000);
         })
         .catch((error) => {
-          console.log("error => ", error);
           handleEraseAfterOrder();
           setTimeout(() => {
             setStripeClientSecret("");

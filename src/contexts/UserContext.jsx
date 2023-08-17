@@ -177,8 +177,6 @@ const UserProvider = ({ children }) => {
 
     setNbCartItem(updateNbCartItem);
     setCartItem(updatedCartItems);
-
-    console.log("cartItem => ", updatedCartItems);
   };
 
   //Supprime des items ou quantité du panier

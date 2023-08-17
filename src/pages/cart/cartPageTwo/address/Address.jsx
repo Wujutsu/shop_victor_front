@@ -56,7 +56,6 @@ const Address = () => {
   useEffect(() => {
     const updateAddressOrderFocus = () => {
       const selectAddressFocus = listAddress.find((adr) => adr.focus);
-      console.log("selectAddressFocus", selectAddressFocus);
       setAddressOrder(selectAddressFocus);
     };
 

@@ -14,8 +14,9 @@ const Shop = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const getAllProducts = () => {
-      const apiUrl = "http://localhost:8080/api/product/all";
+    //Récupére tous les produits avec un stock supérieur à 0
+    const getAllProductsWithStock = () => {
+      const apiUrl = "http://localhost:8080/api/product/all/stock";
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -26,10 +27,8 @@ const Shop = () => {
       axios
         .get(apiUrl, config)
         .then((response) => {
-          //On ne met que dans la liste les produits avec un stock supérieur à 0
-          const listProductWithItem = response.data.filter(
-            (item) => item.stockQuantity > 0
-          );
+          const listProductWithItem = response.data;
+
           setListProductSave(listProductWithItem);
           setListProduct(listProductWithItem);
           setIsLoading(false);
@@ -39,7 +38,7 @@ const Shop = () => {
         });
     };
 
-    getAllProducts();
+    getAllProductsWithStock();
   }, [token]);
 
   //Permet de mettre à jour la catégorie et filtrer les articles en fonction
