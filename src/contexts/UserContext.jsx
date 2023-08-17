@@ -165,6 +165,7 @@ const UserProvider = ({ children }) => {
     console.log("cartItem => ", updatedCartItems);
   };
 
+  //Supprime des items ou quantité du panier
   const handleDeleteCartItem = (id) => {
     const itemIndex = cartItem.findIndex((item) => item.id === id);
 
