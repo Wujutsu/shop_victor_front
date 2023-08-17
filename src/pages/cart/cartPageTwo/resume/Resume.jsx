@@ -20,7 +20,7 @@ const Resume = () => {
       </div>
       <div className="row mb-2">
         <div className="col-8">Livraison</div>
-        <div className="col-4 text-right">5&nbsp;€</div>
+        <div className="col-4 text-right">0&nbsp;€</div>
       </div>
       {/*<div className="row mb-2">
             <div className="col-8">Code réduction</div>

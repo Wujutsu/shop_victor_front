@@ -19,3 +19,26 @@
     height: 200px;
   }
 }
+
+.spinner-fixed {
+  position: fixed;
+  .spinner-grow {
+    width: 20px;
+    height: 20px;
+  }
+
+  .spinner-center-page,
+  .spinner-center-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .spinner-center-page {
+    height: 50vh;
+  }
+
+  .spinner-center-div {
+    height: 200px;
+  }
+}

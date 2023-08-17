@@ -9,6 +9,7 @@ import {
 
 const HistoricalCommand = () => {
   const { token } = useContext(UserContext);
+  const [isLoading, setIsLoading] = useState(false);
   const [listCommand, setListCommand] = useState([]);
 
   useEffect(() => {
@@ -41,8 +42,11 @@ const HistoricalCommand = () => {
           console.log("Order =>", updateListOrder);
 
           setListCommand(updateListOrder);
+          setIsLoading(true);
         })
-        .catch((error) => {});
+        .catch((error) => {
+          setIsLoading(true);
+        });
     };
 
     getCommandUser();
@@ -53,7 +57,7 @@ const HistoricalCommand = () => {
     <div className="historicalCommand">
       <div className="recap-title">Historique des commandes</div>
 
-      {listCommand.length === 0 && (
+      {isLoading && listCommand.length === 0 && (
         <div className="command">
           <div className="nocommand">Aucun article commandé 😢</div>
         </div>
