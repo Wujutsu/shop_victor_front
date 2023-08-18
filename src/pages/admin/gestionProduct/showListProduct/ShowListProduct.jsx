@@ -3,7 +3,7 @@ import React, { useContext, useState } from "react";
 import { UserContext } from "../../../../contexts/UserContext";
 import { BsPen } from "react-icons/bs";
 import { RxCrossCircled } from "react-icons/rx";
-import { AiOutlineCheckCircle } from "react-icons/ai";
+import { AiOutlineCheckCircle, AiOutlineDelete } from "react-icons/ai";
 import { formatTarif } from "../../../../utils/functionUtils";
 import "./ShowListProduct.scss";
 import ShowInfoPopup from "../../../../components/showInfoPopup/ShowInfoPopup";
@@ -18,7 +18,7 @@ const ShowListProduct = ({
 }) => {
   const [loadingUpdate, setLoadingUpdate] = useState(false);
   const { token } = useContext(UserContext);
-  const [updateError, setUpdateError] = useState("0");
+  const [updateError, setUpdateError] = useState("");
 
   //Permet de undisabled un item pour modifier des champs du produit
   const handleDisabledFalse = (index) => {
@@ -83,6 +83,36 @@ const ShowListProduct = ({
     setListProduct(updatedListProduct);
   };
 
+  // Permet de supprimer un produit définitivement de la BDD
+  const handleDeleteProduct = (id) => {
+    if (window.confirm("Êtes-vous sûr de vouloir supprimer le produit ?")) {
+      const apiUrl = "http://localhost:8080/api/product/delete/" + id;
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      };
+
+      axios
+        .delete(apiUrl, config)
+        .then((response) => {
+          if (response.data) {
+            const updateListProduct = listProduct.filter(
+              (product) => product.id !== id
+            );
+            setListProduct(updateListProduct);
+
+            setUpdateError("delete");
+            setTimeout(() => {
+              setUpdateError("");
+            }, 3000);
+          }
+        })
+        .catch((error) => {});
+    }
+  };
+
   //Permet de valider la modification pour qu'elle soit effective en BDD
   const handleValideUpdateProduct = (index) => {
     const productToUpdate = listProduct[index];
@@ -132,9 +162,9 @@ const ShowListProduct = ({
           setListProduct(finalUpdateProduct);
           setSaveListProduct(finalUpdateProduct);
           setLoadingUpdate(false);
-          setUpdateError("ok");
+          setUpdateError("update");
           setTimeout(() => {
-            setUpdateError("0");
+            setUpdateError("");
           }, 3000);
         })
         .catch((error) => {
@@ -142,13 +172,13 @@ const ShowListProduct = ({
         });
     } else {
       if (isNaN(productToUpdate.price)) {
-        setUpdateError("2");
+        setUpdateError("Erreur dans le prix renseigné");
         productToUpdate.price = "";
       } else {
-        setUpdateError("1");
+        setUpdateError("Tous les champs du produit doivent être renseignés");
       }
       setTimeout(() => {
-        setUpdateError("0");
+        setUpdateError("");
       }, 3000);
     }
   };
@@ -161,13 +191,22 @@ const ShowListProduct = ({
           <div key={index} className="col-lg-6">
             <div className="list-product">
               {item.isDisabled ? (
-                <button
-                  className="btn btn-disabled btn-dark"
-                  onClick={() => handleDisabledFalse(index)}
-                  aria-label="Editer"
-                >
-                  <BsPen size={25} />
-                </button>
+                <>
+                  <button
+                    className="btn btn-disabled btn-dark"
+                    onClick={() => handleDisabledFalse(index)}
+                    aria-label="Editer"
+                  >
+                    <BsPen size={25} />
+                  </button>
+                  <button
+                    className="btn btn-delete btn-danger"
+                    onClick={() => handleDeleteProduct(item.id)}
+                    aria-label="Editer"
+                  >
+                    <AiOutlineDelete size={25} />
+                  </button>
+                </>
               ) : (
                 <>
                   {loadingUpdate ? (
@@ -318,26 +357,25 @@ const ShowListProduct = ({
           </div>
         ))}
 
-      {updateError === "ok" && (
+      {updateError === "delete" && (
+        <ShowInfoPopup
+          msg="Le produit vient d'être supprimé"
+          type="success"
+        ></ShowInfoPopup>
+      )}
+
+      {updateError === "update" && (
         <ShowInfoPopup
           msg="Le produit vient d'être modifié"
           type="success"
         ></ShowInfoPopup>
       )}
 
-      {updateError === "1" && (
-        <ShowInfoPopup
-          msg="Tous les champs du produit doivent être renseignés"
-          type="error"
-        ></ShowInfoPopup>
-      )}
-
-      {updateError === "2" && (
-        <ShowInfoPopup
-          msg="Erreur dans le prix renseigné"
-          type="error"
-        ></ShowInfoPopup>
-      )}
+      {updateError !== "" &&
+        updateError !== "delete" &&
+        updateError !== "update" && (
+          <ShowInfoPopup msg={updateError} type="error"></ShowInfoPopup>
+        )}
     </>
   );
 };
