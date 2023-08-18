@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import "./HistoricalCommand.scss";
 import { UserContext } from "../../../../contexts/UserContext";
 import axios from "axios";
+import Spinner from "../../../../components/spinner/Spinner";
 import {
   formatTimestamp,
   convertDataImg,
@@ -9,7 +10,7 @@ import {
 
 const HistoricalCommand = () => {
   const { token } = useContext(UserContext);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [listCommand, setListCommand] = useState([]);
 
   useEffect(() => {
@@ -42,10 +43,10 @@ const HistoricalCommand = () => {
           console.log("Order =>", updateListOrder);
 
           setListCommand(updateListOrder);
-          setIsLoading(true);
+          setIsLoading(false);
         })
         .catch((error) => {
-          setIsLoading(true);
+          setIsLoading(false);
         });
     };
 
@@ -57,7 +58,9 @@ const HistoricalCommand = () => {
     <div className="historicalCommand">
       <div className="recap-title">Historique des commandes</div>
 
-      {isLoading && listCommand.length === 0 && (
+      {isLoading && <Spinner page={false} point={true} />}
+
+      {!isLoading && listCommand.length === 0 && (
         <div className="command">
           <div className="nocommand">Aucun article commandé 😢</div>
         </div>

@@ -3,10 +3,15 @@
     width: 20px;
     height: 20px;
   }
-  .spinner-border {
-    width: 80px;
-    height: 80px;
-    font-size: 40px;
+  .box-border {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .spinner-border {
+      width: 80px;
+      height: 80px;
+      font-size: 40px;
+    }
   }
 
   .spinner-center-page,
