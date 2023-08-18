@@ -10,7 +10,7 @@ const Account = () => {
   return (
     <div className="account">
       <div className="title">Mon compte</div>
-      <div className="welcome">Bonjour {firstName}</div>
+      <div className="welcome">Bonjour {firstName} 😊</div>
       <div className="row">
         <div className="col-sm-6">
           <Profil />

@@ -312,7 +312,7 @@ const CartPageOne = () => {
                 <div className="col" style={{ paddingLeft: "10px" }}>
                   Livraison
                 </div>
-                <div className="col t-right">5.00&nbsp;€</div>
+                <div className="col t-right">0.00&nbsp;€</div>
               </div>
               <form>
                 <p>Code réduction</p>
