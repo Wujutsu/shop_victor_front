@@ -29,6 +29,7 @@ const Shop = () => {
         .then((response) => {
           const listProductWithItem = response.data;
 
+          console.log("List produit => ", listProductWithItem);
           setListProductSave(listProductWithItem);
           setListProduct(listProductWithItem);
           setIsLoading(false);
