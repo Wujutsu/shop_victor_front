@@ -160,7 +160,16 @@ const CartPageOne = () => {
         }
       })
       .catch((error) => {
-        console.log("ERROR => ", error);
+        //Le prix d'un article du panier ne correspond pas au prix de l'article en temps réel
+        if (error.response.data === "Error: Price article invalid") {
+          setNbCartItem(0);
+          setTotalCommandItem(0);
+          setShowCartItem([]);
+          setCartItem([]);
+
+          //Message d'erreur pour informer l'utilisateur
+          setErrorStock("Une erreur est survenue 😫");
+        }
       });
   };
 

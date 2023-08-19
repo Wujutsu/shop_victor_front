@@ -99,7 +99,7 @@ const ShowCategory = ({ categories, setCategories }) => {
   return (
     <div>
       <div className="gestion-categorie">
-        <h2>Gestion des Catégories</h2>
+        <h2>Gestion catégories</h2>
         <div className="categorie-form">
           <input
             type="text"

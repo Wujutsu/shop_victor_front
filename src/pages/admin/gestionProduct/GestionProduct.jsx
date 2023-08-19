@@ -76,7 +76,7 @@ const GestionProduct = () => {
       <ShowCategory categories={categories} setCategories={setCategories} />
 
       <div className="mt-4">
-        <h2>Gestion des Produits</h2>
+        <h2>Gestion produits</h2>
         <button
           className="btn btn-admin btn-primary mb-3"
           onClick={() => setShowModalNewProduct(true)}

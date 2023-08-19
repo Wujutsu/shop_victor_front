@@ -5,6 +5,7 @@ import { UserContext } from "../../contexts/UserContext";
 import { NavLink, useNavigate } from "react-router-dom";
 import ShowInfoPopup from "../../components/showInfoPopup/ShowInfoPopup";
 
+//TODO: Gérér les champs input dans ce qu'on peut mettre dedans surtout niveau adresse
 //TODO: Ajouter mdp oublier et donc recup via mail
 //TODO: Lorsque l'utilisateur a son token expiré, le déconnecter
 export const Login = () => {
@@ -33,7 +34,7 @@ export const Login = () => {
 
     const apiUrl = "http://localhost:8080/api/auth/signin";
     const requestData = {
-      email: email,
+      email: email.toLowerCase(),
       password: password,
     };
 
@@ -45,7 +46,7 @@ export const Login = () => {
           response.data.accessToken,
           response.data.firstName,
           response.data.lastName,
-          response.data.email,
+          response.data.email.toLowerCase(),
           response.data.phoneNumber,
           response.data.roles[0]
         );
