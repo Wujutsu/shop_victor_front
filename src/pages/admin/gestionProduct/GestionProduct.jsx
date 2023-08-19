@@ -7,6 +7,7 @@ import { convertDataImg, formatTarif } from "../../../utils/functionUtils";
 import ShowCategory from "./showCategory/ShowCategory";
 import ShowListProduct from "./showListProduct/ShowListProduct";
 import AddProduct from "./addProduct/AddProduct";
+import Paging from "./showListProduct/paging/Paging";
 
 //TODO: Permettre d'archiver des produits ???
 const GestionProduct = () => {
@@ -16,6 +17,7 @@ const GestionProduct = () => {
   const [saveListProduct, setSaveListProduct] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [showModalNewProduct, setShowModalNewProduct] = useState(false);
+  const [filterPage, setFilterPage] = useState(0);
 
   useEffect(() => {
     const getAllCategories = () => {
@@ -36,7 +38,7 @@ const GestionProduct = () => {
     };
 
     const getAllProducts = () => {
-      const apiUrl = "http://localhost:8080/api/product/all";
+      const apiUrl = "http://localhost:8080/api/product/all/" + filterPage;
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -68,7 +70,7 @@ const GestionProduct = () => {
 
     getAllCategories();
     getAllProducts();
-  }, [token]);
+  }, [token, filterPage]);
 
   return (
     <>
@@ -107,6 +109,8 @@ const GestionProduct = () => {
             isLoading={isLoading}
           />
         </div>
+
+        <Paging filterPage={filterPage} setFilterPage={setFilterPage} />
       </div>
     </>
   );
