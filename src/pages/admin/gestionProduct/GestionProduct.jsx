@@ -83,6 +83,9 @@ const GestionProduct = () => {
         >
           Ajouter un produit
         </button>
+
+        {isLoading && <Spinner page={false} />}
+
         <div className="row">
           {/* Ajout un produit */}
 
@@ -104,8 +107,6 @@ const GestionProduct = () => {
             isLoading={isLoading}
           />
         </div>
-
-        {isLoading && <Spinner />}
       </div>
     </>
   );

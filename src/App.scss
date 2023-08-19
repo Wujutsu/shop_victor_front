@@ -115,3 +115,19 @@ select {
     border: 2px solid #75aa70;
   }
 }
+
+.btn-dark {
+  background-color: black;
+  border: 2px solid black;
+}
+
+.btn-outline-dark {
+  border: 2px solid black;
+  color: black;
+
+  &:hover,
+  &:active {
+    background-color: white;
+    color: black;
+  }
+}
