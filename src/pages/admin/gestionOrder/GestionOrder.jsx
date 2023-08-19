@@ -4,16 +4,23 @@ import axios from "axios";
 import { UserContext } from "../../../contexts/UserContext";
 import { formatTimestamp, convertDataImg } from "../../../utils/functionUtils";
 import { AiOutlineFieldTime, AiOutlineCheckCircle } from "react-icons/ai";
+import {
+  BsFillArrowRightCircleFill,
+  BsFillArrowLeftCircleFill,
+} from "react-icons/bs";
 import { RiMailSendLine } from "react-icons/ri";
 import Spinner from "../../../components/spinner/Spinner";
 
 const GestionOrder = () => {
   const { token } = useContext(UserContext);
   const [filterState, setFilterState] = useState(0);
+  const [filterPage, setFilterPage] = useState(0);
   const [listOrder, setListOrder] = useState([]);
+  const [nbPageToShow, setNbPageToShow] = useState(0);
   const [nbOrderByState, setNbOrderByState] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
+  // Permet de connaitre le nombre de commande en fonction de l'état des commandes (0, 1, 2, 3)
   useEffect(() => {
     const getCountOrdersByState = () => {
       const apiUrl = "http://localhost:8080/api/order/nb";
@@ -36,10 +43,32 @@ const GestionOrder = () => {
   }, [token, filterState, listOrder]);
 
   useEffect(() => {
+    //Récupére le nombre de page à afficher
+    const getNbPage = () => {
+      setIsLoading(true);
+
+      const apiUrl = "http://localhost:8080/api/order/nbpage/" + filterState;
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      };
+
+      axios
+        .get(apiUrl, config)
+        .then((response) => {
+          setNbPageToShow(parseInt(response.data) - 1);
+        })
+        .catch((error) => {});
+    };
+
+    //Récupére toutes les commandes en fonction de l'état et du numéro de page
     const getAllOrder = () => {
       setIsLoading(true);
 
-      const apiUrl = "http://localhost:8080/api/order/all/" + filterState;
+      const apiUrl =
+        "http://localhost:8080/api/order/all/" + filterState + "/" + filterPage;
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -69,12 +98,14 @@ const GestionOrder = () => {
           setIsLoading(false);
         })
         .catch((error) => {
+          console.log("ARGG=>", error);
           setIsLoading(false);
         });
     };
 
+    getNbPage();
     getAllOrder();
-  }, [token, filterState]);
+  }, [token, filterState, filterPage]);
 
   //Met à jour l'état de la commande
   const updateStateOrder = (id) => {
@@ -112,13 +143,33 @@ const GestionOrder = () => {
     setListOrder(updateListOrder);
   };
 
+  const handlePagePrecedente = () => {
+    setFilterPage(filterPage - 1);
+    scrollToTop();
+  };
+
+  const handlePageSuivante = () => {
+    setFilterPage(filterPage + 1);
+    scrollToTop();
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", // Permet un défilement fluide
+    });
+  };
+
   return (
     <div className="gestion-order">
       <h2>Gestion commandes</h2>
 
       <div className="filtre">
         <button
-          onClick={() => setFilterState(0)}
+          onClick={() => {
+            setFilterState(0);
+            setFilterPage(0);
+          }}
           className={`btn ${
             filterState === 0 ? "btn-dark" : "btn-outline-dark"
           }`}
@@ -127,7 +178,10 @@ const GestionOrder = () => {
           {nbOrderByState[0] ? " (" + nbOrderByState[0] + ")" : "(0)"}
         </button>
         <button
-          onClick={() => setFilterState(1)}
+          onClick={() => {
+            setFilterState(1);
+            setFilterPage(0);
+          }}
           className={`btn margin-left ${
             filterState === 1 ? "btn-dark" : "btn-outline-dark"
           }`}
@@ -137,7 +191,10 @@ const GestionOrder = () => {
           {nbOrderByState[1] ? " (" + nbOrderByState[1] + ")" : "(0)"}
         </button>
         <button
-          onClick={() => setFilterState(2)}
+          onClick={() => {
+            setFilterState(2);
+            setFilterPage(0);
+          }}
           className={`btn margin-left ${
             filterState === 2 ? "btn-dark" : "btn-outline-dark"
           }`}
@@ -263,6 +320,31 @@ const GestionOrder = () => {
               </div>
             </div>
           ))}
+
+          {nbPageToShow > 0 && (
+            <div className="page">
+              {filterPage > 0 ? (
+                <div className="left" onClick={() => handlePagePrecedente()}>
+                  <BsFillArrowLeftCircleFill size={30} color="#136893" />
+                </div>
+              ) : (
+                <div className="left">
+                  <BsFillArrowLeftCircleFill size={30} />
+                </div>
+              )}
+              <div className="number">{filterPage + 1}</div>
+
+              {filterPage !== nbPageToShow ? (
+                <div className="right" onClick={() => handlePageSuivante()}>
+                  <BsFillArrowRightCircleFill size={30} color="#136893" />
+                </div>
+              ) : (
+                <div className="right">
+                  <BsFillArrowRightCircleFill size={30} />
+                </div>
+              )}
+            </div>
+          )}
         </>
       )}
     </div>

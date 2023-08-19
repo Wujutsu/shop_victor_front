@@ -102,4 +102,24 @@
       }
     }
   }
+
+  .page {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+
+    .number {
+      font-size: 1.2rem;
+      margin-top: 1px;
+    }
+    .left {
+      cursor: pointer;
+      margin-right: 10px;
+    }
+    .right {
+      cursor: pointer;
+      margin-left: 10px;
+    }
+  }
 }
