@@ -35,8 +35,50 @@ export const Login = () => {
       setPasswordUpdated(true);
       localStorage.removeItem("passwordUpdateSuccess");
     }
+
+    //Ici on vérifie si il y a un token valide pour permettre d'activer un compte
+    const tokenVerification = async () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const tokenUrl = urlParams.get("token");
+
+      if (tokenUrl) {
+        const tokenValide = await verificationTokenExisting(tokenUrl);
+
+        if (tokenValide) {
+          const apiUrl =
+            "http://localhost:8080/api/user/update/active-account/" + tokenUrl;
+
+          axios
+            .put(apiUrl)
+            .then((response) => {
+              console.log("PPPP=>", response.data);
+              if (response.data) {
+                setIsGood("Votre compte vient d'être activé");
+                setTimeout(() => {
+                  setIsGood("");
+                }, 3000);
+              }
+            })
+            .catch((error) => {});
+        }
+      }
+    };
+
+    tokenVerification();
   }, []);
 
+  //Permet de vérifier la validité d'un token
+  const verificationTokenExisting = (tokenUrl) => {
+    const apiUrl = "http://localhost:8080/api/user/verif/token/" + tokenUrl;
+
+    return new Promise((success, failed) => {
+      axios.get(apiUrl).then((response) => {
+        success(response.data);
+      });
+    });
+  };
+
+  //Permet d'envoyer les infos de connexion
   const handleLogin = (event) => {
     event.preventDefault();
 
@@ -61,10 +103,18 @@ export const Login = () => {
         navigate("/");
       })
       .catch((error) => {
-        setIncorrectIdentifier("Identifiants incorrects");
+        if (error.response.data === "Account is not active") {
+          setIsError("Vous n'avez pas encore activé votre compte");
+          setTimeout(() => {
+            setIsError("");
+          }, 3000);
+        } else {
+          setIncorrectIdentifier("Identifiants incorrects");
+        }
       });
   };
 
+  //Permet d'envoyer un mail pour réinitialiser le mot de passe
   const handlePasswordForgot = () => {
     if (email === "") {
       setIncorrectIdentifier(
@@ -158,7 +208,7 @@ export const Login = () => {
 
       {accountCreatedSuccess && (
         <ShowInfoPopup
-          msg="Votre compte a été créé avec succès !"
+          msg="Un e-mail de confirmation vient de vous être envoyé pour activer votre compte"
           type="success"
         />
       )}

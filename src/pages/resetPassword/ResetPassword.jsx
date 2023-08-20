@@ -71,7 +71,7 @@ const ResetPassword = () => {
       };
 
       axios
-        .post(apiUrl, requestData)
+        .put(apiUrl, requestData)
         .then((response) => {
           if (response.data) {
             localStorage.setItem("passwordUpdateSuccess", true);
