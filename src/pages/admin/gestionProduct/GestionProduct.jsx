@@ -79,6 +79,8 @@ const GestionProduct = () => {
             };
           });
 
+          console.log("TEST => ", updatedCartItems);
+
           setListProduct(updatedCartItems);
           setSaveListProduct(updatedCartItems);
           setIsLoading(false);
