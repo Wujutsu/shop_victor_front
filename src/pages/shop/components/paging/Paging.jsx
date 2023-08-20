@@ -40,10 +40,19 @@ const Paging = ({ filterPage, setFilterPage, filterCategorie }) => {
 
   const handlePagePrecedente = () => {
     setFilterPage(filterPage - 1);
+    scrollToTop();
   };
 
   const handlePageSuivante = () => {
     setFilterPage(filterPage + 1);
+    scrollToTop();
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   };
 
   return (

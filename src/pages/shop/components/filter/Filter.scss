@@ -1,6 +1,8 @@
 .filter {
-  width: fit-content;
-  margin: auto;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.4rem;
   margin-top: 2rem;
 
   button {
