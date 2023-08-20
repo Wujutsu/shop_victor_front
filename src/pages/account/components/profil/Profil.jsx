@@ -33,7 +33,6 @@ const Profil = () => {
     const requestData = {
       firstName: valFirstName,
       lastName: valLastName,
-      email: valEmail,
       phoneNumber: valPhoneNumber,
     };
     const config = {
@@ -51,12 +50,7 @@ const Profil = () => {
           localStorage.setItem("emailUpdated", true);
           handleLogout();
         } else {
-          handleUpdateInfos(
-            valFirstName,
-            valLastName,
-            valEmail,
-            valPhoneNumber
-          );
+          handleUpdateInfos(valFirstName, valLastName, valPhoneNumber);
           setUpdatedInformations(true);
           setTimeout(() => {
             setUpdatedInformations(false);
@@ -157,6 +151,7 @@ const Profil = () => {
               value={valEmail}
               onChange={(e) => setValEmail(e.target.value)}
               autoComplete="off"
+              disabled={true}
               required
             />
           </div>

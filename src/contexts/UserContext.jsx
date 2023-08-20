@@ -102,10 +102,9 @@ const UserProvider = ({ children }) => {
   ]);
 
   //Met à jour info utilisateur
-  const handleUpdateInfos = (firstName, lastName, email, phoneNumber) => {
+  const handleUpdateInfos = (firstName, lastName, phoneNumber) => {
     setFirstName(firstName);
     setLastName(lastName);
-    setEmail(email);
     setPhoneNumber(phoneNumber);
   };
 
