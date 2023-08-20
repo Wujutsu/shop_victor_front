@@ -1,0 +1,21 @@
+.filter-product {
+  margin-bottom: 0.8rem;
+  position: relative;
+
+  .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 35px;
+  }
+  .filter2 {
+    position: absolute;
+    top: 0;
+    left: 185px;
+  }
+  .filter3 {
+    position: absolute;
+    top: 0;
+    left: 275px;
+  }
+}

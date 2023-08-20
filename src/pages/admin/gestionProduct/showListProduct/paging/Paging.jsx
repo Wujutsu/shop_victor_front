@@ -7,14 +7,16 @@ import { UserContext } from "../../../../../contexts/UserContext";
 import axios from "axios";
 import "./Paging.scss";
 
-const Paging = ({ filterPage, setFilterPage }) => {
+const Paging = ({ filterPage, setFilterPage, filterCategorie }) => {
   const { token } = useContext(UserContext);
   const [nbPageToShow, setNbPageToShow] = useState(0);
 
   useEffect(() => {
+    console.log("Page");
     //Récupére le nombre de page à afficher
     const getNbPage = () => {
-      const apiUrl = "http://localhost:8080/api/product/all/nbpage";
+      const apiUrl =
+        "http://localhost:8080/api/product/all/nbpage/" + filterCategorie;
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -31,7 +33,7 @@ const Paging = ({ filterPage, setFilterPage }) => {
     };
 
     getNbPage();
-  }, [token]);
+  }, [token, filterCategorie]);
 
   const handlePagePrecedente = () => {
     setFilterPage(filterPage - 1);

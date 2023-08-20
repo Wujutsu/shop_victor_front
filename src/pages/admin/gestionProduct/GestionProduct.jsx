@@ -8,6 +8,8 @@ import ShowCategory from "./showCategory/ShowCategory";
 import ShowListProduct from "./showListProduct/ShowListProduct";
 import AddProduct from "./addProduct/AddProduct";
 import Paging from "./showListProduct/paging/Paging";
+import FilterProduct from "./filterProduct/FilterProduct";
+import ShowInfoPopup from "../../../components/showInfoPopup/ShowInfoPopup";
 
 //TODO: Permettre d'archiver des produits ???
 const GestionProduct = () => {
@@ -18,8 +20,13 @@ const GestionProduct = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [showModalNewProduct, setShowModalNewProduct] = useState(false);
   const [filterPage, setFilterPage] = useState(0);
+  const [filterCategorie, setFilterCategorie] = useState("all");
+  const [filterStock, setFilterStock] = useState("empty");
+  const [msgError, setMsgError] = useState("");
 
+  //Récupére les catégories
   useEffect(() => {
+    console.log("recup CAT");
     const getAllCategories = () => {
       const apiUrl = "http://localhost:8080/api/categorie/all";
       const config = {
@@ -37,8 +44,26 @@ const GestionProduct = () => {
         .catch((error) => {});
     };
 
+    getAllCategories();
+  }, [token]);
+
+  //Récupére les produits
+  useEffect(() => {
+    console.log("recup PROD");
+
     const getAllProducts = () => {
-      const apiUrl = "http://localhost:8080/api/product/all/" + filterPage;
+      const quantityMinToShow = 0;
+      const apiUrl =
+        "http://localhost:8080/api/product/all/" +
+        filterPage +
+        "/" +
+        filterCategorie +
+        "/" +
+        quantityMinToShow +
+        "/" +
+        filterStock;
+
+      console.log("url =>", apiUrl);
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -64,13 +89,20 @@ const GestionProduct = () => {
           setIsLoading(false);
         })
         .catch((error) => {
+          if (error.response.data === "Error: Categorie not found") {
+            setMsgError(
+              "La catégorie n'a pas été trouvée, veuillez réessayer ultérieurement"
+            );
+            setTimeout(() => {
+              setMsgError("");
+            }, 3000);
+          }
           setIsLoading(false);
         });
     };
 
-    getAllCategories();
     getAllProducts();
-  }, [token, filterPage]);
+  }, [token, filterPage, filterCategorie, filterStock]);
 
   return (
     <>
@@ -79,6 +111,16 @@ const GestionProduct = () => {
 
       <div className="mt-4">
         <h2>Gestion produits</h2>
+
+        {/* Filtre les produits */}
+        <FilterProduct
+          categories={categories}
+          setFilterCategorie={setFilterCategorie}
+          filterStock={filterStock}
+          setFilterStock={setFilterStock}
+          setFilterPage={setFilterPage}
+        />
+
         <button
           className="btn btn-admin btn-primary mb-3"
           onClick={() => setShowModalNewProduct(true)}
@@ -110,7 +152,16 @@ const GestionProduct = () => {
           />
         </div>
 
-        <Paging filterPage={filterPage} setFilterPage={setFilterPage} />
+        {/* Permet de changer de page  */}
+        <Paging
+          filterPage={filterPage}
+          setFilterPage={setFilterPage}
+          filterCategorie={filterCategorie}
+        />
+
+        {msgError !== "" && (
+          <ShowInfoPopup msg={msgError} type="error"></ShowInfoPopup>
+        )}
       </div>
     </>
   );

@@ -114,17 +114,23 @@ const ShowCategory = ({ categories, setCategories }) => {
             Ajouter
           </button>
         </div>
-        {categories.map((category, index) => (
-          <div className="categorie-list" key={index}>
-            <input type="text" value={category.name} disabled />
-            <button
-              className="btn btn-admin btn-danger margin-left"
-              onClick={() => handleDeleteCategory(category.id)}
+
+        <div className="row">
+          {categories.map((category, index) => (
+            <div
+              className="categorie-list col-xl-3 col-lg-4 col-sm-6"
+              key={index}
             >
-              <AiOutlineDelete />
-            </button>
-          </div>
-        ))}
+              <input type="text" value={category.name} disabled />
+              <button
+                className="btn btn-admin btn-danger"
+                onClick={() => handleDeleteCategory(category.id)}
+              >
+                <AiOutlineDelete size={25} />
+              </button>
+            </div>
+          ))}
+        </div>
         {newCategoryError === 1 && (
           <ShowInfoPopup
             msg="Impossible d'ajouter une catégorie vide"
