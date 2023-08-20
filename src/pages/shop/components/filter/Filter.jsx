@@ -26,7 +26,7 @@ const Filter = ({ filterCategorie, setFilterCategorie, setFilterPage }) => {
     };
 
     getAllCategories();
-  }, [token, setListCategorie]);
+  }, [token]);
 
   const handleSelectedCategorie = (categorie) => {
     setFilterCategorie(categorie);

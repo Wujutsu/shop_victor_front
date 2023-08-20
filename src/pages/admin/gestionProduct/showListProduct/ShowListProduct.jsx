@@ -249,11 +249,11 @@ const ShowListProduct = ({
               <div className="row">
                 <div className="col-sm-3">
                   <div className="info-detail">
-                    <img
-                      className="img-fluid"
-                      src={item.urlPicture || ""}
-                      alt={`item ${index}`}
-                    />
+                    <div
+                      className="picture"
+                      style={{ backgroundImage: `url(${item.urlPicture})` }}
+                    ></div>
+
                     <div className="price-quantity">
                       <div className="price">
                         <input

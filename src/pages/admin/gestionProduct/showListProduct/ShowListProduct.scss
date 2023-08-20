@@ -69,11 +69,14 @@
   }
 
   .info-detail {
-    img {
-      width: 120px;
-      display: block;
+    .picture {
+      width: 100px;
       margin: auto;
-      border-radius: 5px;
+      height: 145px;
+      position: relative;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center center;
     }
 
     .price-quantity {

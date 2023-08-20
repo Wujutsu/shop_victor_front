@@ -20,6 +20,8 @@ const Shop = () => {
   useEffect(() => {
     //Récupére tous les produits avec un stock supérieur à 0
     const getAllProductsWithStock = () => {
+      setIsLoading(true);
+
       const filterQuantityMinToShow = 1;
       const filterStock = "empty";
       const apiUrl =
@@ -74,22 +76,25 @@ const Shop = () => {
       />
 
       {!isLoading ? (
-        <div className="row">
-          {listProduct.map((item) => (
-            <div className="col-lg-3 col-md-4 col-sm-6" key={item.id}>
-              <Product info={item} />
-            </div>
-          ))}
-        </div>
+        <>
+          <div className="row">
+            {listProduct.map((item) => (
+              <div className="col-lg-3 col-md-4 col-sm-6" key={item.id}>
+                <Product info={item} />
+              </div>
+            ))}
+          </div>
+          <div>
+            <Paging
+              filterPage={filterPage}
+              setFilterPage={setFilterPage}
+              filterCategorie={filterCategorie}
+            />
+          </div>
+        </>
       ) : (
         <Spinner />
       )}
-
-      <Paging
-        filterPage={filterPage}
-        setFilterPage={setFilterPage}
-        filterCategorie={filterCategorie}
-      />
 
       {msgError !== "" && (
         <ShowInfoPopup msg={msgError} type="error"></ShowInfoPopup>
