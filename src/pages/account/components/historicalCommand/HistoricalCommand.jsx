@@ -69,8 +69,8 @@ const HistoricalCommand = () => {
           <div>
             <div className="state">
               {order.state === 0 && <>Commande en attente de traitement</>}
-              {order.state === 1 && <>Commande expédiée</>}
-              {order.state === 2 && <>Commande annulée</>}
+              {order.state === 1 && <>Commande en attente d'envoi</>}
+              {order.state === 2 && <>Commande envoyée</>}
             </div>
 
             <div className="date">

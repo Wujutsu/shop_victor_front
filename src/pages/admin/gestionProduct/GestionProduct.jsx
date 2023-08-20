@@ -136,6 +136,7 @@ const GestionProduct = () => {
             setShowModalNewProduct={setShowModalNewProduct}
             listProduct={listProduct}
             setListProduct={setListProduct}
+            setSaveListProduct={setSaveListProduct}
           />
 
           {/* Liste des produits && update */}

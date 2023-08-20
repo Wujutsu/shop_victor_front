@@ -14,6 +14,7 @@ const AddProduct = ({
   setShowModalNewProduct,
   listProduct,
   setListProduct,
+  setSaveListProduct,
 }) => {
   const { token } = useContext(UserContext);
   const [newProduct, setNewProduct] = useState({
@@ -143,9 +144,11 @@ const AddProduct = ({
             price: formatTarif(response.data.price),
             isDisabled: true,
           };
-          updateListProduct.push(dataNewProduct);
+
+          updateListProduct.unshift(dataNewProduct);
 
           setListProduct(updateListProduct);
+          setSaveListProduct(updateListProduct);
           handleCancleAddProduct();
           setLoadingUpdate(false);
           setSuccessAdd("ok");
