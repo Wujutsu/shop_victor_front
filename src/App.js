@@ -16,6 +16,7 @@ import Admin from "./pages/admin/Admin";
 import NotFound from "./pages/notFound/NotFound";
 import CartPageTwo from "./pages/cart/cartPageTwo/CartPageTwo";
 import SuccessPayment from "./pages/cart/successPayment/SuccessPayment";
+import ResetPassword from "./pages/resetPassword/ResetPassword";
 
 function App() {
   const { isLogged, role, nbCartItem, stripeClientSecret } =
@@ -28,6 +29,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/account" element={isLogged ? <Account /> : <Login />} />
         <Route path="/shop" element={<Shop />} />
         <Route path="/cart" element={isLogged ? <CartPageOne /> : <Shop />} />

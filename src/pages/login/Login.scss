@@ -1,7 +1,7 @@
 .login-container {
   padding: 1rem;
   text-align: center;
-  max-width: 30rem;
+  max-width: 32rem;
   margin: auto;
 }
 
@@ -28,7 +28,7 @@
     }
 
     input {
-      margin-bottom: 2.8rem;
+      margin-bottom: 2rem;
       padding: 10px;
       font-size: 16px;
       outline: none;
@@ -37,9 +37,10 @@
   }
 
   .identif-error {
-    margin-top: -2.15rem;
-    margin-bottom: 0.65rem;
+    margin-top: -1.63rem;
+    margin-bottom: 0.3rem;
     color: var(--color-red);
+    font-size: 0.9rem;
   }
 
   button {
@@ -48,9 +49,20 @@
   }
 }
 
-.new-account {
-  margin-top: 1rem;
-  font-size: 0.8rem;
-  text-align: left;
-  cursor: pointer;
+.option {
+  margin-top: 1.3rem;
+
+  .forget-password {
+    font-size: 0.8rem;
+    text-align: left;
+    cursor: pointer;
+    margin-right: 1rem;
+  }
+
+  .new-account {
+    margin-top: 0.6rem;
+    font-size: 0.8rem;
+    text-align: left;
+    cursor: pointer;
+  }
 }

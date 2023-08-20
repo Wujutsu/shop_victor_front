@@ -11,11 +11,14 @@ import ShowInfoPopup from "../../components/showInfoPopup/ShowInfoPopup";
 export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [incorrectIdentifier, setIncorrectIdentifier] = useState(false);
+  const [incorrectIdentifier, setIncorrectIdentifier] = useState("");
   const navigate = useNavigate();
   const { handleSaveLogin } = useContext(UserContext);
   const [accountCreatedSuccess, setAccountCreatedSuccess] = useState(false);
   const [emailUpdated, setEmailUpdated] = useState(false);
+  const [isError, setIsError] = useState("");
+  const [isGood, setIsGood] = useState("");
+  const [passwordUpdated, setPasswordUpdated] = useState(false);
 
   useEffect(() => {
     if (localStorage.getItem("accountCreatedSuccess")) {
@@ -26,6 +29,11 @@ export const Login = () => {
     if (localStorage.getItem("emailUpdated")) {
       setEmailUpdated(true);
       localStorage.removeItem("emailUpdated");
+    }
+
+    if (localStorage.getItem("passwordUpdateSuccess")) {
+      setPasswordUpdated(true);
+      localStorage.removeItem("passwordUpdateSuccess");
     }
   }, []);
 
@@ -41,7 +49,7 @@ export const Login = () => {
     axios
       .post(apiUrl, requestData)
       .then((response) => {
-        setIncorrectIdentifier(false);
+        setIncorrectIdentifier("");
         handleSaveLogin(
           response.data.accessToken,
           response.data.firstName,
@@ -53,14 +61,47 @@ export const Login = () => {
         navigate("/");
       })
       .catch((error) => {
-        setIncorrectIdentifier(true);
+        setIncorrectIdentifier("Identifiants incorrects");
       });
+  };
+
+  const handlePasswordForgot = () => {
+    if (email === "") {
+      setIncorrectIdentifier(
+        "Veuillez renseigner votre e-mail pour réinitialiser le mot de passe"
+      );
+    } else {
+      setIncorrectIdentifier("");
+
+      const apiUrl = "http://localhost:8080/api/email/reset-password";
+      const requestData = {
+        to: email.toLowerCase(),
+      };
+
+      axios
+        .post(apiUrl, requestData)
+        .then((response) => {
+          setIsGood("Un e-mail vient d'être envoyé à l'adresse " + email);
+          setEmail("");
+          setPassword("");
+          setTimeout(() => {
+            setIsGood("");
+          }, 3000);
+        })
+        .catch((error) => {
+          if (error.response.data === "Error: User not found") {
+            setIsError("Aucun compte enregistré avec l'e-mail " + email);
+            setTimeout(() => {
+              setIsError("");
+            }, 3000);
+          }
+        });
+    }
   };
 
   return (
     <div className="login-container">
       <div className="login-title">Connexion</div>
-
       <form className="login-form" onSubmit={handleLogin}>
         <div className="form-input">
           <label htmlFor="email">E-mail</label>
@@ -69,7 +110,10 @@ export const Login = () => {
             id="email"
             name="email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => {
+              setEmail(e.target.value);
+              setIncorrectIdentifier("");
+            }}
             required
             autoComplete="off"
           />
@@ -82,14 +126,17 @@ export const Login = () => {
             id="password"
             name="password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => {
+              setPassword(e.target.value);
+              setIncorrectIdentifier("");
+            }}
             required
             autoComplete="off"
           />
         </div>
 
-        {incorrectIdentifier && (
-          <div className="identif-error">Identifiants incorrects</div>
+        {incorrectIdentifier !== "" && (
+          <div className="identif-error">{incorrectIdentifier}</div>
         )}
 
         <button
@@ -100,10 +147,14 @@ export const Login = () => {
           Se connecter
         </button>
       </form>
-
-      <NavLink to="/register" aria-label="redirectRegister">
-        <div className="new-account">Créer un compte</div>
-      </NavLink>
+      <div className="option">
+        <div className="forget-password" onClick={() => handlePasswordForgot()}>
+          Mot de passe oublié
+        </div>
+        <NavLink to="/register" aria-label="redirectRegister">
+          <div className="new-account">Créer un compte</div>
+        </NavLink>
+      </div>
 
       {accountCreatedSuccess && (
         <ShowInfoPopup
@@ -115,6 +166,17 @@ export const Login = () => {
       {emailUpdated && (
         <ShowInfoPopup msg="Votre e-mail a été mis à jour" type="success" />
       )}
+
+      {passwordUpdated && (
+        <ShowInfoPopup
+          msg="Votre mot de passe à été mis à jour"
+          type="success"
+        />
+      )}
+
+      {isGood !== "" && <ShowInfoPopup msg={isGood} type="success" />}
+
+      {isError !== "" && <ShowInfoPopup msg={isError} type="error" />}
     </div>
   );
 };
