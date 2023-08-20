@@ -12,6 +12,7 @@ const Address = () => {
     country: "",
     codePostal: "",
     city: "",
+    number: "",
     address: "",
     identity: "",
     focus: false,
@@ -77,6 +78,7 @@ const Address = () => {
       country: "",
       codePostal: "",
       city: "",
+      number: "",
       address: "",
       identity: "",
     });
@@ -91,6 +93,7 @@ const Address = () => {
       country: dataNewAddress.country,
       codePostal: dataNewAddress.codePostal,
       city: dataNewAddress.city,
+      number: dataNewAddress.number,
       address: dataNewAddress.address,
       identity: dataNewAddress.identity,
     };
@@ -183,7 +186,7 @@ const Address = () => {
               >
                 <div>{item.identity}</div>
                 <div>
-                  {item.address}, {item.city}
+                  {item.number} {item.address}, {item.city}
                 </div>
                 <div>
                   {item.codePostal}, {item.country}
@@ -226,6 +229,8 @@ const Address = () => {
                 value={dataNewAddress.identity}
                 name="identity"
                 id="identity"
+                placeholder="Prénom Nom"
+                maxLength={50}
                 onChange={(e) => handleUpdateInput("identity", e.target.value)}
               />
             </div>
@@ -238,6 +243,7 @@ const Address = () => {
                 name="country"
                 id="country"
                 value={dataNewAddress.country}
+                maxLength={50}
                 onChange={(e) => handleUpdateInput("country", e.target.value)}
               />
             </div>
@@ -250,6 +256,7 @@ const Address = () => {
                 value={dataNewAddress.city}
                 name="city"
                 id="city"
+                maxLength={50}
                 onChange={(e) => handleUpdateInput("city", e.target.value)}
               />
             </div>
@@ -262,12 +269,26 @@ const Address = () => {
                 value={dataNewAddress.codePostal}
                 name="codePostal"
                 id="codePostal"
+                maxLength={5}
                 onChange={(e) =>
                   handleUpdateInput("codePostal", e.target.value)
                 }
               />
             </div>
-            <div className="col-12 mt-4 mb-2 form-input">
+            <div className="col-md-3 col-sm-2 mt-4 mb-2 form-input">
+              <label htmlFor="address">Numéro</label>
+              <input
+                type="text"
+                required
+                autoComplete="off"
+                value={dataNewAddress.number}
+                name="number"
+                id="number"
+                maxLength={4}
+                onChange={(e) => handleUpdateInput("number", e.target.value)}
+              />
+            </div>
+            <div className="col-md-9 col-sm-10 mt-4 mb-2 form-input">
               <label htmlFor="address">Adresse</label>
               <input
                 type="text"
@@ -276,6 +297,7 @@ const Address = () => {
                 value={dataNewAddress.address}
                 name="address"
                 id="address"
+                maxLength={150}
                 onChange={(e) => handleUpdateInput("address", e.target.value)}
               />
             </div>

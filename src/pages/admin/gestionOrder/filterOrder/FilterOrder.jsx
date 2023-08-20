@@ -52,12 +52,10 @@ const FilterOrder = ({
           setFilterState(1);
           setFilterPage(0);
         }}
-        className={`btn margin-left ${
-          filterState === 1 ? "btn-dark" : "btn-outline-dark"
-        }`}
+        className={`btn ${filterState === 1 ? "btn-dark" : "btn-outline-dark"}`}
       >
         <RiMailSendLine size={22} />
-        A&nbsp;envoyer{" "}
+        A&nbsp;envoyer
         {nbOrderByState[1] ? " (" + nbOrderByState[1] + ")" : "(0)"}
       </button>
       <button
@@ -65,9 +63,7 @@ const FilterOrder = ({
           setFilterState(2);
           setFilterPage(0);
         }}
-        className={`btn margin-left ${
-          filterState === 2 ? "btn-dark" : "btn-outline-dark"
-        }`}
+        className={`btn ${filterState === 2 ? "btn-dark" : "btn-outline-dark"}`}
       >
         <AiOutlineCheckCircle size={25} />
         Validé {nbOrderByState[2] ? " (" + nbOrderByState[2] + ")" : "(0)"}

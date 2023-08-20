@@ -242,11 +242,10 @@ const CartPageOne = () => {
                 >
                   <div className="row align-items-center">
                     <div className="col-sm-2">
-                      <img
-                        className="img-fluid"
-                        src={item.picture}
-                        alt={item.name}
-                      />
+                      <div
+                        className="picture"
+                        style={{ backgroundImage: `url(${item.picture})` }}
+                      ></div>
                     </div>
                     <div className="col-sm-6">
                       <div className="row text-muted">
@@ -294,7 +293,7 @@ const CartPageOne = () => {
               ))}
 
             {(nbCartItem === "0" || nbCartItem === 0) && (
-              <h5>Votre panier est vide ! 😕</h5>
+              <div>Votre panier est vide ! 😕</div>
             )}
           </div>
           <div className="col-lg-4 col-md-5">

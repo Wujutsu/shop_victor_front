@@ -70,7 +70,7 @@
 
   .info-detail {
     .picture {
-      width: 100px;
+      width: 105px;
       margin: auto;
       height: 145px;
       position: relative;
@@ -146,6 +146,10 @@
   .list-product {
     .info-detail {
       display: flex;
+
+      .picture {
+        width: 180px;
+      }
 
       .price-quantity {
         text-align: left;

@@ -83,7 +83,9 @@ const ShowListOrder = ({ listOrder, setListOrder }) => {
                 <div className="info">
                   <div className="bold">Adresse de livraison:</div>
                   <div>{order.address.identity}</div>
-                  <div>{order.address.address}</div>
+                  <div>
+                    {order.address.number} {order.address.address}
+                  </div>
                   <div>
                     {order.address.codePostal} {order.address.city} -{" "}
                     {order.address.country}

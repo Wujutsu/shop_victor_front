@@ -13,10 +13,10 @@ const Account = () => {
       <div className="welcome">Bonjour {firstName} 😊</div>
       <div className="row">
         <div className="col-sm-6">
-          <Profil />
+          <HistoricalCommand />
         </div>
         <div className="col-sm-6">
-          <HistoricalCommand />
+          <Profil />
         </div>
       </div>
     </div>

@@ -21,6 +21,16 @@
     padding: 0.5rem 0rem;
   }
 
+  .picture {
+    width: 80px;
+    margin: auto;
+    height: 80px;
+    position: relative;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+  }
+
   .cart {
     padding: 2rem 3rem;
     padding-right: 1.5rem;

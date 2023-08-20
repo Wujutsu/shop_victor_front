@@ -60,7 +60,7 @@ const HistoricalCommand = () => {
 
       {!isLoading && listCommand.length === 0 && (
         <div className="command">
-          <div className="nocommand">Aucun article commandé 😢</div>
+          <div className="nocommand">Aucun article commandé 😧</div>
         </div>
       )}
 

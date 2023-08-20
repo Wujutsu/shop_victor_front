@@ -119,7 +119,7 @@ const ResetPassword = () => {
           </div>
 
           <button className="btn btn-success" type="submit">
-            Réinitialiser mon mot de passe
+            Valider
           </button>
         </form>
       )}
