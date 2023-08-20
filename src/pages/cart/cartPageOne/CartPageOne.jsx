@@ -60,7 +60,6 @@ const CartPageOne = () => {
                 : item;
             });
 
-            console.log("Test cart => ", updatedCartItems);
             setTotalCommandItem(sommeItem);
             setShowCartItem(updatedCartItems);
             setIsLoading(false);
@@ -93,8 +92,6 @@ const CartPageOne = () => {
       },
     };
 
-    console.log("requestData => ", requestData);
-
     axios
       .post(apiUrl, requestData, config)
       .then((response) => {
@@ -111,8 +108,6 @@ const CartPageOne = () => {
               return fctRecupNameQuantiy(item);
             }
           );
-
-          console.log("BEFORE => ", cartItem);
 
           //On crée une variable pour mettre à jour cartItem avec les correctifs
           const updateCartItem = showCartItem

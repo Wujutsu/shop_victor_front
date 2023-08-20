@@ -3,10 +3,9 @@ import "./Filter.scss";
 import { UserContext } from "../../../../contexts/UserContext";
 import axios from "axios";
 
-const Filter = ({ handleCategorie }) => {
+const Filter = ({ filterCategorie, setFilterCategorie, setFilterPage }) => {
   const { token } = useContext(UserContext);
   const [listCategorie, setListCategorie] = useState([]);
-  const [categorieSelect, setCategorieSelect] = useState("");
 
   useEffect(() => {
     const getAllCategories = () => {
@@ -30,17 +29,17 @@ const Filter = ({ handleCategorie }) => {
   }, [token, setListCategorie]);
 
   const handleSelectedCategorie = (categorie) => {
-    setCategorieSelect(categorie);
-    handleCategorie(categorie);
+    setFilterCategorie(categorie);
+    setFilterPage(0);
   };
 
   return (
     <div className="filter">
       <button
         className={`btn ${
-          categorieSelect === "" ? "btn-success" : "btn-outline-success"
+          filterCategorie === "all" ? "btn-success" : "btn-outline-success"
         }`}
-        onClick={() => handleSelectedCategorie("")}
+        onClick={() => handleSelectedCategorie("all")}
       >
         Tout
       </button>
@@ -48,7 +47,7 @@ const Filter = ({ handleCategorie }) => {
         <button
           key={item.id}
           className={`btn ${
-            categorieSelect === item.name
+            filterCategorie === item.name
               ? "btn-success"
               : "btn-outline-success"
           }`}

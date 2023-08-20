@@ -5,15 +5,21 @@ import {
 } from "react-icons/bs";
 import { UserContext } from "../../../../contexts/UserContext";
 import axios from "axios";
+import "./Paging.scss";
 
-const Paging = ({ setFilterPage, filterPage, filterState }) => {
+const Paging = ({ filterPage, setFilterPage, filterCategorie }) => {
   const { token } = useContext(UserContext);
   const [nbPageToShow, setNbPageToShow] = useState(0);
 
   useEffect(() => {
     //Récupére le nombre de page à afficher
     const getNbPage = () => {
-      const apiUrl = "http://localhost:8080/api/order/nbpage/" + filterState;
+      const filterQuantityMinToShow = 1;
+      const apiUrl =
+        "http://localhost:8080/api/product/all/nbpage/" +
+        filterCategorie +
+        "/" +
+        filterQuantityMinToShow;
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -30,29 +36,20 @@ const Paging = ({ setFilterPage, filterPage, filterState }) => {
     };
 
     getNbPage();
-  }, [token, filterState]);
+  }, [token, filterCategorie]);
 
   const handlePagePrecedente = () => {
     setFilterPage(filterPage - 1);
-    scrollToTop();
   };
 
   const handlePageSuivante = () => {
     setFilterPage(filterPage + 1);
-    scrollToTop();
-  };
-
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth", // Permet un défilement fluide
-    });
   };
 
   return (
-    <>
+    <div className="page-shop">
       {nbPageToShow > 0 && (
-        <div className="page">
+        <div className="paging">
           {filterPage > 0 ? (
             <div className="left" onClick={() => handlePagePrecedente()}>
               <BsFillArrowLeftCircleFill size={30} color="#198754" />
@@ -75,7 +72,7 @@ const Paging = ({ setFilterPage, filterPage, filterState }) => {
           )}
         </div>
       )}
-    </>
+    </div>
   );
 };
 

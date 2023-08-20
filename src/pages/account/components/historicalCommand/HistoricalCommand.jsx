@@ -40,8 +40,6 @@ const HistoricalCommand = () => {
             };
           });
 
-          console.log("Order =>", updateListOrder);
-
           setListCommand(updateListOrder);
           setIsLoading(false);
         })
@@ -87,7 +85,11 @@ const HistoricalCommand = () => {
             {order.productList.map((product, key) => (
               <div key={key} className="col-xl-6">
                 <div className="show-product">
-                  <img src={product.picture} alt="teeshirt" width={80} />
+                  <div
+                    className="picture"
+                    style={{ backgroundImage: `url(${product.picture})` }}
+                  ></div>
+
                   <div className="detail">
                     <div className="info">{product.name}</div>
                     <div className="info">

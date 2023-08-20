@@ -26,7 +26,6 @@ const GestionProduct = () => {
 
   //Récupére les catégories
   useEffect(() => {
-    console.log("recup CAT");
     const getAllCategories = () => {
       const apiUrl = "http://localhost:8080/api/categorie/all";
       const config = {
@@ -49,21 +48,18 @@ const GestionProduct = () => {
 
   //Récupére les produits
   useEffect(() => {
-    console.log("recup PROD");
-
     const getAllProducts = () => {
-      const quantityMinToShow = 0;
+      const filterQuantityMinToShow = 0;
       const apiUrl =
         "http://localhost:8080/api/product/all/" +
         filterPage +
         "/" +
         filterCategorie +
         "/" +
-        quantityMinToShow +
+        filterQuantityMinToShow +
         "/" +
         filterStock;
 
-      console.log("url =>", apiUrl);
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -83,7 +79,6 @@ const GestionProduct = () => {
             };
           });
 
-          console.log("ListProduct => ", updatedCartItems);
           setListProduct(updatedCartItems);
           setSaveListProduct(updatedCartItems);
           setIsLoading(false);

@@ -6,17 +6,32 @@ import "./components/product/Product";
 import Product from "./components/product/Product";
 import Filter from "./components/filter/Filter";
 import Spinner from "../../components/spinner/Spinner";
+import Paging from "./components/paging/Paging";
+import ShowInfoPopup from "../../components/showInfoPopup/ShowInfoPopup";
 
 const Shop = () => {
   const { token } = useContext(UserContext);
-  const [listProductSave, setListProductSave] = useState([]);
   const [listProduct, setListProduct] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [filterPage, setFilterPage] = useState(0);
+  const [filterCategorie, setFilterCategorie] = useState("all");
+  const [msgError, setMsgError] = useState("");
 
   useEffect(() => {
     //Récupére tous les produits avec un stock supérieur à 0
     const getAllProductsWithStock = () => {
-      const apiUrl = "http://localhost:8080/api/product/all/stock";
+      const filterQuantityMinToShow = 1;
+      const filterStock = "empty";
+      const apiUrl =
+        "http://localhost:8080/api/product/all/" +
+        filterPage +
+        "/" +
+        filterCategorie +
+        "/" +
+        filterQuantityMinToShow +
+        "/" +
+        filterStock;
+
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -29,52 +44,57 @@ const Shop = () => {
         .then((response) => {
           const listProductWithItem = response.data;
 
-          console.log("List produit => ", listProductWithItem);
-          setListProductSave(listProductWithItem);
           setListProduct(listProductWithItem);
           setIsLoading(false);
         })
         .catch((error) => {
+          if (error.response.data === "Error: Categorie not found") {
+            setMsgError(
+              "La catégorie n'a pas été trouvée, veuillez réessayer ultérieurement"
+            );
+            setTimeout(() => {
+              setMsgError("");
+            }, 3000);
+          }
           setIsLoading(false);
         });
     };
 
     getAllProductsWithStock();
-  }, [token]);
-
-  //Permet de mettre à jour la catégorie et filtrer les articles en fonction
-  const handleCategorie = (categorie) => {
-    const listArticles = listProductSave;
-
-    if (categorie !== "") {
-      const filteredListArticles = listArticles.filter(
-        (article) => article.categorie.name === categorie
-      );
-      setListProduct(filteredListArticles);
-    } else {
-      setListProduct(listArticles);
-    }
-  };
+  }, [token, filterPage, filterCategorie]);
 
   return (
-    <>
-      <div className="page-shop">
-        <div className="title-page">Boutique</div>
+    <div className="page-shop">
+      <div className="title-page">Boutique</div>
 
-        <Filter handleCategorie={handleCategorie} />
-        {!isLoading ? (
-          <div className="row">
-            {listProduct.map((item) => (
-              <div className="col-lg-3 col-md-4 col-sm-6" key={item.id}>
-                <Product info={item} />
-              </div>
-            ))}
-          </div>
-        ) : (
-          <Spinner />
-        )}
-      </div>
-    </>
+      <Filter
+        filterCategorie={filterCategorie}
+        setFilterCategorie={setFilterCategorie}
+        setFilterPage={setFilterPage}
+      />
+
+      {!isLoading ? (
+        <div className="row">
+          {listProduct.map((item) => (
+            <div className="col-lg-3 col-md-4 col-sm-6" key={item.id}>
+              <Product info={item} />
+            </div>
+          ))}
+        </div>
+      ) : (
+        <Spinner />
+      )}
+
+      <Paging
+        filterPage={filterPage}
+        setFilterPage={setFilterPage}
+        filterCategorie={filterCategorie}
+      />
+
+      {msgError !== "" && (
+        <ShowInfoPopup msg={msgError} type="error"></ShowInfoPopup>
+      )}
+    </div>
   );
 };
 

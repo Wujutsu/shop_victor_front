@@ -21,11 +21,20 @@
 
     .show-product {
       position: relative;
-      margin-top: 1.5rem;
+      margin-top: 0.5rem;
+
+      .picture {
+        width: 80px;
+        height: 100px;
+        position: relative;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center center;
+      }
 
       .detail {
         position: absolute;
-        top: 5px;
+        top: 10px;
         left: 90px;
       }
     }

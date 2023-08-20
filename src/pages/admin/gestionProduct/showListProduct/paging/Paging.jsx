@@ -12,11 +12,14 @@ const Paging = ({ filterPage, setFilterPage, filterCategorie }) => {
   const [nbPageToShow, setNbPageToShow] = useState(0);
 
   useEffect(() => {
-    console.log("Page");
     //Récupére le nombre de page à afficher
     const getNbPage = () => {
+      const filterQuantityMinToShow = 0;
       const apiUrl =
-        "http://localhost:8080/api/product/all/nbpage/" + filterCategorie;
+        "http://localhost:8080/api/product/all/nbpage/" +
+        filterCategorie +
+        "/" +
+        filterQuantityMinToShow;
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -49,7 +52,7 @@ const Paging = ({ filterPage, setFilterPage, filterCategorie }) => {
         <div className="page">
           {filterPage > 0 ? (
             <div className="left" onClick={() => handlePagePrecedente()}>
-              <BsFillArrowLeftCircleFill size={30} color="#136893" />
+              <BsFillArrowLeftCircleFill size={30} color="#198754" />
             </div>
           ) : (
             <div className="left">
@@ -60,7 +63,7 @@ const Paging = ({ filterPage, setFilterPage, filterCategorie }) => {
 
           {filterPage !== nbPageToShow ? (
             <div className="right" onClick={() => handlePageSuivante()}>
-              <BsFillArrowRightCircleFill size={30} color="#136893" />
+              <BsFillArrowRightCircleFill size={30} color="#198754" />
             </div>
           ) : (
             <div className="right">
