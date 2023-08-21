@@ -30,6 +30,15 @@ export const NavBar = () => {
       </NavLink>
 
       <NavLink
+        to="/?form=true"
+        style={getActiveStyle}
+        className="contact"
+        aria-label="redirectFormContact"
+      >
+        Contact
+      </NavLink>
+
+      <NavLink
         to="/shop"
         style={getActiveStyle}
         className="shop"

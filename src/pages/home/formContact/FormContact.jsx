@@ -9,9 +9,11 @@ const FormContact = () => {
   const [sujet, setSujet] = useState("");
   const [request, setRequest] = useState("");
   const [emailStatus, setEmailStatus] = useState("");
+  const [disabledBtn, setDisabledBtn] = useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    setDisabledBtn(true);
 
     const apiUrl = "http://localhost:8080/api/email/ask";
     const requestData = {
@@ -21,24 +23,30 @@ const FormContact = () => {
       content: request,
     };
 
-    axios.post(apiUrl, requestData).then((response) => {
-      console.log("response => ", response.data);
-      if (response.data) {
-        setName("");
-        setEmail("");
-        setSujet("");
-        setRequest("");
-        setEmailStatus("Votre demande à bien été envoyée");
-        setTimeout(() => {
-          setEmailStatus("");
-        }, 3000);
-      }
-    });
+    axios
+      .post(apiUrl, requestData)
+      .then((response) => {
+        console.log("response => ", response.data);
+        if (response.data) {
+          setName("");
+          setEmail("");
+          setSujet("");
+          setRequest("");
+          setDisabledBtn(false);
+          setEmailStatus("Votre demande à bien été envoyée");
+          setTimeout(() => {
+            setEmailStatus("");
+          }, 3000);
+        }
+      })
+      .catch((error) => {
+        setDisabledBtn(false);
+      });
   };
 
   return (
     <div className="contact">
-      <h2>Une idée, une envie, des questions ?</h2>
+      <h2>Une idée, une envie, des questions&nbsp;?</h2>
 
       <div className="form-contact">
         <form onSubmit={handleSubmit}>
@@ -89,7 +97,11 @@ const FormContact = () => {
               required
             />
           </div>
-          <button type="submit" className="btn btn-success">
+          <button
+            type="submit"
+            className="btn btn-success"
+            disabled={disabledBtn}
+          >
             Envoyer la Demande
           </button>
         </form>
