@@ -1,15 +1,27 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./FormContact.scss";
 import axios from "axios";
 import ShowInfoPopup from "../../../components/showInfoPopup/ShowInfoPopup";
+import { UserContext } from "../../../contexts/UserContext";
 
 const FormContact = () => {
+  const { firstName, lastName, email, isLogged } = useContext(UserContext);
+
   const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  const [inputEmail, setInputEmail] = useState("");
   const [sujet, setSujet] = useState("");
   const [request, setRequest] = useState("");
   const [emailStatus, setEmailStatus] = useState("");
   const [disabledBtn, setDisabledBtn] = useState(false);
+
+  useEffect(() => {
+    if (isLogged) {
+      setName(firstName + " " + lastName);
+      setInputEmail(email);
+    }
+
+    //eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [disabledBtn]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -17,7 +29,7 @@ const FormContact = () => {
 
     const apiUrl = "http://localhost:8080/api/email/ask";
     const requestData = {
-      from: email.toLowerCase(),
+      from: inputEmail.toLowerCase(),
       identity: name,
       subject: sujet,
       content: request,
@@ -29,7 +41,7 @@ const FormContact = () => {
         console.log("response => ", response.data);
         if (response.data) {
           setName("");
-          setEmail("");
+          setInputEmail("");
           setSujet("");
           setRequest("");
           setDisabledBtn(false);
@@ -84,8 +96,8 @@ const FormContact = () => {
             <input
               placeholder="Email"
               type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={inputEmail}
+              onChange={(e) => setInputEmail(e.target.value)}
               required
             />
           </div>

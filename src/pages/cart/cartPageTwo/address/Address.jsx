@@ -7,8 +7,14 @@ import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 
 const Address = () => {
-  const { token, setAddressOrder, phoneNumber, setPhoneNumber } =
-    useContext(UserContext);
+  const {
+    token,
+    setAddressOrder,
+    phoneNumber,
+    setPhoneNumber,
+    firstName,
+    lastName,
+  } = useContext(UserContext);
   const [showInputAddress, setShowInputAddress] = useState(false);
   const [dataNewAddress, setDataNewAddress] = useState({
     country: "",
@@ -16,7 +22,7 @@ const Address = () => {
     city: "",
     number: "",
     address: "",
-    identity: "",
+    identity: firstName + " " + lastName,
     focus: false,
   });
   const [listAddress, setListAddress] = useState([]);

@@ -10,10 +10,12 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorSignup, setErrorSignup] = useState("");
+  const [disabledBtn, setDisabledBtn] = useState(false);
   const navigate = useNavigate();
 
   const handleRegister = (e) => {
     e.preventDefault();
+    setDisabledBtn(true);
 
     const apiUrl = "http://localhost:8080/api/auth/signup";
     const requestData = {
@@ -28,12 +30,14 @@ const Register = () => {
       .then((response) => {
         localStorage.setItem("accountCreatedSuccess", true);
         navigate("/login");
+        setDisabledBtn(false);
       })
       .catch((error) => {
         let message = error.response.data.message;
         if (message === "Error: Email is already use") {
           setErrorSignup("L'adresse E-mail est déjà utilisée");
         }
+        setDisabledBtn(false);
       });
   };
 
@@ -97,6 +101,7 @@ const Register = () => {
         )}
 
         <button
+          disabled={disabledBtn}
           className="btn btn-success"
           type="submit"
           aria-label="S'enregistrer"
