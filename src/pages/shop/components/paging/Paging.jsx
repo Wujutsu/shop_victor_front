@@ -39,18 +39,18 @@ const Paging = ({ filterPage, setFilterPage, filterCategorie }) => {
   }, [token, filterCategorie]);
 
   const handlePagePrecedente = () => {
-    setFilterPage(filterPage - 1);
     scrollToTop();
+    setFilterPage(filterPage - 1);
   };
 
   const handlePageSuivante = () => {
-    setFilterPage(filterPage + 1);
     scrollToTop();
+    setFilterPage(filterPage + 1);
   };
 
   const scrollToTop = () => {
     window.scrollTo({
-      top: 0,
+      top: 200,
       behavior: "smooth",
     });
   };
