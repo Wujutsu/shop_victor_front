@@ -3,10 +3,12 @@ import { AiOutlinePlus } from "react-icons/ai";
 import axios from "axios";
 import { UserContext } from "../../../../contexts/UserContext";
 import { AiOutlineDelete } from "react-icons/ai";
-import { formatPhoneNumber } from "../../../../utils/functionUtils";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
 
 const Address = () => {
-  const { token, phoneNumber, setAddressOrder } = useContext(UserContext);
+  const { token, setAddressOrder, phoneNumber, setPhoneNumber } =
+    useContext(UserContext);
   const [showInputAddress, setShowInputAddress] = useState(false);
   const [dataNewAddress, setDataNewAddress] = useState({
     country: "",
@@ -18,7 +20,6 @@ const Address = () => {
     focus: false,
   });
   const [listAddress, setListAddress] = useState([]);
-  const [inputPhone, setInputPhone] = useState(phoneNumber);
 
   useEffect(() => {
     //Récupére la liste des adresses
@@ -159,15 +160,6 @@ const Address = () => {
           }
         })
         .catch((error) => {});
-    }
-  };
-
-  //Met à jour le numéro de téléphone
-  const handleUpdatePhoneNumber = (num) => {
-    //Permet de modifier la valeur de l'input
-    const formattedPhoneNumber = formatPhoneNumber(num);
-    if (formattedPhoneNumber.length <= 14) {
-      setInputPhone(formattedPhoneNumber);
     }
   };
 
@@ -314,15 +306,13 @@ const Address = () => {
           </form>
         </div>
 
-        <div className="col-12 form-input">
-          <label htmlFor="phone">Numéro de téléphone</label>
-          <input
-            type="tel"
-            value={inputPhone}
-            onChange={(e) => handleUpdatePhoneNumber(e.target.value)}
-            pattern="[A-Za-z]{3}"
-            required
-            autoComplete="off"
+        <div className="col-12">
+          <label htmlFor="phone">Numéro de téléphone *</label>
+          <PhoneInput
+            country={"fr"}
+            value={phoneNumber}
+            onChange={(phoneNumber) => setPhoneNumber(phoneNumber)}
+            placeholder=""
           />
         </div>
       </div>

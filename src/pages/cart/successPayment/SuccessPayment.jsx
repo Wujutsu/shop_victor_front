@@ -14,6 +14,7 @@ const SuccessPayment = () => {
     addressOrder,
     handleEraseAfterOrder,
     setStripeClientSecret,
+    phoneNumber,
   } = useContext(UserContext);
 
   useEffect(() => {
@@ -25,6 +26,7 @@ const SuccessPayment = () => {
         productList: cartItem,
         totalAmount: totalCommandItem,
         address: addressOrder,
+        phoneNumber: phoneNumber,
         state: 0,
       };
 

@@ -241,13 +241,13 @@ const CartPageOne = () => {
                   className="row space-article border-top border-bottom"
                 >
                   <div className="row align-items-center">
-                    <div className="col-sm-2">
+                    <div className="col-sm-2 col-md-3">
                       <div
                         className="picture"
                         style={{ backgroundImage: `url(${item.picture})` }}
                       ></div>
                     </div>
-                    <div className="col-sm-6">
+                    <div className="col-sm-6 col-md-5">
                       <div className="row text-muted">
                         <div className="categorie">{item.categorie}</div>
                       </div>
@@ -255,7 +255,7 @@ const CartPageOne = () => {
                         <div className="name">{item.name}</div>
                       </div>
                     </div>
-                    <div className="col-sm-4 price-quantity">
+                    <div className="col-sm-4 col-md-4 price-quantity">
                       <div className="price">
                         {(item.price * item.quantity).toFixed(2)}&nbsp;€
                       </div>

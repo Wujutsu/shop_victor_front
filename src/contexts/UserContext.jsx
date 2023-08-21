@@ -210,6 +210,7 @@ const UserProvider = ({ children }) => {
     lastName,
     email,
     phoneNumber,
+    setPhoneNumber,
     role,
     isLogged,
     handleUpdateInfos,

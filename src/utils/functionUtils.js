@@ -26,21 +26,6 @@ export const formatTarif = (str) => {
   return parsedNumber.toFixed(2);
 };
 
-//Formatte numéro téléphone
-export const formatPhoneNumber = (phoneNumber) => {
-  const cleaned = phoneNumber.replace(/\D/g, ""); // Supprime tous les caractères non numériques
-  const match = cleaned.match(
-    /^(\d{0,2})(\d{0,2})(\d{0,2})(\d{0,2})(\d{0,2})$/
-  );
-
-  if (match) {
-    const formattedNumber = `${match[1]} ${match[2]} ${match[3]} ${match[4]} ${match[5]}`;
-    return formattedNumber.trim();
-  }
-
-  return phoneNumber;
-};
-
 //Formatteur timestamp
 export const formatTimestamp = (timestamp) => {
   const date = new Date(timestamp);

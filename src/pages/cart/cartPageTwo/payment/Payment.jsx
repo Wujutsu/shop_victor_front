@@ -18,6 +18,7 @@ const Payment = ({ setIsLoading }) => {
     stripeClientSecret,
     setStripeClientSecret,
     addressOrder,
+    phoneNumber,
   } = useContext(UserContext);
 
   useEffect(() => {
@@ -60,7 +61,7 @@ const Payment = ({ setIsLoading }) => {
 
   return (
     <div className="cart-paiement">
-      {addressOrder !== undefined && (
+      {addressOrder !== undefined && phoneNumber !== "" && (
         <div className="cart">
           <h4>
             <b>2. Moyen de paiement</b>

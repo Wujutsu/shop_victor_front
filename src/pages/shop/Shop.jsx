@@ -20,8 +20,6 @@ const Shop = () => {
   useEffect(() => {
     //Récupére tous les produits avec un stock supérieur à 0
     const getAllProductsWithStock = () => {
-      setIsLoading(true);
-
       const filterQuantityMinToShow = 1;
       const filterStock = "empty";
       const apiUrl =

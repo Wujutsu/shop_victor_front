@@ -74,6 +74,9 @@ const ShowListOrder = ({ listOrder, setListOrder }) => {
                 <span className="bold">E-mail:</span> {order.email}
               </div>
               <div>
+                <span className="bold">Téléphone:</span> +{order.phoneNumber}
+              </div>
+              <div>
                 <span className="bold">Prix total:</span> {order.totalAmount}
                 &nbsp;€
               </div>

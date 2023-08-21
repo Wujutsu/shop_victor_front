@@ -30,6 +30,14 @@
       display: flex;
       flex-direction: column;
 
+      .form-phone {
+        margin-top: -1.5rem;
+        .form-control {
+          margin-bottom: 2.2rem !important;
+          width: 100% !important;
+        }
+      }
+
       .form-input {
         position: relative;
 
@@ -49,6 +57,11 @@
           width: 100%;
         }
 
+        .form-control {
+          margin-bottom: 2.2rem !important;
+          width: 100% !important;
+        }
+
         .input-error {
           border: 1px solid red;
         }
@@ -63,6 +76,7 @@
       button {
         margin: auto;
         width: 100%;
+        margin-top: -1rem;
       }
     }
   }
