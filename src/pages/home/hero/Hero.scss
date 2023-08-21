@@ -1,7 +1,10 @@
 .hero {
   background-color: #fff;
-  padding: 70px 0;
   text-align: center;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  margin-top: -75px;
 
   h3 {
     font-size: 1.5rem;

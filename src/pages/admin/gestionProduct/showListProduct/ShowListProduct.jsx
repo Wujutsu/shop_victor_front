@@ -143,6 +143,7 @@ const ShowListProduct = ({
         stockQuantity: productToUpdate.stockQuantity,
         categorie: productToUpdate.categorie,
         active: true,
+        showHomePage: productToUpdate.showHomePage,
       };
       const config = {
         headers: {
@@ -348,6 +349,24 @@ const ShowListProduct = ({
                           disabled={item.isDisabled}
                           required
                         ></textarea>
+                      </div>
+                    </div>
+
+                    <div className="row">
+                      <div className="showHome">
+                        <input
+                          type="checkbox"
+                          checked={item.showHomePage}
+                          disabled={item.isDisabled}
+                          onChange={(e) =>
+                            handleInputChange(
+                              index,
+                              "showHomePage",
+                              e.target.checked
+                            )
+                          }
+                        />
+                        <div>Afficher sur l'écran d'accueil</div>
                       </div>
                     </div>
                   </div>

@@ -2,7 +2,7 @@
   padding: 50px 0;
 
   .product-box {
-    height: 400px;
+    height: 350px;
     margin-bottom: 1.5rem;
 
     @media screen and (max-width: 576px) {
@@ -17,11 +17,6 @@
       border-radius: 10px;
 
       height: 100%;
-      background: linear-gradient(
-          rgba($color: #000000, $alpha: 0.2),
-          rgba($color: #000000, $alpha: 0.5)
-        ),
-        url("https://img01.ztat.net/article/spp-media-p1/8d17e3927eb535b4af075b734af2d48c/39882ce77e4b48fe8de038886082e035.jpg?imwidth=1800");
       background-repeat: no-repeat;
       background-size: cover;
       background-position: center center;
@@ -30,14 +25,6 @@
       &:hover {
         scale: 1.05;
         cursor: pointer;
-        background: linear-gradient(
-            rgba($color: #000000, $alpha: 0.1),
-            rgba($color: #000000, $alpha: 0.1)
-          ),
-          url("https://img01.ztat.net/article/spp-media-p1/8d17e3927eb535b4af075b734af2d48c/39882ce77e4b48fe8de038886082e035.jpg?imwidth=1800");
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: center center;
       }
 
       .box-text {

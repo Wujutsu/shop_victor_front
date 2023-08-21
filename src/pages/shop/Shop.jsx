@@ -8,16 +8,39 @@ import Filter from "./components/filter/Filter";
 import Spinner from "../../components/spinner/Spinner";
 import Paging from "./components/paging/Paging";
 import ShowInfoPopup from "../../components/showInfoPopup/ShowInfoPopup";
+import { useLocation } from "react-router-dom";
 
 const Shop = () => {
+  const location = useLocation();
   const { token } = useContext(UserContext);
   const [listProduct, setListProduct] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [filterPage, setFilterPage] = useState(0);
   const [filterCategorie, setFilterCategorie] = useState("all");
   const [msgError, setMsgError] = useState("");
+  const [recupParamUrl, setRecupParamUrl] = useState(false);
 
   useEffect(() => {
+    //Vérifie si il y a le parametre category dans url
+    const paramUrlUpdate = () => {
+      const urlSearchParams = new URLSearchParams(location.search);
+      const hasContactParam = urlSearchParams.get("category");
+
+      if (hasContactParam && !recupParamUrl) {
+        removeCategoryParamFromUrl();
+        setRecupParamUrl(true);
+        setFilterCategorie(hasContactParam);
+        return true;
+      }
+    };
+
+    //Supprime le parametre category de l'url de manière visuel
+    const removeCategoryParamFromUrl = () => {
+      const newUrl = new URL(window.location.href);
+      newUrl.searchParams.delete("category");
+      window.history.replaceState({}, document.title, newUrl);
+    };
+
     //Récupére tous les produits avec un stock supérieur à 0
     const getAllProductsWithStock = () => {
       const filterQuantityMinToShow = 1;
@@ -42,9 +65,7 @@ const Shop = () => {
       axios
         .get(apiUrl, config)
         .then((response) => {
-          const listProductWithItem = response.data;
-
-          setListProduct(listProductWithItem);
+          setListProduct(response.data);
           setIsLoading(false);
         })
         .catch((error) => {
@@ -60,7 +81,12 @@ const Shop = () => {
         });
     };
 
-    getAllProductsWithStock();
+    const urlContentParam = paramUrlUpdate();
+    if (!urlContentParam) {
+      getAllProductsWithStock();
+    }
+
+    //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token, filterPage, filterCategorie]);
 
   return (

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./Home.scss";
 
 import Hero from "./hero/Hero";
@@ -8,34 +8,45 @@ import { useLocation } from "react-router-dom";
 
 export const Home = () => {
   const location = useLocation();
+  const [recupParamUrl, setRecupParamUrl] = useState(false);
 
   useEffect(() => {
-    const handleHashChange = () => {
+    const redirectBottomPageForAccesFormContact = () => {
       const urlSearchParams = new URLSearchParams(location.search);
       const hasContactParam = urlSearchParams.get("form");
 
-      if (hasContactParam) {
-        const elementToClick = document.getElementById(
-          "clickRedirectFormContact"
-        );
-        elementToClick.click();
+      if (hasContactParam && !recupParamUrl) {
+        setRecupParamUrl(true);
+        removeCategoryParamFromUrl();
+
+        const scrollToBottom = () => {
+          window.scrollTo({
+            top: document.body.scrollHeight,
+            behavior: "smooth",
+          });
+        };
+
+        setTimeout(() => {
+          scrollToBottom();
+        }, 500);
       }
     };
 
-    handleHashChange();
+    redirectBottomPageForAccesFormContact();
   }, [location.search]);
+
+  //Supprime le parametre category de l'url de manière visuel
+  const removeCategoryParamFromUrl = () => {
+    const newUrl = new URL(window.location.href);
+    newUrl.searchParams.delete("form");
+    window.history.replaceState({}, document.title, newUrl);
+  };
 
   return (
     <div className="mc-fabric-home-page">
       <Hero />
       <ProductsExemple />
-
-      <a href="#contact" className="invisible" id="clickRedirectFormContact">
-        form contact
-      </a>
-      <div id="contact">
-        <FormContact />
-      </div>
+      <FormContact />
     </div>
   );
 };

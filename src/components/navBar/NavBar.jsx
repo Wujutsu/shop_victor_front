@@ -31,7 +31,7 @@ export const NavBar = () => {
 
       <NavLink
         to="/?form=true"
-        style={getActiveStyle}
+        style={{ color: "grey" }}
         className="contact"
         aria-label="redirectFormContact"
       >
