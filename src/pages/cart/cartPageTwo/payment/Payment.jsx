@@ -61,7 +61,7 @@ const Payment = ({ setIsLoading }) => {
 
   return (
     <div className="cart-paiement">
-      {addressOrder !== undefined && phoneNumber !== "" && (
+      {addressOrder !== undefined && phoneNumber.length > 10 && (
         <div className="cart">
           <h4>
             <b>2. Moyen de paiement</b>
