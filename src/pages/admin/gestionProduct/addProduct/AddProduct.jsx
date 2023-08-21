@@ -188,7 +188,7 @@ const AddProduct = ({
                       <input
                         type="file"
                         className="input-file"
-                        accept="image/*"
+                        accept="image/jpg, image/jpeg"
                         onChange={(e) => handleFileChangeUpload(e)}
                       />
                     </label>
