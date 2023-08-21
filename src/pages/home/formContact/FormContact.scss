@@ -1,0 +1,46 @@
+.contact {
+  padding: 40px 0;
+
+  h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  .form-contact {
+    max-width: 40rem;
+    margin: 0 auto;
+    padding: 2rem;
+    border-radius: 5px;
+
+    form {
+      .form-group {
+        margin-bottom: 0.5rem;
+
+        input,
+        textarea {
+          width: 100%;
+          padding: 10px;
+          border: 1px solid #dddddd;
+          border-radius: 5px;
+          font-size: 14px;
+        }
+
+        select {
+          width: 100%;
+          border: 1px solid #dddddd;
+          border-radius: 5px;
+          font-size: 14px;
+        }
+
+        textarea {
+          height: 150px;
+        }
+      }
+
+      .btn-success {
+        width: 100%;
+      }
+    }
+  }
+}
