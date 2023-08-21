@@ -40,7 +40,7 @@ const AddProduct = ({
       const byteArrayAsArray = Array.from(byteArray);
 
       // Convertir l'array buffer en un objet Blob
-      const blob = new Blob([byteArray], { type: "image/png" });
+      const blob = new Blob([byteArray], { type: "image/jpeg" });
       // Créer une URL blob à partir de l'objet Blob
       const imgUrl = URL.createObjectURL(blob);
       setImg(imgUrl);

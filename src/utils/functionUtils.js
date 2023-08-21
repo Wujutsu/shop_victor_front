@@ -10,7 +10,7 @@ export const convertDataImg = (dataImg) => {
   }
 
   // Créer un objet Blob à partir du tableau d'octets
-  const blob = new Blob([byteArray], { type: "image/png" });
+  const blob = new Blob([byteArray], { type: "image/jpeg" });
 
   // Créer une URL blob à partir de l'objet Blob
   const imgUrl = URL.createObjectURL(blob);
