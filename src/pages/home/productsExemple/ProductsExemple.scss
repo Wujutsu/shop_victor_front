@@ -2,8 +2,12 @@
   padding: 50px 0;
 
   .product-box {
-    height: 350px;
+    height: 300px;
     margin-bottom: 1.5rem;
+
+    @media screen and (max-width: 992px) {
+      height: 250px;
+    }
 
     @media screen and (max-width: 576px) {
       padding: 0 40px;
@@ -11,6 +15,13 @@
 
     @media screen and (max-width: 400px) {
       padding: 0 0px;
+    }
+
+    .picture-wait {
+      border: 1px solid rgb(226, 226, 226);
+      height: 100%;
+      border-radius: 10px;
+      background: rgb(226, 226, 226);
     }
 
     .picture {

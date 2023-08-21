@@ -102,7 +102,7 @@ const FormContact = () => {
             className="btn btn-success"
             disabled={disabledBtn}
           >
-            Envoyer la Demande
+            Envoyer la demande
           </button>
         </form>
       </div>

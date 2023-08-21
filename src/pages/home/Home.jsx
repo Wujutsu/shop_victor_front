@@ -33,6 +33,8 @@ export const Home = () => {
     };
 
     redirectBottomPageForAccesFormContact();
+
+    //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.search]);
 
   //Supprime le parametre category de l'url de manière visuel

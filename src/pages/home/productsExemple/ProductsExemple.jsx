@@ -6,8 +6,11 @@ import { NavLink } from "react-router-dom";
 
 const ProductsExemple = () => {
   const [listProducts, setListProducts] = useState([]);
+  const [listProductsWait, setListProductsWait] = useState([]);
 
   useEffect(() => {
+    setListProductsWait(["-", "-", "-", "-"]);
+
     const recupProductToShow = () => {
       const apiUrl = "http://localhost:8080/api/product/all/presentation";
 
@@ -30,43 +33,57 @@ const ProductsExemple = () => {
 
   return (
     <section className="list-products">
-      <div className="row">
-        {listProducts.map((product, index) => (
-          <div key={index} className="col-sm-6 col-lg-3">
-            <NavLink
-              to={`/shop?category=${product.categorie.name}`}
-              aria-label="redirectHome"
-            >
-              <div className="product-box">
-                <div
-                  className="picture"
-                  style={{
-                    backgroundImage: `linear-gradient(
+      <div className="row justify-content-center">
+        {listProducts.length > 0 ? (
+          <>
+            {listProducts.map((product, index) => (
+              <div key={index} className="col-sm-6 col-md-3">
+                <NavLink
+                  to={`/shop?category=${product.categorie.name}`}
+                  aria-label="redirectHome"
+                >
+                  <div className="product-box">
+                    <div
+                      className="picture"
+                      style={{
+                        backgroundImage: `linear-gradient(
                   rgba(0, 0, 0, 0.2),
                   rgba(0, 0, 0, 0.5)
                 ), url(${product.picture})`,
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundImage = `linear-gradient(
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.backgroundImage = `linear-gradient(
                     rgba(0, 0, 0, 0.1),
                     rgba(0, 0, 0, 0.1)
                   ), url(${product.picture})`;
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundImage = `linear-gradient(
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.backgroundImage = `linear-gradient(
                     rgba(0, 0, 0, 0.2),
                     rgba(0, 0, 0, 0.5)
                   ), url(${product.picture})`;
-                  }}
-                >
-                  <div className="box-text">
-                    <div className="text">{product.categorie.name}</div>
+                      }}
+                    >
+                      <div className="box-text">
+                        <div className="text">{product.categorie.name}</div>
+                      </div>
+                    </div>
                   </div>
+                </NavLink>
+              </div>
+            ))}
+          </>
+        ) : (
+          <>
+            {listProductsWait.map((product, index) => (
+              <div key={index} className="col-sm-6 col-md-3">
+                <div className="product-box">
+                  <div className="picture-wait"></div>
                 </div>
               </div>
-            </NavLink>
-          </div>
-        ))}
+            ))}
+          </>
+        )}
       </div>
     </section>
   );
