@@ -1,11 +1,14 @@
 import React from "react";
 import "./Home.scss";
-import Presentation from "./components/Presentation";
+
+import Hero from "./hero/Hero";
+import ProductsExemple from "./productsExemple/ProductsExemple";
 
 export const Home = () => {
   return (
-    <div>
-      <Presentation />
+    <div className="mc-fabric-home-page">
+      <Hero />
+      <ProductsExemple />
     </div>
   );
 };

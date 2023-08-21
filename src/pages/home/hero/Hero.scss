@@ -1,0 +1,45 @@
+.hero {
+  background-color: #fff;
+  padding: 70px 0;
+  text-align: center;
+
+  h3 {
+    font-size: 1.5rem;
+  }
+
+  h1 {
+    margin-top: 1rem;
+    font-size: clamp(2rem, 3vw, 3rem);
+    min-height: 40px;
+    color: #333333;
+    font-weight: bold;
+  }
+
+  p {
+    color: #666666;
+    width: 80%;
+    margin: auto;
+    margin-top: 3rem;
+  }
+
+  button {
+    margin-top: 3rem;
+
+    .in-btn {
+      display: flex;
+      justify-content: center;
+      margin-top: 2px;
+      gap: 7px;
+
+      svg {
+        margin-top: -1px;
+      }
+    }
+  }
+
+  @media screen and (max-width: 992px) {
+    p {
+      width: 100%;
+    }
+  }
+}
