@@ -63,7 +63,8 @@ select {
   background-color: var(--color-blue-dark);
   border: 1px solid var(--color-blue-dark);
 
-  &:hover {
+  &:hover,
+  &:focus {
     background-color: var(--color-blue);
     border: 1px solid var(--color-blue);
   }
@@ -83,7 +84,8 @@ select {
   background-color: var(--color-red);
   border: 1px solid var(--color-red);
 
-  &:hover {
+  &:hover,
+  &:focus {
     background-color: #e1685b;
     border: 1px solid #e1685b;
   }
@@ -102,6 +104,15 @@ select {
 .btn-success {
   background-color: var(--color-green);
   border: 2px solid var(--color-green);
+
+  &:hover {
+    background: #83a57f;
+    border: 2px solid #83a57f;
+  }
+  &:active {
+    border: 2px solid #83a57f !important;
+    background-color: #83a57f !important;
+  }
 }
 
 .btn-outline-success {
@@ -112,7 +123,7 @@ select {
   &:active {
     background-color: white;
     color: black;
-    border: 2px solid #75aa70;
+    border: 2px solid #83a57f;
   }
 }
 

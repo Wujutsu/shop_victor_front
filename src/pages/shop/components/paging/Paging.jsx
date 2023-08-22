@@ -61,7 +61,7 @@ const Paging = ({ filterPage, setFilterPage, filterCategorie }) => {
         <div className="paging">
           {filterPage > 0 ? (
             <div className="left" onClick={() => handlePagePrecedente()}>
-              <BsFillArrowLeftCircleFill size={30} color="#198754" />
+              <BsFillArrowLeftCircleFill size={30} color="#76aa70" />
             </div>
           ) : (
             <div className="left">
@@ -72,7 +72,7 @@ const Paging = ({ filterPage, setFilterPage, filterCategorie }) => {
 
           {filterPage !== nbPageToShow ? (
             <div className="right" onClick={() => handlePageSuivante()}>
-              <BsFillArrowRightCircleFill size={30} color="#198754" />
+              <BsFillArrowRightCircleFill size={30} color="#76aa70" />
             </div>
           ) : (
             <div className="right">

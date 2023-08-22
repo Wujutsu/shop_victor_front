@@ -42,7 +42,7 @@ const Product = ({ info }) => {
           <>
             <button
               disabled={false}
-              className="btn btn-dark"
+              className="btn btn-success"
               onClick={() =>
                 handleAddCartItem(
                   info.id,
@@ -57,7 +57,7 @@ const Product = ({ info }) => {
           </>
         ) : (
           <>
-            <button disabled={true} className="btn btn-dark">
+            <button disabled={true} className="btn btn-success">
               Ajouter au panier
             </button>
           </>
