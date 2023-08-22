@@ -6,11 +6,8 @@ import { NavLink } from "react-router-dom";
 
 const ProductsExemple = () => {
   const [listProducts, setListProducts] = useState([]);
-  const [listProductsWait, setListProductsWait] = useState([]);
 
   useEffect(() => {
-    setListProductsWait(["-", "-", "-", "-"]);
-
     const recupProductToShow = () => {
       const apiUrl = "http://localhost:8080/api/product/all/presentation";
 
@@ -75,13 +72,11 @@ const ProductsExemple = () => {
           </>
         ) : (
           <>
-            {listProductsWait.map((product, index) => (
-              <div key={index} className="col-sm-6 col-md-3">
-                <div className="product-box">
-                  <div className="picture-wait"></div>
-                </div>
+            <div className="col-sm-6 col-md-3">
+              <div className="product-box">
+                <div className="picture-wait"></div>
               </div>
-            ))}
+            </div>
           </>
         )}
       </div>
