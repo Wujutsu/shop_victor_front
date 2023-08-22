@@ -17,6 +17,7 @@ import NotFound from "./pages/notFound/NotFound";
 import CartPageTwo from "./pages/cart/cartPageTwo/CartPageTwo";
 import SuccessPayment from "./pages/cart/successPayment/SuccessPayment";
 import ResetPassword from "./pages/resetPassword/ResetPassword";
+import ProductDetails from "./pages/productDetails/ProductDetails";
 
 function App() {
   const { isLogged, role, nbCartItem, stripeClientSecret } =
@@ -32,6 +33,7 @@ function App() {
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/account" element={isLogged ? <Account /> : <Login />} />
         <Route path="/shop" element={<Shop />} />
+        <Route path="/shop/product/:productId" element={<ProductDetails />} />
         <Route path="/cart" element={isLogged ? <CartPageOne /> : <Shop />} />
         <Route
           path="/cart/paiement"
@@ -71,9 +73,6 @@ function App() {
         />
 
         <Route path="*" element={<NotFound />} />
-
-        {/* Nouvelle route pour les détails du produit 
-        <Route path="/product/:productId" element={<ProductDetails />} />*/}
       </Routes>
       <ScrollToTop />
     </div>

@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import "./Product.scss";
 import { UserContext } from "../../../../contexts/UserContext";
 import { convertDataImg } from "../../../../utils/functionUtils";
+import { NavLink } from "react-router-dom";
 
 const Product = ({ info }) => {
   const [img, setImg] = useState("");
@@ -14,10 +15,15 @@ const Product = ({ info }) => {
   return (
     <div className="product">
       <div className="product-box">
-        <div
-          className="picture"
-          style={{ backgroundImage: `url(${img})` }}
-        ></div>
+        <NavLink
+          to={`/shop/product/${info.id}`}
+          aria-label="redirectInfoProduct"
+        >
+          <div
+            className="picture"
+            style={{ backgroundImage: `url(${img})` }}
+          ></div>
+        </NavLink>
         <div className="infos">
           <div className="title">{info.name}</div>
           <div>
@@ -26,7 +32,7 @@ const Product = ({ info }) => {
               {info.stockQuantity > 0 ? (
                 <>x{info.stockQuantity} en stock</>
               ) : (
-                <>épuisé</>
+                <>Stock épuisé</>
               )}
             </div>
           </div>
@@ -34,7 +40,6 @@ const Product = ({ info }) => {
 
         {info.stockQuantity > 0 ? (
           <>
-            {" "}
             <button
               disabled={false}
               className="btn btn-dark"
@@ -52,19 +57,7 @@ const Product = ({ info }) => {
           </>
         ) : (
           <>
-            {" "}
-            <button
-              disabled={true}
-              className="btn btn-dark"
-              onClick={() =>
-                handleAddCartItem(
-                  info.id,
-                  info.categorie.name,
-                  info.name,
-                  info.price
-                )
-              }
-            >
+            <button disabled={true} className="btn btn-dark">
               Ajouter au panier
             </button>
           </>
