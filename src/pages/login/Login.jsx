@@ -19,6 +19,7 @@ export const Login = () => {
   const [isError, setIsError] = useState("");
   const [isGood, setIsGood] = useState("");
   const [passwordUpdated, setPasswordUpdated] = useState(false);
+  const [expirationSession, setExpirationSession] = useState(false);
 
   useEffect(() => {
     if (localStorage.getItem("accountCreatedSuccess")) {
@@ -34,6 +35,11 @@ export const Login = () => {
     if (localStorage.getItem("passwordUpdateSuccess")) {
       setPasswordUpdated(true);
       localStorage.removeItem("passwordUpdateSuccess");
+    }
+
+    if (localStorage.getItem("expirationSession")) {
+      setExpirationSession(true);
+      localStorage.removeItem("expirationSession");
     }
 
     //Ici on vérifie si il y a un token valide pour permettre d'activer un compte
@@ -222,6 +228,10 @@ export const Login = () => {
           msg="Votre mot de passe à été mis à jour"
           type="success"
         />
+      )}
+
+      {expirationSession && (
+        <ShowInfoPopup msg="Votre session a expiré" type="success" />
       )}
 
       {isGood !== "" && <ShowInfoPopup msg={isGood} type="success" />}

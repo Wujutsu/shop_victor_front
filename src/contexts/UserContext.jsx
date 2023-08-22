@@ -74,6 +74,8 @@ const UserProvider = ({ children }) => {
 
   //Permet de sauvegarder les données de l'utilisateur en local chaque fois qu'elles sont mises à jour
   useEffect(() => {
+    verificationExpirationDataUser();
+
     localStorage.setItem("token", token);
     localStorage.setItem("firstName", firstName);
     localStorage.setItem("lastName", lastName);
@@ -86,6 +88,8 @@ const UserProvider = ({ children }) => {
     localStorage.setItem("totalCommandItem", totalCommandItem);
     localStorage.setItem("addressOrder", JSON.stringify(addressOrder));
     localStorage.setItem("stripeClientSecret", stripeClientSecret);
+
+    //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     token,
     firstName,
@@ -100,6 +104,29 @@ const UserProvider = ({ children }) => {
     addressOrder,
     stripeClientSecret,
   ]);
+
+  const verificationExpirationDataUser = () => {
+    if (isLogged) {
+      const currentTime = new Date().getTime();
+      const expirationSession = localStorage.getItem("expirationLocalStorage");
+
+      if (expirationSession) {
+        if (expirationSession > currentTime) {
+          handleTimeActivityUser();
+        } else {
+          localStorage.setItem("expirationSession", true);
+          localStorage.removeItem("expirationLocalStorage");
+          handleLogout();
+        }
+      }
+    }
+  };
+
+  //Met à jour l'heure d'expiration de la session utilisateur
+  const handleTimeActivityUser = () => {
+    const currentTime = new Date().getTime() + 30000; //+ 1800000; // 30min
+    localStorage.setItem("expirationLocalStorage", currentTime);
+  };
 
   //Met à jour info utilisateur
   const handleUpdateInfos = (firstName, lastName, phoneNumber) => {
@@ -124,6 +151,8 @@ const UserProvider = ({ children }) => {
     setPhoneNumber(phoneNumber == null ? "" : phoneNumber);
     setRole(role);
     setIsLogged(true);
+
+    handleTimeActivityUser();
   };
 
   //Supprimer info utilisateur à la déconnexion
@@ -134,14 +163,19 @@ const UserProvider = ({ children }) => {
     localStorage.removeItem("email");
     localStorage.removeItem("phoneNumber");
     localStorage.removeItem("role");
+    localStorage.removeItem("isLogged");
+    localStorage.removeItem("addressOrder");
+    localStorage.removeItem("stripeClientSecret");
     setToken("");
     setFirstName("");
     setLastName("");
     setEmail("");
     setPhoneNumber("");
     setRole("");
-
     setIsLogged(false);
+    setAddressOrder({});
+    setStripeClientSecret("");
+
     navigate("/login");
   };
 
