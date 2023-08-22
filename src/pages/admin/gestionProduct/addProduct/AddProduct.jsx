@@ -7,6 +7,8 @@ import axios from "axios";
 import { UserContext } from "../../../../contexts/UserContext";
 import { convertDataImg, formatTarif } from "../../../../utils/functionUtils";
 import ShowInfoPopup from "../../../../components/showInfoPopup/ShowInfoPopup";
+import { BiInfinite } from "react-icons/bi";
+import { GiCardboardBoxClosed } from "react-icons/gi";
 
 const AddProduct = ({
   categories,
@@ -22,6 +24,7 @@ const AddProduct = ({
     description: "",
     price: "",
     stockQuantity: 0,
+    stockInfinite: false,
     categorie: { id: "", name: "" },
     listPicture: [],
     active: true,
@@ -69,6 +72,8 @@ const AddProduct = ({
     } else if (field === "stockQuantity") {
       let quantityTemp = parseInt(updatedProduct[field]);
 
+      updatedProduct.stockInfinite = false;
+
       updatedProduct[field] =
         value === "+" ? quantityTemp + 1 : quantityTemp - 1;
       if (quantityTemp < 0) {
@@ -77,6 +82,16 @@ const AddProduct = ({
     } else {
       updatedProduct[field] = value;
     }
+
+    setNewProduct(updatedProduct);
+  };
+
+  //Permet de mettre un stock en infini
+  const handleStockInfini = (index) => {
+    const updatedProduct = { ...newProduct };
+
+    updatedProduct.stockInfinite = true;
+    updatedProduct.stockQuantity = 1;
 
     setNewProduct(updatedProduct);
   };
@@ -90,6 +105,7 @@ const AddProduct = ({
       description: "",
       price: "",
       stockQuantity: 0,
+      stockInfinite: false,
       categorie: { id: "", name: "" },
       listPicture: [],
       active: true,
@@ -123,6 +139,7 @@ const AddProduct = ({
         description: productToAdd.description,
         price: productToAdd.price,
         stockQuantity: productToAdd.stockQuantity,
+        stockInfinite: productToAdd.stockInfinite,
         categorie: productToAdd.categorie,
         listPicture: productToAdd.listPicture,
         active: productToAdd.active,
@@ -268,15 +285,13 @@ const AddProduct = ({
                       >
                         -
                       </button>
-                      <input
-                        className="show-quantity"
-                        type="text"
-                        value={newProduct.stockQuantity}
-                        onChange={(e) =>
-                          handleAddInputChange("stockQuantity", e.target.value)
-                        }
-                        autoComplete="off"
-                      />
+                      <div className="show-quantity">
+                        {newProduct.stockInfinite ? (
+                          <BiInfinite />
+                        ) : (
+                          <>{newProduct.stockQuantity}</>
+                        )}
+                      </div>
                       <button
                         className="btn-quantity"
                         onClick={() =>
@@ -286,6 +301,13 @@ const AddProduct = ({
                         +
                       </button>
                     </div>
+
+                    <button
+                      className="btn btn-dark btn-stock-infinite"
+                      onClick={() => handleStockInfini()}
+                    >
+                      <GiCardboardBoxClosed size={20} /> infini
+                    </button>
                   </div>
                 </div>
               </div>

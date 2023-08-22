@@ -61,11 +61,11 @@ const ProductDetails = () => {
                 <div className="price">
                   {productInfo.price}&nbsp;€
                   <div className="stock">
-                    {productInfo.stockQuantity !== 0 ? (
+                    {/* {productInfo.stockQuantity !== 0 ? (
                       <>(x{productInfo.stockQuantity} en stock)</>
                     ) : (
                       <>(Stock épuisé)</>
-                    )}
+                    )}*/}
                   </div>
                 </div>
                 <div className="description">

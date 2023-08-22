@@ -3,10 +3,12 @@ import React, { useContext, useState } from "react";
 import { UserContext } from "../../../../contexts/UserContext";
 import { BsPen } from "react-icons/bs";
 import { RxCrossCircled } from "react-icons/rx";
+import { BiInfinite } from "react-icons/bi";
 import { AiOutlineCheckCircle, AiOutlineDelete } from "react-icons/ai";
 import { formatTarif } from "../../../../utils/functionUtils";
 import "./ShowListProduct.scss";
 import ShowInfoPopup from "../../../../components/showInfoPopup/ShowInfoPopup";
+import { GiCardboardBoxClosed } from "react-icons/gi";
 
 const ShowListProduct = ({
   listProduct,
@@ -74,6 +76,24 @@ const ShowListProduct = ({
             typeIncre === "+"
               ? parseInt(item.stockQuantity) + 1
               : parseInt(item.stockQuantity) - 1,
+          stockInfinite: false,
+        };
+      } else {
+        return { ...item };
+      }
+    });
+
+    setListProduct(updatedListProduct);
+  };
+
+  //Permet de mettre un stock en infini
+  const handleStockInfini = (index) => {
+    const updatedListProduct = listProduct.map((item, i) => {
+      if (index === i) {
+        return {
+          ...item,
+          stockQuantity: 1,
+          stockInfinite: true,
         };
       } else {
         return { ...item };
@@ -102,6 +122,7 @@ const ShowListProduct = ({
               (product) => product.id !== id
             );
             setListProduct(updateListProduct);
+            setSaveListProduct(updateListProduct);
 
             setUpdateError("delete");
             setTimeout(() => {
@@ -141,6 +162,7 @@ const ShowListProduct = ({
         description: productToUpdate.description,
         price: productToUpdate.price,
         stockQuantity: productToUpdate.stockQuantity,
+        stockInfinite: productToUpdate.stockInfinite,
         categorie: productToUpdate.categorie,
         active: true,
         showHomePage: productToUpdate.showHomePage,
@@ -276,14 +298,13 @@ const ShowListProduct = ({
                         >
                           -
                         </button>
-                        <input
-                          className="show-quantity"
-                          type="text"
-                          disabled={item.isDisabled}
-                          value={item.stockQuantity}
-                          onChange={() => false}
-                          autoComplete="off"
-                        />
+                        <div className="show-quantity">
+                          {item.stockInfinite ? (
+                            <BiInfinite />
+                          ) : (
+                            <>{item.stockQuantity}</>
+                          )}
+                        </div>
                         <button
                           className="btn-quantity"
                           disabled={item.isDisabled}
@@ -292,6 +313,13 @@ const ShowListProduct = ({
                           +
                         </button>
                       </div>
+                      <button
+                        disabled={item.isDisabled}
+                        className="btn btn-dark"
+                        onClick={() => handleStockInfini(index)}
+                      >
+                        <GiCardboardBoxClosed size={20} /> infini
+                      </button>
                     </div>
                   </div>
                 </div>
