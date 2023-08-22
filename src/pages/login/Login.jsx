@@ -5,9 +5,6 @@ import { UserContext } from "../../contexts/UserContext";
 import { NavLink, useNavigate } from "react-router-dom";
 import ShowInfoPopup from "../../components/showInfoPopup/ShowInfoPopup";
 
-//TODO: Gérér les champs input dans ce qu'on peut mettre dedans surtout niveau adresse
-//TODO: Ajouter mdp oublier et donc recup via mail
-//TODO: Lorsque l'utilisateur a son token expiré, le déconnecter
 export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

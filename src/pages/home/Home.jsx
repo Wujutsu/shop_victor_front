@@ -5,6 +5,7 @@ import Hero from "./hero/Hero";
 import ProductsExemple from "./productsExemple/ProductsExemple";
 import FormContact from "./formContact/FormContact";
 import { useLocation } from "react-router-dom";
+import Footer from "./footer/Footer";
 
 export const Home = () => {
   const location = useLocation();
@@ -49,6 +50,7 @@ export const Home = () => {
       <Hero />
       <ProductsExemple />
       <FormContact />
+      <Footer />
     </div>
   );
 };

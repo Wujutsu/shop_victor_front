@@ -1,32 +1,26 @@
 .footer {
+  margin-top: 1rem;
   color: white;
   text-align: center;
-  display: block;
-  background-color: black;
+  background-color: #163114;
   display: flex;
   flex-flow: column nowrap;
-  padding: 0.8rem;
-  justify-content: space-between;
-}
-.footer > * {
-  margin: 0.5rem;
-}
-.footer > :first-child {
-  opacity: 0.5;
 }
 
 .social-links {
+  margin-top: 5px;
   display: flex;
   flex-grow: 1;
   justify-content: center;
-}
+  gap: 1rem;
 
-.social-links > * {
-  padding: 0 1rem;
-  color: rgb(175, 175, 175);
-}
-.social-links > *:hover {
-  color: white;
+  svg {
+    transition: 0.3s;
+
+    &:hover {
+      scale: 1.1;
+    }
+  }
 }
 
 @media (min-width: 768px) {

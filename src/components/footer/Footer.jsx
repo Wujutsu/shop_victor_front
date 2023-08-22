@@ -1,8 +1,6 @@
 import React from "react";
 import "./Footer.scss";
-import { ImGithub } from "react-icons/im";
-import { SiLinkedin } from "react-icons/si";
-import { BsTwitter } from "react-icons/bs";
+import { BsFacebook, BsInstagram } from "react-icons/bs";
 import { Link } from "react-router-dom";
 
 export const Footer = () => {
@@ -10,16 +8,16 @@ export const Footer = () => {
 
   return (
     <div className="footer">
-      <small> &copy; {copyrightYear} Chirag Taluja</small>
+      <small> &copy; {copyrightYear} M&C Fabric</small>
       <div className="social-links">
-        <Link to="https://twitter.com/ichiragtaluja" target="_blank">
-          <BsTwitter />
+        <Link to="https://www.instagram.com/mc.fabric/" target="_blank">
+          <BsInstagram color="white" size={30} />
         </Link>
-        <Link to="https://github.com/ichiragtaluja" target="_blank">
-          <ImGithub />
-        </Link>
-        <Link to="https://www.linkedin.com/in/ichiragtaluja" target="_blank">
-          <SiLinkedin />
+        <Link
+          to="https://www.facebook.com/people/MC-fabric/100095020135734/?mibextid=LQQJ4d"
+          target="_blank"
+        >
+          <BsFacebook color="white" size={30} />
         </Link>
       </div>
     </div>
