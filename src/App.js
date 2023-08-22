@@ -12,11 +12,8 @@ function App() {
     <div className="App">
       <div className="container-md contenu">
         <NavBar />
-
-        {/* Affichage des pages en fonction de l'url */}
         <Routing />
       </div>
-
       <Footer />
       <ScrollToTop />
     </div>

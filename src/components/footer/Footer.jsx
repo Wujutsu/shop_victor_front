@@ -11,13 +11,13 @@ export const Footer = () => {
       <small> &copy; {copyrightYear} M&C Fabric</small>
       <div className="social-links">
         <Link to="https://www.instagram.com/mc.fabric/" target="_blank">
-          <BsInstagram color="white" size={30} />
+          <BsInstagram color="white" size={25} />
         </Link>
         <Link
           to="https://www.facebook.com/people/MC-fabric/100095020135734/?mibextid=LQQJ4d"
           target="_blank"
         >
-          <BsFacebook color="white" size={30} />
+          <BsFacebook color="white" size={25} />
         </Link>
       </div>
     </div>

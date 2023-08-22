@@ -124,7 +124,7 @@ const UserProvider = ({ children }) => {
 
   //Met à jour l'heure d'expiration de la session utilisateur
   const handleTimeActivityUser = () => {
-    const currentTime = new Date().getTime() + 1800000; // 30min
+    const currentTime = new Date().getTime() + 3600000;
     localStorage.setItem("expirationLocalStorage", currentTime);
   };
 
