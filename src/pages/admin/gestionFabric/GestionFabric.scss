@@ -1,0 +1,53 @@
+.gestion-fabric {
+  margin-top: 2rem;
+
+  .btn-admin {
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .list-fabric {
+    margin-top: 1rem;
+
+    .fabric {
+      margin-bottom: 2rem;
+      padding: 10px;
+      box-shadow: 3px 3px 10px grey;
+      border-radius: 5px;
+      position: relative;
+
+      .picture {
+        margin: auto;
+        height: 100px;
+        border-radius: 10px;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center center;
+      }
+
+      .name {
+        text-align: center;
+        margin-top: 5px;
+      }
+
+      .btn-delete {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        border-radius: 0px;
+        border-top-right-radius: 5px;
+        border-bottom-left-radius: 5px;
+
+        position: absolute;
+        right: 0px;
+        top: 0px;
+
+        width: 30px;
+        height: 30px;
+      }
+    }
+  }
+}

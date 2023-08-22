@@ -1,6 +1,13 @@
 .gestion-order {
   margin-top: 2rem;
 
+  .btn-admin {
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .filtre {
     display: flex;
     justify-content: flex-start;

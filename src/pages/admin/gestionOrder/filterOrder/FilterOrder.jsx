@@ -42,7 +42,9 @@ const FilterOrder = ({
           setFilterState(0);
           setFilterPage(0);
         }}
-        className={`btn ${filterState === 0 ? "btn-dark" : "btn-outline-dark"}`}
+        className={`btn btn-admin ${
+          filterState === 0 ? "btn-dark" : "btn-outline-dark"
+        }`}
       >
         <AiOutlineFieldTime size={25} /> A&nbsp;traiter{" "}
         {nbOrderByState[0] ? " (" + nbOrderByState[0] + ")" : "(0)"}
@@ -52,7 +54,9 @@ const FilterOrder = ({
           setFilterState(1);
           setFilterPage(0);
         }}
-        className={`btn ${filterState === 1 ? "btn-dark" : "btn-outline-dark"}`}
+        className={`btn btn-admin ${
+          filterState === 1 ? "btn-dark" : "btn-outline-dark"
+        }`}
       >
         <RiMailSendLine size={22} />
         A&nbsp;envoyer
@@ -63,7 +67,9 @@ const FilterOrder = ({
           setFilterState(2);
           setFilterPage(0);
         }}
-        className={`btn ${filterState === 2 ? "btn-dark" : "btn-outline-dark"}`}
+        className={`btn btn-admin ${
+          filterState === 2 ? "btn-dark" : "btn-outline-dark"
+        }`}
       >
         <AiOutlineCheckCircle size={25} />
         Validé {nbOrderByState[2] ? " (" + nbOrderByState[2] + ")" : "(0)"}

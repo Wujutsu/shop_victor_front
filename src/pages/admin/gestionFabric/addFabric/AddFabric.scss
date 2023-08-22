@@ -1,0 +1,48 @@
+.add-fabric {
+  .fabric {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+  }
+
+  .file-upload {
+    padding: 5px;
+    margin-top: -5px;
+    margin-bottom: 5px;
+
+    .input-perso {
+      cursor: pointer;
+      z-index: 10;
+      padding: 5px 15px;
+
+      .select-img {
+        z-index: 10;
+        font-size: 12px;
+      }
+    }
+
+    .input-file {
+      display: none;
+    }
+  }
+
+  input {
+    margin: 9.5px 0;
+    width: 100%;
+  }
+
+  .validation {
+    display: flex;
+
+    .btn-danger {
+      margin-top: 5px;
+      width: 48%;
+    }
+
+    .btn-success {
+      margin-top: 5px;
+      width: 48%;
+      margin-left: 4%;
+    }
+  }
+}
