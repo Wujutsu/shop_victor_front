@@ -11,13 +11,6 @@ import Paging from "./showListProduct/paging/Paging";
 import FilterProduct from "./filterProduct/FilterProduct";
 import ShowInfoPopup from "../../../components/showInfoPopup/ShowInfoPopup";
 
-//TODO: Permettre d'ajouter un prénom pour personaliser un produit
-//TODO: Permettre de mettre un stock infini en option
-//TODO: Ajouter une liste de tissu
-//TODO: Ajouter footer  (https://www.lesmignonneries.com/pages/creation-sur-mesure)
-//TODO: Créer des produits personaliser et facturable juste pour le client
-//TODO: Envoyer un email d'alerte lorsqu'une commande est faite
-//TODO: Ajouter le logo dans l'onglet
 const GestionProduct = () => {
   const { token } = useContext(UserContext);
   const [categories, setCategories] = useState([]);

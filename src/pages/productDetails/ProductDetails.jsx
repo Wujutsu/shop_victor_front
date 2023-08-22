@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import "./ProductDetails.scss";
 import { UserContext } from "../../contexts/UserContext";
 import axios from "axios";
-import { NavLink, useNavigate, useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import { convertDataImg } from "../../utils/functionUtils";
 import NotFound from "../notFound/NotFound";
 
