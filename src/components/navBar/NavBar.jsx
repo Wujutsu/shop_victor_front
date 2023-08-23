@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./NavBar.scss";
 import { NavLink } from "react-router-dom";
 import { CgShoppingCart } from "react-icons/cg";
@@ -13,6 +13,17 @@ export const NavBar = () => {
   };
   const { isLogged, handleLogout, nbCartItem, role } = useContext(UserContext);
   const [accessCartError, setAccessCartError] = useState(false);
+  const [cartIncre, setCartIncre] = useState(false);
+
+  useEffect(() => {
+    console.log("MAMA => ", nbCartItem);
+    setTimeout(() => {
+      setCartIncre(true);
+      setTimeout(() => {
+        setCartIncre(false);
+      }, 1000);
+    }, 200);
+  }, [nbCartItem]);
 
   const handleAccessCartError = () => {
     setAccessCartError(true);
@@ -50,7 +61,7 @@ export const NavBar = () => {
       {!isLogged ? (
         <div className="position-cart">
           <button
-            className="cart"
+            className={`${cartIncre ? "cart-incre" : "cart"}`}
             aria-label="btnCart"
             onClick={() => handleAccessCartError()}
           >
@@ -61,7 +72,10 @@ export const NavBar = () => {
       ) : (
         <NavLink to="/cart" aria-label="redirectCart">
           <div className="position-cart">
-            <button className="cart" aria-label="btnCart">
+            <button
+              className={`${cartIncre ? "cart-incre" : "cart"}`}
+              aria-label="btnCart"
+            >
               <CgShoppingCart size={22} />
               <span className="cart-item-qty">{nbCartItem}</span>
             </button>

@@ -48,7 +48,15 @@ nav {
     color: black;
   }
 
-  .cart {
+  .cart-incre {
+    transform: scale(1.2, 1.2);
+    svg {
+      rotate: 100;
+      animation: move 1s infinite linear;
+    }
+  }
+  .cart,
+  .cart-incre {
     padding: 12px;
     background-color: var(--color-light);
     border-radius: 50%;
@@ -116,4 +124,22 @@ nav {
 
 .btn-perso {
   font-size: 0.9rem;
+}
+
+@keyframes move {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(30deg);
+  }
+  50% {
+    transform: rotate(0deg);
+  }
+  75% {
+    transform: rotate(-30deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
 }

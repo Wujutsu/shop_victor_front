@@ -5,12 +5,14 @@ import axios from "axios";
 import { NavLink, useParams } from "react-router-dom";
 import { convertDataImg } from "../../utils/functionUtils";
 import NotFound from "../notFound/NotFound";
+import { CgShoppingCart } from "react-icons/cg";
 
 const ProductDetails = () => {
   const { productId } = useParams();
   const { token, handleAddCartItem } = useContext(UserContext);
   const [productInfo, setProductInfo] = useState({});
   const [idProductError, setIdProductError] = useState(false);
+  const [animationAddCart, setAnimationAddCart] = useState(false);
 
   useEffect(() => {
     const dataInfoProduct = () => {
@@ -42,6 +44,13 @@ const ProductDetails = () => {
 
     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const handleAnimationAddCart = () => {
+    setAnimationAddCart(true);
+    setTimeout(() => {
+      setAnimationAddCart(false);
+    }, 800);
+  };
 
   return (
     <>
@@ -78,35 +87,45 @@ const ProductDetails = () => {
               </div>
 
               <div className="add-cart">
-                <NavLink to="/shop" aria-label="redirectShop">
-                  <button className="btn btn-dark">Retour</button>
-                </NavLink>
+                <div className="box-btn">
+                  <NavLink to="/shop" aria-label="redirectShop">
+                    <button className="btn btn-dark">Retour</button>
+                  </NavLink>
 
-                {productInfo.stockQuantity > 0 ? (
-                  <>
-                    {" "}
-                    <button
-                      disabled={false}
-                      className="btn btn-success"
-                      onClick={() =>
-                        handleAddCartItem(
-                          productInfo.id,
-                          productInfo.categorie.name,
-                          productInfo.name,
-                          productInfo.price
-                        )
-                      }
-                    >
-                      Ajouter au panier
-                    </button>
-                  </>
-                ) : (
-                  <>
-                    <button disabled={true} className="btn btn-success">
-                      Ajouter au panier
-                    </button>
-                  </>
-                )}
+                  {productInfo.stockQuantity > 0 ? (
+                    <>
+                      {" "}
+                      <button
+                        disabled={false}
+                        className="btn btn-success"
+                        onClick={() => {
+                          handleAddCartItem(
+                            productInfo.id,
+                            productInfo.categorie.name,
+                            productInfo.name,
+                            productInfo.price
+                          );
+                          handleAnimationAddCart();
+                        }}
+                      >
+                        <div
+                          className={`cart-add-animation ${
+                            animationAddCart ? "animation-start" : "d-none"
+                          }`}
+                        >
+                          <CgShoppingCart size={20} color="white" />
+                        </div>
+                        Ajouter au panier
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <button disabled={true} className="btn btn-success">
+                        Ajouter au panier
+                      </button>
+                    </>
+                  )}
+                </div>
               </div>
             </div>
           </div>

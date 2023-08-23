@@ -46,12 +46,41 @@
       }
     }
 
-    button {
-      width: 100%;
+    .box-btn {
+      position: relative;
       margin-top: 1rem;
-      border-radius: 0px;
-      border-bottom-left-radius: 5px;
-      border-bottom-right-radius: 5px;
+
+      button {
+        width: 100%;
+        border-radius: 0px;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+      }
+
+      .cart-add-animation {
+        position: absolute;
+        top: 0px;
+        right: 2px;
+        padding: 8px;
+        background-color: black;
+        border-radius: 50%;
+      }
+      .animation-start {
+        position: absolute;
+        transform-origin: center;
+        animation: rise 0.8s ease-in-out forwards;
+      }
     }
+  }
+}
+
+@keyframes rise {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-80vh) scale(0.6);
+    opacity: 0;
   }
 }
