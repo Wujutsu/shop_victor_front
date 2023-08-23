@@ -71,34 +71,38 @@ const Profil = () => {
   const updatePassword = (e) => {
     e.preventDefault();
 
-    const apiUrl = "http://localhost:8080/api/user/update/password";
-    const requestData = {
-      oldPassword: oldPassword,
-      newPassword: newPassword,
-      verifPassword: verifPassword,
-    };
-    const config = {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    };
+    if (newPassword.length < 8) {
+      setErrorPassword("length");
+    } else {
+      const apiUrl = "http://localhost:8080/api/user/update/password";
+      const requestData = {
+        oldPassword: oldPassword,
+        newPassword: newPassword,
+        verifPassword: verifPassword,
+      };
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      };
 
-    axios
-      .put(apiUrl, requestData, config)
-      .then((response) => {
-        setOldPassword("");
-        setNewPassword("");
-        setVerifPassword("");
-        setErrorPassword("success");
-      })
-      .catch((error) => {
-        if (error.response.data === "Error: incorrect old password") {
-          setErrorPassword("old");
-        } else if (error.response.data === "Error: incorrect new password") {
-          setErrorPassword("new");
-        }
-      });
+      axios
+        .put(apiUrl, requestData, config)
+        .then((response) => {
+          setOldPassword("");
+          setNewPassword("");
+          setVerifPassword("");
+          setErrorPassword("success");
+        })
+        .catch((error) => {
+          if (error.response.data === "Error: incorrect old password") {
+            setErrorPassword("old");
+          } else if (error.response.data === "Error: incorrect new password") {
+            setErrorPassword("new");
+          }
+        });
+    }
 
     setTimeout(() => {
       setErrorPassword("");
@@ -232,9 +236,16 @@ const Profil = () => {
         ></ShowInfoPopup>
       )}
 
+      {errorPassword === "length" && (
+        <ShowInfoPopup
+          msg="Votre mot de passe doit contenir au moins 8 caractères"
+          type="error"
+        ></ShowInfoPopup>
+      )}
+
       {errorPassword === "old" && (
         <ShowInfoPopup
-          msg="Votre mot de passe est incorrect"
+          msg='Votre "ancien" mot de passe est incorrect'
           type="error"
         ></ShowInfoPopup>
       )}

@@ -51,10 +51,10 @@ const ResetPassword = () => {
     e.preventDefault();
     let authorizationUpdate = true;
 
-    if (newPassword.length < 6) {
+    if (newPassword.length < 8) {
       authorizationUpdate = false;
       setErrorUpdatePassword(
-        "Votre mot de passe doit contenir plus de 5 caractères"
+        "Votre mot de passe doit contenir au moins 8 caractères"
       );
     }
 

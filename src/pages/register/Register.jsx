@@ -14,30 +14,35 @@ const Register = () => {
 
   const handleRegister = (e) => {
     e.preventDefault();
-    setDisabledBtn(true);
 
-    const apiUrl = "http://localhost:8080/api/auth/signup";
-    const requestData = {
-      email: email,
-      password: password,
-      firstName: firstName,
-      lastName: lastName,
-    };
+    if (password.length < 8) {
+      setErrorSignup("Votre mot de passe doit contenir au moins 8 caractères");
+    } else {
+      setDisabledBtn(true);
 
-    axios
-      .post(apiUrl, requestData)
-      .then((response) => {
-        localStorage.setItem("accountCreatedSuccess", true);
-        navigate("/login");
-        setDisabledBtn(false);
-      })
-      .catch((error) => {
-        let message = error.response.data.message;
-        if (message === "Error: Email is already use") {
-          setErrorSignup("L'adresse E-mail est déjà utilisée");
-        }
-        setDisabledBtn(false);
-      });
+      const apiUrl = "http://localhost:8080/api/auth/signup";
+      const requestData = {
+        email: email,
+        password: password,
+        firstName: firstName,
+        lastName: lastName,
+      };
+
+      axios
+        .post(apiUrl, requestData)
+        .then((response) => {
+          localStorage.setItem("accountCreatedSuccess", true);
+          navigate("/login");
+          setDisabledBtn(false);
+        })
+        .catch((error) => {
+          let message = error.response.data.message;
+          if (message === "Error: Email is already use") {
+            setErrorSignup("L'adresse E-mail est déjà utilisée");
+          }
+          setDisabledBtn(false);
+        });
+    }
   };
 
   return (
@@ -76,7 +81,10 @@ const Register = () => {
             id="email"
             name="email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => {
+              setEmail(e.target.value);
+              setErrorSignup("");
+            }}
             required
             autoComplete="off"
           />
@@ -89,7 +97,10 @@ const Register = () => {
             id="password"
             name="password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => {
+              setPassword(e.target.value);
+              setErrorSignup("");
+            }}
             required
             autoComplete="off"
           />
