@@ -16,7 +16,6 @@ export const NavBar = () => {
   const [cartIncre, setCartIncre] = useState(false);
 
   useEffect(() => {
-    console.log("MAMA => ", nbCartItem);
     setTimeout(() => {
       setCartIncre(true);
       setTimeout(() => {

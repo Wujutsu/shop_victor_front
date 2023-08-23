@@ -73,7 +73,7 @@
           top: 0px;
           right: 2px;
           padding: 8px;
-          background-color: black;
+          background-color: var(--color-green);
           border-radius: 50%;
         }
         .animation-start {
@@ -96,7 +96,7 @@
     opacity: 1;
   }
   100% {
-    transform: translateY(-80vh) scale(0.6);
+    transform: translateY(-300px) scale(0.6);
     opacity: 0;
   }
 }

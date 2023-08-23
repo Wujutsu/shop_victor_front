@@ -6,6 +6,7 @@ import { NavLink, useParams } from "react-router-dom";
 import { convertDataImg } from "../../utils/functionUtils";
 import NotFound from "../notFound/NotFound";
 import { CgShoppingCart } from "react-icons/cg";
+import { TbArrowBack } from "react-icons/tb";
 
 const ProductDetails = () => {
   const { productId } = useParams();
@@ -89,12 +90,13 @@ const ProductDetails = () => {
               <div className="add-cart">
                 <div className="box-btn">
                   <NavLink to="/shop" aria-label="redirectShop">
-                    <button className="btn btn-dark">Retour</button>
+                    <button className="btn btn-dark">
+                      <TbArrowBack size={25} />
+                    </button>
                   </NavLink>
 
                   {productInfo.stockQuantity > 0 ? (
                     <>
-                      {" "}
                       <button
                         disabled={false}
                         className="btn btn-success"
