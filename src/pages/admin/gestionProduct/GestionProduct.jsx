@@ -21,6 +21,7 @@ const GestionProduct = () => {
   const [filterPage, setFilterPage] = useState(0);
   const [filterCategorie, setFilterCategorie] = useState("all");
   const [filterStock, setFilterStock] = useState("empty");
+  const [filterPrice, setFilterPrice] = useState("empty");
   const [msgError, setMsgError] = useState("");
 
   //Récupére les catégories
@@ -57,7 +58,9 @@ const GestionProduct = () => {
         "/" +
         filterQuantityMinToShow +
         "/" +
-        filterStock;
+        filterStock +
+        "/" +
+        filterPrice;
 
       const config = {
         headers: {
@@ -96,7 +99,7 @@ const GestionProduct = () => {
     };
 
     getAllProducts();
-  }, [token, filterPage, filterCategorie, filterStock]);
+  }, [token, filterPage, filterCategorie, filterStock, filterPrice]);
 
   return (
     <>
@@ -112,6 +115,8 @@ const GestionProduct = () => {
           setFilterCategorie={setFilterCategorie}
           filterStock={filterStock}
           setFilterStock={setFilterStock}
+          filterPrice={filterPrice}
+          setFilterPrice={setFilterPrice}
           setFilterPage={setFilterPage}
         />
 

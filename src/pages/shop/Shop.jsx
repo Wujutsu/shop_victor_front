@@ -45,6 +45,7 @@ const Shop = () => {
     const getAllProductsWithStock = () => {
       const filterQuantityMinToShow = 1;
       const filterStock = "empty";
+      const filterPrice = "empty";
       const apiUrl =
         "http://localhost:8080/api/product/all/" +
         filterPage +
@@ -53,7 +54,9 @@ const Shop = () => {
         "/" +
         filterQuantityMinToShow +
         "/" +
-        filterStock;
+        filterStock +
+        "/" +
+        filterPrice;
 
       const config = {
         headers: {

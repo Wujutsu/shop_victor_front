@@ -1,5 +1,5 @@
 .filter-product {
-  margin-bottom: 0.8rem;
+  margin-bottom: 0.4rem;
   position: relative;
 
   .btn {
@@ -15,7 +15,17 @@
   }
   .filter3 {
     position: absolute;
-    top: 0;
+    top: 41px;
+    left: 185px;
+  }
+  .filter4 {
+    position: absolute;
+    top: 0px;
+    left: 275px;
+  }
+  .filter5 {
+    position: absolute;
+    top: 41px;
     left: 275px;
   }
 }
