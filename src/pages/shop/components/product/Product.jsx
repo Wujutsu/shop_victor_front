@@ -50,28 +50,47 @@ const Product = ({ info }) => {
         <div className="box-btn">
           {info.stockQuantity > 0 ? (
             <>
-              <button
-                disabled={false}
-                className="btn btn-success"
-                onClick={() => {
-                  handleAddCartItem(
-                    info.id,
-                    info.categorie.name,
-                    info.name,
-                    info.price
-                  );
-                  handleAnimationAddCart();
-                }}
-              >
-                <div
-                  className={`cart-add-animation ${
-                    animationAddCart ? "animation-start" : "d-none"
-                  }`}
+              {info.optionPersoName === false &&
+              info.optionPersoFabric === false ? (
+                <button
+                  disabled={false}
+                  className="btn btn-success"
+                  onClick={() => {
+                    handleAddCartItem(
+                      info.id,
+                      info.categorie.name,
+                      info.name,
+                      info.price
+                    );
+                    handleAnimationAddCart();
+                  }}
                 >
-                  <CgShoppingCart size={20} color="white" />
-                </div>
-                Ajouter au panier
-              </button>
+                  <div
+                    className={`cart-add-animation ${
+                      animationAddCart ? "animation-start" : "d-none"
+                    }`}
+                  >
+                    <CgShoppingCart size={20} color="white" />
+                  </div>
+                  Ajouter au panier
+                </button>
+              ) : (
+                <NavLink
+                  to={`/shop/product/${info.id}`}
+                  aria-label="redirectInfoProduct"
+                >
+                  <button disabled={false} className="btn btn-success">
+                    <div
+                      className={`cart-add-animation ${
+                        animationAddCart ? "animation-start" : "d-none"
+                      }`}
+                    >
+                      <CgShoppingCart size={20} color="white" />
+                    </div>
+                    Personnaliser
+                  </button>
+                </NavLink>
+              )}
             </>
           ) : (
             <>

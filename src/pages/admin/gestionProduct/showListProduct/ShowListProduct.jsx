@@ -166,6 +166,8 @@ const ShowListProduct = ({
         categorie: productToUpdate.categorie,
         active: true,
         showHomePage: productToUpdate.showHomePage,
+        optionPersoName: productToUpdate.optionPersoName,
+        optionPersoFabric: productToUpdate.optionPersoFabric,
       };
       const config = {
         headers: {
@@ -381,7 +383,39 @@ const ShowListProduct = ({
                     </div>
 
                     <div className="row">
-                      <div className="showHome">
+                      <div className="option-supp">
+                        <input
+                          type="checkbox"
+                          checked={item.optionPersoName}
+                          disabled={item.isDisabled}
+                          onChange={(e) =>
+                            handleInputChange(
+                              index,
+                              "optionPersoName",
+                              e.target.checked
+                            )
+                          }
+                        />
+                        <div>Nom personnalisable</div>
+                      </div>
+
+                      <div className="option-supp">
+                        <input
+                          type="checkbox"
+                          checked={item.optionPersoFabric}
+                          disabled={item.isDisabled}
+                          onChange={(e) =>
+                            handleInputChange(
+                              index,
+                              "optionPersoFabric",
+                              e.target.checked
+                            )
+                          }
+                        />
+                        <div>Tissu personnalisable</div>
+                      </div>
+
+                      <div className="option-supp">
                         <input
                           type="checkbox"
                           checked={item.showHomePage}

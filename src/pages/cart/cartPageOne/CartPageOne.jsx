@@ -61,11 +61,27 @@ const CartPageOne = () => {
                 : item;
             });
 
+            //Permet d'afficher l'image des tissus
+            const lastUpdatedCartItems = updatedCartItems.map((item) => {
+              if (item.optionFabric) {
+                const updateFabric = {
+                  ...item.optionFabric,
+                  pictureUrl: convertDataImg(item.optionFabric.picture),
+                };
+                return { ...item, optionFabric: updateFabric };
+              } else {
+                return { ...item };
+              }
+            });
+
+            console.log("lastUpdatedCartItems=>", lastUpdatedCartItems);
+
             setTotalCommandItem(sommeItem);
-            setShowCartItem(updatedCartItems);
+            setShowCartItem(lastUpdatedCartItems);
             setIsLoading(false);
           })
           .catch((error) => {
+            console.log("error => ", error);
             setIsLoading(false);
           });
       } else {
@@ -80,11 +96,18 @@ const CartPageOne = () => {
 
   // Permet de rediriger l'utilisateur sur la page suivante d'achat et de vérifier la disponibilité des stock
   const handleGoToPayement = () => {
-    // /cart/paiement
-
     const apiUrl = "http://localhost:8080/api/product/verif";
 
-    let requestData = cartItem;
+    let requestData = [];
+    cartItem.forEach((item, index) => {
+      requestData.push({
+        id: item.id,
+        categorie: item.categorie,
+        name: item.name,
+        quantity: item.quantity,
+        price: item.price,
+      });
+    });
 
     const config = {
       headers: {
@@ -255,6 +278,24 @@ const CartPageOne = () => {
                       <div className="row">
                         <div className="name">{item.name}</div>
                       </div>
+
+                      {item.optionName && (
+                        <div className="option-name">
+                          <span>Prénom</span>: {item.optionName}
+                        </div>
+                      )}
+
+                      {item.optionFabric && (
+                        <div className="option-fabric">
+                          <div
+                            className="picture-fabric"
+                            style={{
+                              backgroundImage: `url(${item.optionFabric.pictureUrl})`,
+                            }}
+                          ></div>
+                          <div>{item.optionFabric.name}</div>
+                        </div>
+                      )}
                     </div>
                     <div className="col-sm-4 col-md-4 price-quantity">
                       <div className="price">

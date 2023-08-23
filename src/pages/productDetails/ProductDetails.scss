@@ -55,8 +55,80 @@
       }
 
       .description {
-        margin-top: 0.5rem;
+        margin-top: 0.8rem;
         font-size: 0.9rem;
+      }
+
+      .option-personnalisation {
+        .line {
+          height: 1px;
+          width: 80%;
+          background-color: black;
+          margin: auto;
+          margin-top: 1.5rem;
+          margin-bottom: 1.5rem;
+        }
+
+        .option-title {
+          color: var(--color-blue-dark);
+          margin-bottom: 1rem;
+          margin-bottom: 2rem;
+        }
+
+        .form-input {
+          position: relative;
+
+          label {
+            position: absolute;
+            font-size: 0.8rem;
+            text-align: left;
+            color: black;
+            top: -24px;
+          }
+
+          input {
+            margin-bottom: 2.2rem;
+            padding: 10px;
+            font-size: 16px;
+            outline: none;
+            max-width: 200px;
+            width: 100%;
+          }
+
+          .box-fabric {
+            .show-fabric {
+              width: 40px;
+              height: 40px;
+              background-repeat: no-repeat;
+              background-size: cover;
+              background-position: center center;
+              border-radius: 50px;
+              margin-bottom: 10px;
+              cursor: pointer;
+              transition: 0.3s;
+
+              &:hover {
+                scale: 1.2;
+              }
+            }
+
+            .show-fabric-selected {
+              scale: 1.2;
+              border-radius: 0px;
+            }
+
+            @media screen and (max-width: 992px) {
+              margin-bottom: 2rem;
+            }
+
+            @media screen and (max-width: 380px) {
+              .show-fabric {
+                width: 35px;
+                height: 35px;
+              }
+            }
+          }
+        }
       }
     }
 

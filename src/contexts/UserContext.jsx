@@ -180,27 +180,74 @@ const UserProvider = ({ children }) => {
   };
 
   //Ajout des items dans le panier
-  const handleAddCartItem = (id, categorie, name, price) => {
-    let newItem = {
-      id: id,
-      categorie: categorie,
-      name: name,
-      quantity: 1,
-      price: price,
-    };
+  const handleAddCartItem = (
+    id,
+    categorie,
+    name,
+    price,
+    optionName = "",
+    optionFabric = ""
+  ) => {
+    let newItem = {};
+
+    if (optionFabric === "" && optionName === "") {
+      newItem = {
+        id: id,
+        categorie: categorie,
+        name: name,
+        quantity: 1,
+        price: price,
+      };
+    } else if (optionFabric === "" && optionName !== "") {
+      newItem = {
+        id: id,
+        categorie: categorie,
+        name: name,
+        quantity: 1,
+        price: price,
+        optionName: optionName,
+      };
+    } else if (optionFabric !== "" && optionName === "") {
+      newItem = {
+        id: id,
+        categorie: categorie,
+        name: name,
+        quantity: 1,
+        price: price,
+        optionFabric: optionFabric,
+      };
+    } else if (optionFabric !== "" && optionName !== "") {
+      newItem = {
+        id: id,
+        categorie: categorie,
+        name: name,
+        quantity: 1,
+        price: price,
+        optionName: optionName,
+        optionFabric: optionFabric,
+      };
+    }
+
     let updatedCartItems = [];
 
     if (cartItem !== null) {
-      // Vérifiez si un élément avec le même id existe déjà dans cartItem
-      const itemIndex = cartItem.findIndex((item) => item.id === newItem.id);
+      //Si le produit n'est pas personalisable
+      if (optionName === "" && optionFabric === "") {
+        // Vérifiez si un élément avec le même id existe déjà dans cartItem
+        const itemIndex = cartItem.findIndex((item) => item.id === newItem.id);
 
-      if (itemIndex !== -1) {
-        // L'élément existe, incrémente la quantité
-        updatedCartItems = [...cartItem];
-        updatedCartItems[itemIndex].quantity += 1;
+        if (itemIndex !== -1) {
+          // L'élément existe, incrémente la quantité
+          updatedCartItems = [...cartItem];
+          updatedCartItems[itemIndex].quantity += 1;
+        } else {
+          // L'élément n'existe pas encore, on ajoute
+          updatedCartItems = [...cartItem, newItem];
+        }
       } else {
-        // L'élément n'existe pas encore, on ajoute
-        updatedCartItems = [...cartItem, newItem];
+        //Si le produit est personalisable (il est donc unique)
+        updatedCartItems = [...cartItem];
+        updatedCartItems.push(newItem);
       }
     } else {
       updatedCartItems.push(newItem);

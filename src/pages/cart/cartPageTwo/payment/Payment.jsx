@@ -32,8 +32,12 @@ const Payment = ({ setIsLoading }) => {
         currency: "eur",
         description:
           nbCartItem > 1 ? nbCartItem + " articles" : nbCartItem + " article",
-        metadata: cartItem.map(({ id, ...rest }) => rest),
+        metadata: cartItem.map(
+          ({ id, optionFabric, optionName, ...rest }) => rest
+        ),
       };
+
+      console.log("??? => ", requestData);
 
       const config = {
         headers: {

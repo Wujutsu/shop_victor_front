@@ -24,11 +24,32 @@
   .picture {
     width: 75px;
     margin: auto;
-    height: 90px;
+    height: 100px;
     position: relative;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
+  }
+
+  .option-fabric {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.8rem;
+
+    .picture-fabric {
+      width: 25px;
+      height: 25px;
+      border-radius: 50px;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center center;
+    }
+  }
+
+  .option-name {
+    font-size: 0.8rem;
+    margin-top: 5px;
   }
 
   @media screen and (max-width: 576px) {
@@ -121,6 +142,7 @@
 
     .quantity {
       margin-right: -5px;
+
       .btn-quantity {
         height: 30px;
         width: 1.3rem;
@@ -165,6 +187,14 @@
     .categorie,
     .price {
       text-align: center;
+    }
+
+    .option-name {
+      text-align: center;
+    }
+
+    .option-fabric {
+      justify-content: center;
     }
 
     .price-quantity {
