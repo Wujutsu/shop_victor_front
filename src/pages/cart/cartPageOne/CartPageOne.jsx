@@ -74,14 +74,11 @@ const CartPageOne = () => {
               }
             });
 
-            console.log("lastUpdatedCartItems=>", lastUpdatedCartItems);
-
             setTotalCommandItem(sommeItem);
             setShowCartItem(lastUpdatedCartItems);
             setIsLoading(false);
           })
           .catch((error) => {
-            console.log("error => ", error);
             setIsLoading(false);
           });
       } else {

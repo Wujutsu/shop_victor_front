@@ -38,7 +38,6 @@ const FormContact = () => {
     axios
       .post(apiUrl, requestData)
       .then((response) => {
-        console.log("response => ", response.data);
         if (response.data) {
           setName("");
           setInputEmail("");

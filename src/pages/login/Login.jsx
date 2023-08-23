@@ -54,7 +54,6 @@ export const Login = () => {
           axios
             .put(apiUrl)
             .then((response) => {
-              console.log("PPPP=>", response.data);
               if (response.data) {
                 setIsGood("Votre compte vient d'être activé");
                 setTimeout(() => {

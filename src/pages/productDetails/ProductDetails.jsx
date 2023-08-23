@@ -35,7 +35,6 @@ const ProductDetails = () => {
       axios
         .get(apiUrl, config)
         .then(async (response) => {
-          console.log("response => ", response.data);
           const updateInfoProduct = {
             ...response.data,
             listPicture: convertDataImg(response.data.listPicture[0]),

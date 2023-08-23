@@ -37,8 +37,6 @@ const Payment = ({ setIsLoading }) => {
         ),
       };
 
-      console.log("??? => ", requestData);
-
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,

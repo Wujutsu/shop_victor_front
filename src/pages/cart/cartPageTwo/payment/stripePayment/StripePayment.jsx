@@ -57,8 +57,6 @@ const StripePayment = ({ setIsLoading }) => {
       totalAmount: totalCommandItem,
     };
 
-    console.log("requestData => ", requestData);
-
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -74,7 +72,6 @@ const StripePayment = ({ setIsLoading }) => {
         })
         .catch((error) => {
           const msgError = error.response.data;
-          console.log("ERROR => ", error);
 
           if (msgError.includes("Insufficient stock")) {
             const item = msgError.split(": ")[1];

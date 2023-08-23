@@ -31,7 +31,6 @@ const GestionFabric = () => {
           const updateListFabric = response.data.map((fabric) => {
             return { ...fabric, picture: convertDataImg(fabric.picture) };
           });
-          console.log("response => ", updateListFabric);
           setListFabric(updateListFabric);
           setIsLoading(false);
         })
