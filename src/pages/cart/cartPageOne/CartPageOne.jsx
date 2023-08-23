@@ -4,7 +4,8 @@ import axios from "axios";
 import "./CartPageOne.scss";
 import Spinner from "../../../components/spinner/Spinner";
 import { convertDataImg } from "../../../utils/functionUtils";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { TbArrowBack } from "react-icons/tb";
 
 const CartPageOne = () => {
   const {
@@ -328,18 +329,29 @@ const CartPageOne = () => {
                 </div>
               </div>
 
-              {cartItem.length > 0 ? (
-                <button
-                  className="btn btn-dark"
-                  onClick={() => handleGoToPayement()}
-                >
-                  Continuer
-                </button>
-              ) : (
-                <button className="btn btn-dark" disabled={true}>
-                  Continuer
-                </button>
-              )}
+              <div className="action-cart">
+                <div className="back">
+                  <NavLink to="/shop" aria-label="redirectShop">
+                    <button className="btn btn-dark">
+                      <TbArrowBack size={25} />
+                    </button>
+                  </NavLink>
+                </div>
+                <div className="next">
+                  {cartItem.length > 0 ? (
+                    <button
+                      className="btn btn-dark"
+                      onClick={() => handleGoToPayement()}
+                    >
+                      Continuer
+                    </button>
+                  ) : (
+                    <button className="btn btn-dark" disabled={true}>
+                      Continuer
+                    </button>
+                  )}
+                </div>
+              </div>
             </div>
           </div>
         </div>

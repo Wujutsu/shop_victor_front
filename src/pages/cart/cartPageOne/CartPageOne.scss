@@ -88,6 +88,22 @@
       margin-top: 2rem;
     }
 
+    .action-cart {
+      width: fit-content;
+      display: flex;
+      gap: 10px;
+
+      .back {
+        width: 50px;
+        .btn {
+          width: 100%;
+          svg {
+            margin-left: -2px;
+          }
+        }
+      }
+    }
+
     .t-right {
       text-align: right;
     }

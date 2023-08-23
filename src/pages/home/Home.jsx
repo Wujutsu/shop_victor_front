@@ -22,7 +22,7 @@ export const Home = () => {
 
         const scrollToBottom = () => {
           window.scrollTo({
-            top: document.body.scrollHeight,
+            top: document.body.scrollHeight - 650,
             behavior: "smooth",
           });
         };
