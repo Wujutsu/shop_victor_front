@@ -28,6 +28,9 @@ const AddProduct = ({
     categorie: { id: "", name: "" },
     listPicture: [],
     active: true,
+    optionPersoName: false,
+    optionPersoFabric: false,
+    showHomePage: false,
   });
   const [img, setImg] = useState("");
   const [loadingUpdate, setLoadingUpdate] = useState(false);
@@ -109,6 +112,9 @@ const AddProduct = ({
       categorie: { id: "", name: "" },
       listPicture: [],
       active: true,
+      optionPersoName: false,
+      optionPersoFabric: false,
+      showHomePage: false,
     });
   };
 
@@ -143,6 +149,9 @@ const AddProduct = ({
         categorie: productToAdd.categorie,
         listPicture: productToAdd.listPicture,
         active: productToAdd.active,
+        showHomePage: productToAdd.showHomePage,
+        optionPersoName: productToAdd.optionPersoName,
+        optionPersoFabric: productToAdd.optionPersoFabric,
       };
       const config = {
         headers: {
@@ -363,6 +372,47 @@ const AddProduct = ({
                         }
                         required
                       ></textarea>
+                    </div>
+                  </div>
+
+                  <div className="row">
+                    <div className="option-supp">
+                      <input
+                        type="checkbox"
+                        checked={newProduct.optionPersoName}
+                        onChange={(e) =>
+                          handleAddInputChange(
+                            "optionPersoName",
+                            e.target.checked
+                          )
+                        }
+                      />
+                      <div>Nom personnalisable</div>
+                    </div>
+
+                    <div className="option-supp">
+                      <input
+                        type="checkbox"
+                        checked={newProduct.optionPersoFabric}
+                        onChange={(e) =>
+                          handleAddInputChange(
+                            "optionPersoFabric",
+                            e.target.checked
+                          )
+                        }
+                      />
+                      <div>Tissu personnalisable</div>
+                    </div>
+
+                    <div className="option-supp">
+                      <input
+                        type="checkbox"
+                        checked={newProduct.showHomePage}
+                        onChange={(e) =>
+                          handleAddInputChange("showHomePage", e.target.checked)
+                        }
+                      />
+                      <div>Afficher sur l'écran d'accueil</div>
                     </div>
                   </div>
                 </div>
