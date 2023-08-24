@@ -20,7 +20,8 @@ const Register = () => {
     } else {
       setDisabledBtn(true);
 
-      const apiUrl = "http://localhost:8080/api/auth/signup";
+      const apiUrl =
+        "https://cozy-lunchroom-production.up.railway.app/api/auth/signup";
       const requestData = {
         email: email,
         password: password,

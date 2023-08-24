@@ -19,7 +19,8 @@ const SuccessPayment = () => {
 
   useEffect(() => {
     const createOrder = () => {
-      const apiUrl = "http://localhost:8080/api/order/add";
+      const apiUrl =
+        "https://cozy-lunchroom-production.up.railway.app/api/order/add";
 
       const requestData = {
         email: email,

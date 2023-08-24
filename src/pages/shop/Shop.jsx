@@ -47,7 +47,7 @@ const Shop = () => {
       const filterStock = "empty";
       const filterPrice = "empty";
       const apiUrl =
-        "http://localhost:8080/api/product/all/" +
+        "https://cozy-lunchroom-production.up.railway.app/api/product/all/" +
         filterPage +
         "/" +
         filterCategorie +

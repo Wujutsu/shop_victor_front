@@ -11,7 +11,9 @@ const ShowListOrder = ({ listOrder, setListOrder }) => {
   const updateStateOrder = (id) => {
     updateStateDisabledBtnOrder(id, true);
 
-    const apiUrl = "http://localhost:8080/api/order/treatment/" + id;
+    const apiUrl =
+      "https://cozy-lunchroom-production.up.railway.app/api/order/treatment/" +
+      id;
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,

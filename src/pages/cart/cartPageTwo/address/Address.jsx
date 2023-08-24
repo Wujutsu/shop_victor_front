@@ -30,7 +30,8 @@ const Address = () => {
   useEffect(() => {
     //Récupére la liste des adresses
     const getListAddressSave = () => {
-      const apiUrl = "http://localhost:8080/api/user/list/address";
+      const apiUrl =
+        "https://cozy-lunchroom-production.up.railway.app/api/user/list/address";
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -95,7 +96,8 @@ const Address = () => {
   const handleAddAddress = (e) => {
     e.preventDefault();
 
-    const apiUrl = "http://localhost:8080/api/user/add/address";
+    const apiUrl =
+      "https://cozy-lunchroom-production.up.railway.app/api/user/add/address";
     const requestData = {
       country: dataNewAddress.country,
       codePostal: dataNewAddress.codePostal,
@@ -147,7 +149,9 @@ const Address = () => {
     );
 
     if (shouldDelete) {
-      const apiUrl = "http://localhost:8080/api/user/delete/address/" + id;
+      const apiUrl =
+        "https://cozy-lunchroom-production.up.railway.app/api/user/delete/address/" +
+        id;
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,

@@ -13,7 +13,9 @@ const Paging = ({ setFilterPage, filterPage, filterState }) => {
   useEffect(() => {
     //Récupére le nombre de page à afficher
     const getNbPage = () => {
-      const apiUrl = "http://localhost:8080/api/order/nbpage/" + filterState;
+      const apiUrl =
+        "https://cozy-lunchroom-production.up.railway.app/api/order/nbpage/" +
+        filterState;
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,

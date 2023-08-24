@@ -49,7 +49,8 @@ const StripePayment = ({ setIsLoading }) => {
 
   //Permet de vérifier que le prix à payer et la quantité de produit en stock est valide
   const handleVerifCommandPossible = () => {
-    const apiUrl = "http://localhost:8080/api/order/verif";
+    const apiUrl =
+      "https://cozy-lunchroom-production.up.railway.app/api/order/verif";
 
     const requestData = {
       email: email,

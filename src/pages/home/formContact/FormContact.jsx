@@ -27,7 +27,8 @@ const FormContact = () => {
     event.preventDefault();
     setDisabledBtn(true);
 
-    const apiUrl = "http://localhost:8080/api/email/ask";
+    const apiUrl =
+      "https://cozy-lunchroom-production.up.railway.app/api/email/ask";
     const requestData = {
       from: inputEmail.toLowerCase(),
       identity: name,
