@@ -72,6 +72,8 @@ const GestionProduct = () => {
       axios
         .get(apiUrl, config)
         .then((response) => {
+          console.log("??? => ", response.data);
+
           const updatedCartItems = response.data.map((item) => {
             return {
               ...item,

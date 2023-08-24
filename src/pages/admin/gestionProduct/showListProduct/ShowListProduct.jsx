@@ -5,10 +5,11 @@ import { BsPen } from "react-icons/bs";
 import { RxCrossCircled } from "react-icons/rx";
 import { BiInfinite } from "react-icons/bi";
 import { AiOutlineCheckCircle, AiOutlineDelete } from "react-icons/ai";
-import { formatTarif } from "../../../../utils/functionUtils";
+import { convertDataImg, formatTarif } from "../../../../utils/functionUtils";
 import "./ShowListProduct.scss";
 import ShowInfoPopup from "../../../../components/showInfoPopup/ShowInfoPopup";
 import { GiCardboardBoxClosed } from "react-icons/gi";
+import { BsCloudDownload } from "react-icons/bs";
 
 const ShowListProduct = ({
   listProduct,
@@ -165,6 +166,7 @@ const ShowListProduct = ({
         stockInfinite: productToUpdate.stockInfinite,
         categorie: productToUpdate.categorie,
         active: true,
+        listPicture: productToUpdate.listPicture,
         showHomePage: productToUpdate.showHomePage,
         optionPersoName: productToUpdate.optionPersoName,
         optionPersoFabric: productToUpdate.optionPersoFabric,
@@ -205,6 +207,41 @@ const ShowListProduct = ({
       setTimeout(() => {
         setUpdateError("");
       }, 3000);
+    }
+  };
+
+  const handleFileChangeUpload = (event, id) => {
+    const reader = new FileReader();
+
+    reader.onload = (event) => {
+      const fileData = event.target.result;
+      const byteArray = new Uint8Array(fileData);
+      const byteArrayAsArray = Array.from(byteArray);
+
+      // Convertir l'array buffer en un objet Blob
+      const blob = new Blob([byteArray], { type: "image/jpeg" });
+      // Créer une URL blob à partir de l'objet Blob
+      const imgUrl = URL.createObjectURL(blob);
+
+      const updateProduct = listProduct.map((item) => {
+        if (item.id === id) {
+          return {
+            ...item,
+            listPicture: [byteArrayAsArray],
+            urlPicture: imgUrl,
+          };
+        } else {
+          return item;
+        }
+      });
+
+      console.log(updateProduct);
+      setListProduct(updateProduct);
+    };
+
+    const dataPicture = event.target.files[0];
+    if (dataPicture !== undefined) {
+      reader.readAsArrayBuffer(event.target.files[0]);
     }
   };
 
@@ -274,6 +311,22 @@ const ShowListProduct = ({
               <div className="row">
                 <div className="col-sm-3">
                   <div className="info-detail">
+                    {!item.isDisabled && (
+                      <div className="btn btn-primary btn-admin file-upload">
+                        <label className="input-perso">
+                          <span className="select-img">
+                            <BsCloudDownload size={15} /> Image
+                          </span>
+                          <input
+                            type="file"
+                            className="input-file"
+                            accept="image/jpg, image/jpeg"
+                            onChange={(e) => handleFileChangeUpload(e, item.id)}
+                          />
+                        </label>
+                      </div>
+                    )}
+
                     <div
                       className="picture"
                       style={{ backgroundImage: `url(${item.urlPicture})` }}
