@@ -35,7 +35,19 @@ const GestionOrder = () => {
         .then((response) => {
           const updateListOrder = response.data.map((order) => {
             const updateProductList = order.productList.map((product) => {
-              return { ...product, picture: convertDataImg(product.picture) };
+              let updateOptionFabric = null;
+              if (product.optionFabric !== null) {
+                updateOptionFabric = {
+                  ...product.optionFabric,
+                  picture: convertDataImg(product.optionFabric.picture),
+                };
+              }
+
+              return {
+                ...product,
+                picture: convertDataImg(product.picture),
+                optionFabric: updateOptionFabric,
+              };
             });
 
             return {
@@ -45,6 +57,8 @@ const GestionOrder = () => {
               disabled: false,
             };
           });
+
+          console.log("AFTER => ", updateListOrder);
 
           setListOrder(updateListOrder);
           setIsLoading(false);

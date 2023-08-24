@@ -70,6 +70,7 @@
         margin-top: 0px;
         margin-bottom: 10px;
         box-shadow: 0 0 5px black;
+        height: 227px;
         padding: 10px;
         border-radius: 5px;
 
@@ -96,6 +97,33 @@
         }
         .price {
           font-size: 0.8rem;
+        }
+
+        .option-none {
+          font-size: 0.8rem;
+          color: var(--color-blue);
+        }
+        .firstName {
+          font-size: 0.8rem;
+          color: var(--color-red);
+        }
+
+        .option-fabric {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 5px;
+          font-size: 0.8rem;
+          color: var(--color-red);
+
+          .picture-fabric {
+            width: 25px;
+            height: 25px;
+            border-radius: 50px;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center center;
+          }
         }
       }
     }

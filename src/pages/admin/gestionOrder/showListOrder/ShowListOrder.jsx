@@ -128,6 +128,28 @@ const ShowListOrder = ({ listOrder, setListOrder }) => {
                     <div className="title-product">{product.name}</div>
                     <div className="quantity">Quantité: {product.quantity}</div>
                     <div className="price">Prix: {product.price}&nbsp;€</div>
+                    {product.optionName !== null && (
+                      <div className="firstName">
+                        Prénom: {product.optionName}
+                      </div>
+                    )}
+                    {product.optionFabric !== null && (
+                      <div className="option-fabric">
+                        <div
+                          className="picture-fabric"
+                          style={{
+                            backgroundImage: `url(${product.optionFabric.picture})`,
+                          }}
+                        ></div>
+                        <div>{product.optionFabric.name}</div>
+                      </div>
+                    )}
+                    {product.optionName === null &&
+                      product.optionFabric === null && (
+                        <div className="option-none">
+                          Aucune personnalisation
+                        </div>
+                      )}
                   </div>
                 </div>
               ))}
