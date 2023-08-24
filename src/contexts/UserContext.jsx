@@ -22,6 +22,17 @@ const UserProvider = ({ children }) => {
 
   //Récupére les données sauvegardées en local lors du chargement initial du composant
   useEffect(() => {
+    if (
+      localStorage.getItem("cartItem").trim() == "undefined" ||
+      localStorage.getItem("addressOrder").trim() == "undefined"
+    ) {
+      localStorage.clear();
+      setCartItem([]);
+      setTotalCommandItem(0);
+      setAddressOrder({});
+      handleLogout();
+    }
+
     const savedToken = localStorage.getItem("token");
     const savedFirstName = localStorage.getItem("firstName");
     const savedLastName = localStorage.getItem("lastName");
