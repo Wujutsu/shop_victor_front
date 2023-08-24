@@ -23,8 +23,8 @@ const UserProvider = ({ children }) => {
   //Récupére les données sauvegardées en local lors du chargement initial du composant
   useEffect(() => {
     if (
-      localStorage.getItem("cartItem").trim() == "undefined" ||
-      localStorage.getItem("addressOrder").trim() == "undefined"
+      localStorage.getItem("cartItem").trim() === "undefined" ||
+      localStorage.getItem("addressOrder").trim() === "undefined"
     ) {
       localStorage.clear();
       setCartItem([]);
@@ -81,6 +81,8 @@ const UserProvider = ({ children }) => {
     if (savedStripeClientSecret) {
       setStripeClientSecret(savedStripeClientSecret);
     }
+
+    //eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   //Permet de sauvegarder les données de l'utilisateur en local chaque fois qu'elles sont mises à jour

@@ -5,7 +5,7 @@ import { BsPen } from "react-icons/bs";
 import { RxCrossCircled } from "react-icons/rx";
 import { BiInfinite } from "react-icons/bi";
 import { AiOutlineCheckCircle, AiOutlineDelete } from "react-icons/ai";
-import { convertDataImg, formatTarif } from "../../../../utils/functionUtils";
+import { formatTarif } from "../../../../utils/functionUtils";
 import "./ShowListProduct.scss";
 import ShowInfoPopup from "../../../../components/showInfoPopup/ShowInfoPopup";
 import { GiCardboardBoxClosed } from "react-icons/gi";

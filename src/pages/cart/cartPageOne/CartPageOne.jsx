@@ -356,10 +356,11 @@ const CartPageOne = () => {
                 </div>
                 <div className="col t-right">0.00&nbsp;€</div>
               </div>
-              <form>
+              {/*  <form>
                 <p>Code réduction</p>
                 <input disabled id="code" placeholder="" autoComplete="off" />
-              </form>
+              </form>*/}
+              <div className="line"></div>
               <div className="row total-cost">
                 <div className="col">Prix total</div>
                 <div className="col t-right">
