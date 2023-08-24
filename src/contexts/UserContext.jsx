@@ -23,14 +23,19 @@ const UserProvider = ({ children }) => {
   //Récupére les données sauvegardées en local lors du chargement initial du composant
   useEffect(() => {
     if (
-      localStorage.getItem("cartItem").trim() === "undefined" ||
-      localStorage.getItem("addressOrder").trim() === "undefined"
+      localStorage.getItem("cartItem") !== null &&
+      localStorage.getItem("addressOrder") != null
     ) {
-      localStorage.clear();
-      setCartItem([]);
-      setTotalCommandItem(0);
-      setAddressOrder({});
-      handleLogout();
+      if (
+        localStorage.getItem("cartItem").trim() === "undefined" ||
+        localStorage.getItem("addressOrder").trim() === "undefined"
+      ) {
+        localStorage.clear();
+        setCartItem([]);
+        setTotalCommandItem(0);
+        setAddressOrder({});
+        handleLogout();
+      }
     }
 
     const savedToken = localStorage.getItem("token");
