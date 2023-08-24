@@ -4,6 +4,7 @@ import { UserContext } from "../../../../contexts/UserContext";
 import { convertDataImg } from "../../../../utils/functionUtils";
 import { NavLink } from "react-router-dom";
 import { CgShoppingCart } from "react-icons/cg";
+import { BsFillEyeFill } from "react-icons/bs";
 
 const Product = ({ info }) => {
   const [img, setImg] = useState("");
@@ -28,10 +29,11 @@ const Product = ({ info }) => {
           to={`/shop/product/${info.id}`}
           aria-label="redirectInfoProduct"
         >
-          <div
-            className="picture"
-            style={{ backgroundImage: `url(${img})` }}
-          ></div>
+          <div className="picture" style={{ backgroundImage: `url(${img})` }}>
+            <div className="show-product">
+              <BsFillEyeFill size={40} />
+            </div>
+          </div>
         </NavLink>
         <div className="infos">
           <div className="title">{info.name}</div>

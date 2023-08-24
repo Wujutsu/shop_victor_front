@@ -224,7 +224,7 @@ const ProductDetails = () => {
                             <div className="col-lg-6 col-md-12 col-sm-7">
                               <div className="form-input">
                                 <label htmlFor="Tissu">
-                                  Choisis ton tissu:{" "}
+                                  Choisis un tissu:{" "}
                                   {nameFabricSelect !== "" && (
                                     <span>{nameFabricSelect}</span>
                                   )}
