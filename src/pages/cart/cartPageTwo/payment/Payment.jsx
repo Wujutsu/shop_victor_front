@@ -19,6 +19,7 @@ const Payment = ({ setIsLoading }) => {
     setStripeClientSecret,
     addressOrder,
     phoneNumber,
+    priceDelivery,
   } = useContext(UserContext);
 
   useEffect(() => {
@@ -28,7 +29,8 @@ const Payment = ({ setIsLoading }) => {
       const apiUrl = "http://localhost:8080/api/payment/create";
 
       const requestData = {
-        amount: parseFloat(totalCommandItem) * 100,
+        amount:
+          (parseFloat(totalCommandItem) + parseFloat(priceDelivery)) * 100,
         currency: "eur",
         description:
           nbCartItem > 1 ? nbCartItem + " articles" : nbCartItem + " article",

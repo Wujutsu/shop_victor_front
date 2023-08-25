@@ -15,6 +15,7 @@ const SuccessPayment = () => {
     handleEraseAfterOrder,
     setStripeClientSecret,
     phoneNumber,
+    objectDelivery,
   } = useContext(UserContext);
 
   useEffect(() => {
@@ -28,6 +29,7 @@ const SuccessPayment = () => {
         address: addressOrder,
         phoneNumber: phoneNumber,
         state: 0,
+        delivery: objectDelivery,
       };
 
       const config = {

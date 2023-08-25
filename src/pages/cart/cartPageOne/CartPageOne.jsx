@@ -18,13 +18,21 @@ const CartPageOne = () => {
     handleDeleteCartItem,
     totalCommandItem,
     setTotalCommandItem,
+    objectDelivery,
+    priceDelivery,
+    setObjectDelivery,
+    setPriceDelivery,
   } = useContext(UserContext);
   const [showCartItem, setShowCartItem] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [errorStock, setErrorStock] = useState("");
+  const [listTypeDelivery, setListTypeDelivery] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
+    setPriceDelivery(0);
+    setObjectDelivery("");
+
     const getPictureProducts = () => {
       if (cartItem !== null && cartItem.length > 0) {
         const apiUrl = "http://localhost:8080/api/product/picture";
@@ -86,7 +94,19 @@ const CartPageOne = () => {
       }
     };
 
+    const getAllTypeDelivery = () => {
+      const apiUrl = "http://localhost:8080/api/delivery/all";
+
+      axios
+        .get(apiUrl)
+        .then((response) => {
+          setListTypeDelivery(response.data);
+        })
+        .catch((error) => {});
+    };
+
     getPictureProducts();
+    getAllTypeDelivery();
 
     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
@@ -237,6 +257,21 @@ const CartPageOne = () => {
     handleUpdateItem(id, "add");
   };
 
+  //Permet de mémoriser le type de livraison choisi
+  const handleSelectDelivery = (id) => {
+    const chooseSelectDelivery = listTypeDelivery.find(
+      (item) => item.id === id
+    );
+
+    if (chooseSelectDelivery !== undefined) {
+      setPriceDelivery(chooseSelectDelivery.price);
+      setObjectDelivery(chooseSelectDelivery);
+    } else {
+      setPriceDelivery(0);
+      setObjectDelivery("");
+    }
+  };
+
   return (
     <div>
       {errorStock !== "" && <div className="error-stock">{errorStock}</div>}
@@ -347,14 +382,30 @@ const CartPageOne = () => {
                   {nbCartItem} {nbCartItem > 1 ? "articles" : "article"}
                 </div>
                 <div className="col t-right">
-                  {parseFloat(totalCommandItem).toFixed(2)}&nbsp;€
+                  {parseFloat(totalCommandItem).toFixed(2)}
+                  &nbsp;€
+                </div>
+              </div>
+
+              <div className="row total-item">
+                <div className="box-selectDelivery">
+                  <select
+                    name="selectDelivery"
+                    onChange={(e) => handleSelectDelivery(e.target.value)}
+                  >
+                    <option value="empty"></option>
+                    {listTypeDelivery.map((item, index) => (
+                      <option key={index} value={item.id}>
+                        {item.name} {item.price}&nbsp;€ ({item.time}j. ouvrés)
+                      </option>
+                    ))}
+                  </select>
                 </div>
               </div>
               <div className="row total-item">
-                <div className="col" style={{ paddingLeft: "10px" }}>
-                  Livraison
+                <div className="col t-right">
+                  {parseFloat(priceDelivery).toFixed(2)}&nbsp;€
                 </div>
-                <div className="col t-right">0.00&nbsp;€</div>
               </div>
               {/*  <form>
                 <p>Code réduction</p>
@@ -364,7 +415,10 @@ const CartPageOne = () => {
               <div className="row total-cost">
                 <div className="col">Prix total</div>
                 <div className="col t-right">
-                  {parseFloat(totalCommandItem).toFixed(2)}&nbsp;€
+                  {(
+                    parseFloat(totalCommandItem) + parseFloat(priceDelivery)
+                  ).toFixed(2)}
+                  &nbsp;€
                 </div>
               </div>
 
@@ -377,7 +431,9 @@ const CartPageOne = () => {
                   </NavLink>
                 </div>
                 <div className="next">
-                  {cartItem.length > 0 ? (
+                  {cartItem.length > 0 &&
+                  objectDelivery !== "" &&
+                  priceDelivery !== "" ? (
                     <button
                       className="btn btn-dark"
                       onClick={() => handleGoToPayement()}

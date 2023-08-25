@@ -17,6 +17,8 @@ const UserProvider = ({ children }) => {
   const [cartItem, setCartItem] = useState([]);
   const [nbCartItem, setNbCartItem] = useState(0);
   const [totalCommandItem, setTotalCommandItem] = useState(0);
+  const [objectDelivery, setObjectDelivery] = useState({});
+  const [priceDelivery, setPriceDelivery] = useState(0);
   const [addressOrder, setAddressOrder] = useState({});
   const [stripeClientSecret, setStripeClientSecret] = useState("");
 
@@ -24,16 +26,17 @@ const UserProvider = ({ children }) => {
   useEffect(() => {
     if (
       localStorage.getItem("cartItem") !== null &&
-      localStorage.getItem("addressOrder") != null
+      localStorage.getItem("addressOrder") != null &&
+      localStorage.getItem("objectDelivery") != null
     ) {
       if (
         localStorage.getItem("cartItem").trim() === "undefined" ||
-        localStorage.getItem("addressOrder").trim() === "undefined"
+        localStorage.getItem("addressOrder").trim() === "undefined" ||
+        localStorage.getItem("objectDelivery").trim() === "undefined"
       ) {
         localStorage.clear();
-        setCartItem([]);
-        setTotalCommandItem(0);
-        setAddressOrder({});
+
+        handleEraseAfterOrder();
         handleLogout();
       }
     }
@@ -48,6 +51,10 @@ const UserProvider = ({ children }) => {
     const savedCartItem = JSON.parse(localStorage.getItem("cartItem"));
     const savedNbCartItem = localStorage.getItem("nbCartItem");
     const savedTotalCommandItem = localStorage.getItem("totalCommandItem");
+    const savedObjectDelivery = JSON.parse(
+      localStorage.getItem("objectDelivery")
+    );
+    const savedPriceDelivery = localStorage.getItem("priceDelivery");
     const savedAddressOrder = JSON.parse(localStorage.getItem("addressOrder"));
     const savedStripeClientSecret = localStorage.getItem("stripeClientSecret");
 
@@ -79,6 +86,11 @@ const UserProvider = ({ children }) => {
       setTotalCommandItem(savedTotalCommandItem);
     }
 
+    if (savedObjectDelivery && savedPriceDelivery) {
+      setObjectDelivery(savedObjectDelivery);
+      setPriceDelivery(savedPriceDelivery);
+    }
+
     if (savedAddressOrder) {
       setAddressOrder(savedAddressOrder);
     }
@@ -104,6 +116,8 @@ const UserProvider = ({ children }) => {
     localStorage.setItem("cartItem", JSON.stringify(cartItem));
     localStorage.setItem("nbCartItem", nbCartItem);
     localStorage.setItem("totalCommandItem", totalCommandItem);
+    localStorage.setItem("priceDelivery", priceDelivery);
+    localStorage.setItem("objectDelivery", JSON.stringify(objectDelivery));
     localStorage.setItem("addressOrder", JSON.stringify(addressOrder));
     localStorage.setItem("stripeClientSecret", stripeClientSecret);
 
@@ -121,6 +135,8 @@ const UserProvider = ({ children }) => {
     totalCommandItem,
     addressOrder,
     stripeClientSecret,
+    priceDelivery,
+    objectDelivery,
   ]);
 
   const verificationExpirationDataUser = () => {
@@ -300,6 +316,8 @@ const UserProvider = ({ children }) => {
     setCartItem([]);
     setNbCartItem(0);
     setTotalCommandItem(0);
+    setObjectDelivery({});
+    setPriceDelivery(0);
     setAddressOrder({});
   };
 
@@ -328,6 +346,10 @@ const UserProvider = ({ children }) => {
     handleEraseAfterOrder,
     stripeClientSecret,
     setStripeClientSecret,
+    objectDelivery,
+    setObjectDelivery,
+    priceDelivery,
+    setPriceDelivery,
   };
 
   return (

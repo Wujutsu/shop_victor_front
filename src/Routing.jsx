@@ -70,6 +70,10 @@ const Routing = () => {
           path="/admin/fabric"
           element={isLogged && role === "ROLE_ADMIN" ? <Admin /> : <NotFound />}
         />
+        <Route
+          path="/admin/delivery"
+          element={isLogged && role === "ROLE_ADMIN" ? <Admin /> : <NotFound />}
+        />
 
         <Route path="*" element={<NotFound />} />
       </Routes>

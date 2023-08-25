@@ -2,7 +2,8 @@ import React, { useContext } from "react";
 import { UserContext } from "../../../../contexts/UserContext";
 
 const Resume = () => {
-  const { totalCommandItem, nbCartItem } = useContext(UserContext);
+  const { totalCommandItem, nbCartItem, priceDelivery } =
+    useContext(UserContext);
 
   return (
     <div className="cart resume">
@@ -20,7 +21,9 @@ const Resume = () => {
       </div>
       <div className="row mb-2">
         <div className="col-8">Livraison</div>
-        <div className="col-4 text-right">0&nbsp;€</div>
+        <div className="col-4 text-right">
+          {parseFloat(priceDelivery).toFixed(2)}&nbsp;€
+        </div>
       </div>
       {/*<div className="row mb-2">
             <div className="col-8">Code réduction</div>
@@ -30,7 +33,10 @@ const Resume = () => {
       <div className="row">
         <div className="col-8">Total à payer</div>
         <div className="col-4 text-right">
-          {parseFloat(totalCommandItem).toFixed(2)}&nbsp;€
+          {(parseFloat(totalCommandItem) + parseFloat(priceDelivery)).toFixed(
+            2
+          )}
+          &nbsp;€
         </div>
       </div>
     </div>

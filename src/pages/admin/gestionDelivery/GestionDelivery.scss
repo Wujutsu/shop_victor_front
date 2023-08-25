@@ -1,0 +1,61 @@
+.gestion-delivery {
+  margin-top: 2rem;
+
+  .new-delivery {
+    box-shadow: 3px 3px 10px grey;
+    padding: 0 10px;
+    padding-top: 2rem;
+    padding-bottom: 12px;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+
+    .form-input {
+      position: relative;
+      margin-bottom: 1.7rem;
+
+      input {
+        width: 100%;
+      }
+
+      label {
+        position: absolute;
+        top: -21px;
+        font-size: 0.8rem;
+        font-weight: bold;
+      }
+    }
+
+    button {
+      width: 100%;
+    }
+    .btn-add {
+      margin-bottom: 5px;
+    }
+  }
+
+  .box-info {
+    box-shadow: 3px 3px 10px grey;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    position: relative;
+    padding: 7px 10px;
+    width: 100%;
+
+    .transporteur {
+      font-weight: bold;
+    }
+    .ouvre,
+    .tarif {
+      font-size: 0.9rem;
+    }
+
+    button {
+      position: absolute;
+      top: 0px;
+      right: 0;
+      height: 100%;
+      border-bottom-left-radius: 0px;
+      border-top-left-radius: 0px;
+    }
+  }
+}

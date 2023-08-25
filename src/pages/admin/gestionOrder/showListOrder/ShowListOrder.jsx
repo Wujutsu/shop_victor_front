@@ -77,8 +77,9 @@ const ShowListOrder = ({ listOrder, setListOrder }) => {
                 <span className="bold">Téléphone:</span> +{order.phoneNumber}
               </div>
               <div>
-                <span className="bold">Prix total:</span> {order.totalAmount}
-                &nbsp;€
+                <span className="bold">Prix total:</span>{" "}
+                {parseFloat(order.totalAmount)}&nbsp;€ +
+                {parseFloat(order.delivery.price)}&nbsp;€ {order.delivery.name}
               </div>
             </div>
             <div className="row">

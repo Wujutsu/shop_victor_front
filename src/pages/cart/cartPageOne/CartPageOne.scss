@@ -103,6 +103,15 @@
 
     .total-item {
       margin-top: 1rem;
+
+      .box-selectDelivery {
+        width: 100%;
+        select {
+          width: 100%;
+          font-size: 0.7rem;
+          font-weight: bold;
+        }
+      }
     }
 
     .line {
