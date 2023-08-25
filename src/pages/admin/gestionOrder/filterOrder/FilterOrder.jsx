@@ -16,8 +16,7 @@ const FilterOrder = ({
   // Permet de connaitre le nombre de commande en fonction de l'état des commandes (0, 1, 2, 3)
   useEffect(() => {
     const getCountOrdersByState = () => {
-      const apiUrl =
-        "https://cozy-lunchroom-production.up.railway.app/api/order/nb";
+      const apiUrl = "http://localhost:3000/api/order/nb";
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,

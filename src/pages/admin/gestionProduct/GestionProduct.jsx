@@ -27,8 +27,7 @@ const GestionProduct = () => {
   //Récupére les catégories
   useEffect(() => {
     const getAllCategories = () => {
-      const apiUrl =
-        "https://cozy-lunchroom-production.up.railway.app/api/categorie/all";
+      const apiUrl = "http://localhost:3000/api/categorie/all";
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -52,7 +51,7 @@ const GestionProduct = () => {
     const getAllProducts = () => {
       const filterQuantityMinToShow = 0;
       const apiUrl =
-        "https://cozy-lunchroom-production.up.railway.app/api/product/all/" +
+        "http://localhost:3000/api/product/all/" +
         filterPage +
         "/" +
         filterCategorie +

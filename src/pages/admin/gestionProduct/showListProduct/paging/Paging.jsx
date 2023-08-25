@@ -16,7 +16,7 @@ const Paging = ({ filterPage, setFilterPage, filterCategorie }) => {
     const getNbPage = () => {
       const filterQuantityMinToShow = 0;
       const apiUrl =
-        "https://cozy-lunchroom-production.up.railway.app/api/product/all/nbpage/" +
+        "http://localhost:3000/api/product/all/nbpage/" +
         filterCategorie +
         "/" +
         filterQuantityMinToShow;

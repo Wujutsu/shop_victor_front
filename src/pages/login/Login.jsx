@@ -49,8 +49,7 @@ export const Login = () => {
 
         if (tokenValide) {
           const apiUrl =
-            "https://cozy-lunchroom-production.up.railway.app/api/user/update/active-account/" +
-            tokenUrl;
+            "http://localhost:3000/api/user/update/active-account/" + tokenUrl;
 
           axios
             .put(apiUrl)
@@ -72,9 +71,7 @@ export const Login = () => {
 
   //Permet de vérifier la validité d'un token
   const verificationTokenExisting = (tokenUrl) => {
-    const apiUrl =
-      "https://cozy-lunchroom-production.up.railway.app/api/user/verif/token/" +
-      tokenUrl;
+    const apiUrl = "http://localhost:3000/api/user/verif/token/" + tokenUrl;
 
     return new Promise((success, failed) => {
       axios.get(apiUrl).then((response) => {
@@ -87,8 +84,7 @@ export const Login = () => {
   const handleLogin = (event) => {
     event.preventDefault();
 
-    const apiUrl =
-      "https://cozy-lunchroom-production.up.railway.app/api/auth/signin";
+    const apiUrl = "http://localhost:3000/api/auth/signin";
     const requestData = {
       email: email.toLowerCase(),
       password: password,
@@ -129,8 +125,7 @@ export const Login = () => {
     } else {
       setIncorrectIdentifier("");
 
-      const apiUrl =
-        "https://cozy-lunchroom-production.up.railway.app/api/email/reset-password";
+      const apiUrl = "http://localhost:3000/api/email/reset-password";
       const requestData = {
         to: email.toLowerCase(),
       };

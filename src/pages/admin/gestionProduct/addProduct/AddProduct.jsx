@@ -139,8 +139,7 @@ const AddProduct = ({
     ) {
       setLoadingUpdate(true);
 
-      const apiUrl =
-        "https://cozy-lunchroom-production.up.railway.app/api/product/add";
+      const apiUrl = "http://localhost:3000/api/product/add";
       const requestData = {
         name: productToAdd.name,
         description: productToAdd.description,

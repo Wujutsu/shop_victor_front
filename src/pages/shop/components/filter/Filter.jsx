@@ -9,8 +9,7 @@ const Filter = ({ filterCategorie, setFilterCategorie, setFilterPage }) => {
 
   useEffect(() => {
     const getAllCategories = () => {
-      const apiUrl =
-        "https://cozy-lunchroom-production.up.railway.app/api/categorie/all";
+      const apiUrl = "http://localhost:3000/api/categorie/all";
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,

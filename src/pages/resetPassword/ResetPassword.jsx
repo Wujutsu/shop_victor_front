@@ -37,9 +37,7 @@ const ResetPassword = () => {
 
   //Permet de vérifier la validité d'un token
   const verificationTokenExisting = (tokenUrl) => {
-    const apiUrl =
-      "https://cozy-lunchroom-production.up.railway.app/api/user/verif/token/" +
-      tokenUrl;
+    const apiUrl = "http://localhost:3000/api/user/verif/token/" + tokenUrl;
 
     return new Promise((success, failed) => {
       axios.get(apiUrl).then((response) => {
@@ -66,8 +64,7 @@ const ResetPassword = () => {
     }
 
     if (authorizationUpdate) {
-      const apiUrl =
-        "https://cozy-lunchroom-production.up.railway.app/api/user/update/password/token";
+      const apiUrl = "http://localhost:3000/api/user/update/password/token";
       const requestData = {
         password: newPassword,
         token: token,

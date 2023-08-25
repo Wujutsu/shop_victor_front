@@ -50,8 +50,7 @@ const AddFabric = ({
   };
 
   const handleAddFabric = () => {
-    const apiUrl =
-      "https://cozy-lunchroom-production.up.railway.app/api/fabric/add";
+    const apiUrl = "http://localhost:3000/api/fabric/add";
     const requestData = {
       name: newFabricName,
       picture: newFabricPicture,

@@ -17,8 +17,7 @@ const GestionFabric = () => {
     const getAllFabric = () => {
       setIsLoading(true);
 
-      const apiUrl =
-        "https://cozy-lunchroom-production.up.railway.app/api/fabric/all";
+      const apiUrl = "http://localhost:3000/api/fabric/all";
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -49,9 +48,7 @@ const GestionFabric = () => {
     );
 
     if (shouldDelete) {
-      const apiUrl =
-        "https://cozy-lunchroom-production.up.railway.app/api/fabric/delete/" +
-        id;
+      const apiUrl = "http://localhost:3000/api/fabric/delete/" + id;
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,

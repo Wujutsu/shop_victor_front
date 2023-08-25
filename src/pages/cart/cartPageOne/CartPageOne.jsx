@@ -27,8 +27,7 @@ const CartPageOne = () => {
   useEffect(() => {
     const getPictureProducts = () => {
       if (cartItem !== null && cartItem.length > 0) {
-        const apiUrl =
-          "https://cozy-lunchroom-production.up.railway.app/api/product/picture";
+        const apiUrl = "http://localhost:3000/api/product/picture";
 
         let requestData = [];
         cartItem.forEach((item, index) => {
@@ -94,8 +93,7 @@ const CartPageOne = () => {
 
   // Permet de rediriger l'utilisateur sur la page suivante d'achat et de vérifier la disponibilité des stock
   const handleGoToPayement = () => {
-    const apiUrl =
-      "https://cozy-lunchroom-production.up.railway.app/api/product/verif";
+    const apiUrl = "http://localhost:3000/api/product/verif";
 
     let requestData = [];
     cartItem.forEach((item, index) => {

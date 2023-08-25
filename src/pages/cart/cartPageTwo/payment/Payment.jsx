@@ -25,8 +25,7 @@ const Payment = ({ setIsLoading }) => {
     //Permet de créer l'intention de paiement (ce que doit payer l'utilisateur)
     const createPaymentIntent = () => {
       setStripeClientSecret("");
-      const apiUrl =
-        "https://cozy-lunchroom-production.up.railway.app/api/payment/create";
+      const apiUrl = "http://localhost:3000/api/payment/create";
 
       const requestData = {
         amount: parseFloat(totalCommandItem) * 100,

@@ -9,8 +9,7 @@ const ProductsExemple = () => {
 
   useEffect(() => {
     const recupProductToShow = () => {
-      const apiUrl =
-        "https://cozy-lunchroom-production.up.railway.app/api/product/all/presentation";
+      const apiUrl = "http://localhost:3000/api/product/all/presentation";
 
       axios
         .get(apiUrl)

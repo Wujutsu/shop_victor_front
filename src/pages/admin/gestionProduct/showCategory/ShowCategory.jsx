@@ -21,8 +21,7 @@ const ShowCategory = ({ categories, setCategories }) => {
       );
 
       if (verifDoublou === -1) {
-        const apiUrl =
-          "https://cozy-lunchroom-production.up.railway.app/api/categorie/add";
+        const apiUrl = "http://localhost:3000/api/categorie/add";
         const requestData = {
           name: newCategory,
         };
@@ -67,9 +66,7 @@ const ShowCategory = ({ categories, setCategories }) => {
     if (!shouldDelete) {
       return; // Abort the deletion if the user cancels
     } else {
-      const apiUrl =
-        "https://cozy-lunchroom-production.up.railway.app/api/categorie/delete/" +
-        id;
+      const apiUrl = "http://localhost:3000/api/categorie/delete/" + id;
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,

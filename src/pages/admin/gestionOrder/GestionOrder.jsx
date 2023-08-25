@@ -22,10 +22,7 @@ const GestionOrder = () => {
       setIsLoading(true);
 
       const apiUrl =
-        "https://cozy-lunchroom-production.up.railway.app/api/order/all/" +
-        filterState +
-        "/" +
-        filterPage;
+        "http://localhost:3000/api/order/all/" + filterState + "/" + filterPage;
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,

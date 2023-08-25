@@ -24,9 +24,7 @@ const ProductDetails = () => {
 
   useEffect(() => {
     const dataInfoProduct = () => {
-      const apiUrl =
-        "https://cozy-lunchroom-production.up.railway.app/api/product/info/" +
-        productId;
+      const apiUrl = "http://localhost:3000/api/product/info/" + productId;
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -64,8 +62,7 @@ const ProductDetails = () => {
   //Récupére la liste des tissus si nécéssaire
   const getAllFabricList = () => {
     return new Promise((success, failed) => {
-      const apiUrl =
-        "https://cozy-lunchroom-production.up.railway.app/api/fabric/all";
+      const apiUrl = "http://localhost:3000/api/fabric/all";
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,
