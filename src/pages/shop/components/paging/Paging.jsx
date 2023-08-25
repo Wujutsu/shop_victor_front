@@ -16,7 +16,7 @@ const Paging = ({ filterPage, setFilterPage, filterCategorie }) => {
     const getNbPage = () => {
       const filterQuantityMinToShow = 1;
       const apiUrl =
-        "http://localhost:8080/api/product/all/nbpage/" +
+        "https://mcfabric.netlify.app/api/product/all/nbpage/" +
         filterCategorie +
         "/" +
         filterQuantityMinToShow;

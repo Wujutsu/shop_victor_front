@@ -18,7 +18,7 @@ const GestionDelivery = () => {
 
   useEffect(() => {
     const getAllTypeDelivery = () => {
-      const apiUrl = "http://localhost:8080/api/delivery/all";
+      const apiUrl = "https://mcfabric.netlify.app/api/delivery/all";
 
       axios
         .get(apiUrl)
@@ -50,7 +50,7 @@ const GestionDelivery = () => {
   };
 
   const handleAddNewDelivery = () => {
-    const apiUrl = "http://localhost:8080/api/delivery/add";
+    const apiUrl = "https://mcfabric.netlify.app/api/delivery/add";
     const data = {
       name: newDelivery.name,
       time: newDelivery.time,
@@ -82,7 +82,7 @@ const GestionDelivery = () => {
     );
 
     if (shouldDelete) {
-      const apiUrl = "http://localhost:8080/api/delivery/delete/" + id;
+      const apiUrl = "https://mcfabric.netlify.app/api/delivery/delete/" + id;
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,

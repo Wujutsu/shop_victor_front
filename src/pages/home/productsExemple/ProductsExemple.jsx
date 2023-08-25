@@ -9,7 +9,8 @@ const ProductsExemple = () => {
 
   useEffect(() => {
     const recupProductToShow = () => {
-      const apiUrl = "http://localhost:8080/api/product/all/presentation";
+      const apiUrl =
+        "https://mcfabric.netlify.app/api/product/all/presentation";
 
       axios
         .get(apiUrl)

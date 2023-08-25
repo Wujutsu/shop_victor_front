@@ -26,7 +26,7 @@ const Payment = ({ setIsLoading }) => {
     //Permet de créer l'intention de paiement (ce que doit payer l'utilisateur)
     const createPaymentIntent = () => {
       setStripeClientSecret("");
-      const apiUrl = "http://localhost:8080/api/payment/create";
+      const apiUrl = "https://mcfabric.netlify.app/api/payment/create";
 
       const requestData = {
         amount:

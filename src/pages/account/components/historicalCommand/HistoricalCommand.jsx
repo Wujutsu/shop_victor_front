@@ -16,7 +16,7 @@ const HistoricalCommand = () => {
   useEffect(() => {
     //Récupére les commandes de l'utilisateur connecté
     const getCommandUser = () => {
-      const apiUrl = "http://localhost:8080/api/order/email";
+      const apiUrl = "https://mcfabric.netlify.app/api/order/email";
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,

@@ -17,7 +17,7 @@ const GestionFabric = () => {
     const getAllFabric = () => {
       setIsLoading(true);
 
-      const apiUrl = "http://localhost:8080/api/fabric/all";
+      const apiUrl = "https://mcfabric.netlify.app/api/fabric/all";
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -48,7 +48,7 @@ const GestionFabric = () => {
     );
 
     if (shouldDelete) {
-      const apiUrl = "http://localhost:8080/api/fabric/delete/" + id;
+      const apiUrl = "https://mcfabric.netlify.app/api/fabric/delete/" + id;
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,
