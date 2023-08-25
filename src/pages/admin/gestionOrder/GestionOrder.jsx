@@ -22,7 +22,7 @@ const GestionOrder = () => {
       setIsLoading(true);
 
       const apiUrl =
-        "http://localhost:3000/api/order/all/" + filterState + "/" + filterPage;
+        "http://localhost:8080/api/order/all/" + filterState + "/" + filterPage;
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,

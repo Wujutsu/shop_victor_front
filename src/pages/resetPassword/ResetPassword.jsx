@@ -37,7 +37,7 @@ const ResetPassword = () => {
 
   //Permet de vérifier la validité d'un token
   const verificationTokenExisting = (tokenUrl) => {
-    const apiUrl = "http://localhost:3000/api/user/verif/token/" + tokenUrl;
+    const apiUrl = "http://localhost:8080/api/user/verif/token/" + tokenUrl;
 
     return new Promise((success, failed) => {
       axios.get(apiUrl).then((response) => {
@@ -64,7 +64,7 @@ const ResetPassword = () => {
     }
 
     if (authorizationUpdate) {
-      const apiUrl = "http://localhost:3000/api/user/update/password/token";
+      const apiUrl = "http://localhost:8080/api/user/update/password/token";
       const requestData = {
         password: newPassword,
         token: token,

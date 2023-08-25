@@ -47,7 +47,7 @@ const Shop = () => {
       const filterStock = "empty";
       const filterPrice = "empty";
       const apiUrl =
-        "http://localhost:3000/api/product/all/" +
+        "http://localhost:8080/api/product/all/" +
         filterPage +
         "/" +
         filterCategorie +

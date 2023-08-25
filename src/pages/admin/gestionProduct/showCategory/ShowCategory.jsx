@@ -21,7 +21,7 @@ const ShowCategory = ({ categories, setCategories }) => {
       );
 
       if (verifDoublou === -1) {
-        const apiUrl = "http://localhost:3000/api/categorie/add";
+        const apiUrl = "http://localhost:8080/api/categorie/add";
         const requestData = {
           name: newCategory,
         };
@@ -66,7 +66,7 @@ const ShowCategory = ({ categories, setCategories }) => {
     if (!shouldDelete) {
       return; // Abort the deletion if the user cancels
     } else {
-      const apiUrl = "http://localhost:3000/api/categorie/delete/" + id;
+      const apiUrl = "http://localhost:8080/api/categorie/delete/" + id;
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,

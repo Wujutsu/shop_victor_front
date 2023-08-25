@@ -16,7 +16,7 @@ const Paging = ({ filterPage, setFilterPage, filterCategorie }) => {
     const getNbPage = () => {
       const filterQuantityMinToShow = 0;
       const apiUrl =
-        "http://localhost:3000/api/product/all/nbpage/" +
+        "http://localhost:8080/api/product/all/nbpage/" +
         filterCategorie +
         "/" +
         filterQuantityMinToShow;

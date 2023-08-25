@@ -139,7 +139,7 @@ const AddProduct = ({
     ) {
       setLoadingUpdate(true);
 
-      const apiUrl = "http://localhost:3000/api/product/add";
+      const apiUrl = "http://localhost:8080/api/product/add";
       const requestData = {
         name: productToAdd.name,
         description: productToAdd.description,

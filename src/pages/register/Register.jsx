@@ -20,7 +20,7 @@ const Register = () => {
     } else {
       setDisabledBtn(true);
 
-      const apiUrl = "http://localhost:3000/api/auth/signup";
+      const apiUrl = "http://localhost:8080/api/auth/signup";
       const requestData = {
         email: email,
         password: password,

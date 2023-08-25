@@ -9,7 +9,7 @@ const Filter = ({ filterCategorie, setFilterCategorie, setFilterPage }) => {
 
   useEffect(() => {
     const getAllCategories = () => {
-      const apiUrl = "http://localhost:3000/api/categorie/all";
+      const apiUrl = "http://localhost:8080/api/categorie/all";
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,

@@ -19,7 +19,7 @@ const SuccessPayment = () => {
 
   useEffect(() => {
     const createOrder = () => {
-      const apiUrl = "http://localhost:3000/api/order/add";
+      const apiUrl = "http://localhost:8080/api/order/add";
 
       const requestData = {
         email: email,
