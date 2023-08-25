@@ -107,7 +107,7 @@ const ShowListProduct = ({
   // Permet de supprimer un produit définitivement de la BDD
   const handleDeleteProduct = (id) => {
     if (window.confirm("Êtes-vous sûr de vouloir supprimer le produit ?")) {
-      const apiUrl = "https://mcfabric.netlify.app/api/product/delete/" + id;
+      const apiUrl = "http://localhost:8080/api/product/delete/" + id;
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -156,7 +156,7 @@ const ShowListProduct = ({
     ) {
       setLoadingUpdate(true);
 
-      const apiUrl = "https://mcfabric.netlify.app/api/product/update";
+      const apiUrl = "http://localhost:8080/api/product/update";
       const requestData = {
         id: productToUpdate.id,
         name: productToUpdate.name,
@@ -235,7 +235,6 @@ const ShowListProduct = ({
         }
       });
 
-      console.log(updateProduct);
       setListProduct(updateProduct);
     };
 

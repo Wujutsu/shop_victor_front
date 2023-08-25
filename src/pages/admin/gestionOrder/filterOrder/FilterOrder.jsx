@@ -16,7 +16,7 @@ const FilterOrder = ({
   // Permet de connaitre le nombre de commande en fonction de l'état des commandes (0, 1, 2, 3)
   useEffect(() => {
     const getCountOrdersByState = () => {
-      const apiUrl = "https://mcfabric.netlify.app/api/order/nb";
+      const apiUrl = "http://localhost:8080/api/order/nb";
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,

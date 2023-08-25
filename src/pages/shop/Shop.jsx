@@ -47,7 +47,7 @@ const Shop = () => {
       const filterStock = "empty";
       const filterPrice = "empty";
       const apiUrl =
-        "https://mcfabric.netlify.app/api/product/all/" +
+        "http://localhost:8080/api/product/all/" +
         filterPage +
         "/" +
         filterCategorie +

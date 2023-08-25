@@ -20,7 +20,7 @@ const Register = () => {
     } else {
       setDisabledBtn(true);
 
-      const apiUrl = "https://mcfabric.netlify.app/api/auth/signup";
+      const apiUrl = "http://localhost:8080/api/auth/signup";
       const requestData = {
         email: email,
         password: password,

@@ -9,7 +9,7 @@ const Filter = ({ filterCategorie, setFilterCategorie, setFilterPage }) => {
 
   useEffect(() => {
     const getAllCategories = () => {
-      const apiUrl = "https://mcfabric.netlify.app/api/categorie/all";
+      const apiUrl = "http://localhost:8080/api/categorie/all";
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,

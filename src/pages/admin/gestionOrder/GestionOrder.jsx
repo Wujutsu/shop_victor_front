@@ -22,10 +22,7 @@ const GestionOrder = () => {
       setIsLoading(true);
 
       const apiUrl =
-        "https://mcfabric.netlify.app/api/order/all/" +
-        filterState +
-        "/" +
-        filterPage;
+        "http://localhost:8080/api/order/all/" + filterState + "/" + filterPage;
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -60,8 +57,6 @@ const GestionOrder = () => {
               disabled: false,
             };
           });
-
-          console.log("AFTER => ", updateListOrder);
 
           setListOrder(updateListOrder);
           setIsLoading(false);

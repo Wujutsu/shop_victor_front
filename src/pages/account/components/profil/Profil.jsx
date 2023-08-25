@@ -30,7 +30,7 @@ const Profil = () => {
   const updateInformations = (e) => {
     e.preventDefault();
 
-    const apiUrl = "https://mcfabric.netlify.app/api/user/update/info";
+    const apiUrl = "http://localhost:8080/api/user/update/info";
     const requestData = {
       firstName: valFirstName,
       lastName: valLastName,
@@ -74,7 +74,7 @@ const Profil = () => {
     if (newPassword.length < 8) {
       setErrorPassword("length");
     } else {
-      const apiUrl = "https://mcfabric.netlify.app/api/user/update/password";
+      const apiUrl = "http://localhost:8080/api/user/update/password";
       const requestData = {
         oldPassword: oldPassword,
         newPassword: newPassword,

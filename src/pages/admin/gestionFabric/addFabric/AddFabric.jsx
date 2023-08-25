@@ -50,7 +50,7 @@ const AddFabric = ({
   };
 
   const handleAddFabric = () => {
-    const apiUrl = "https://mcfabric.netlify.app/api/fabric/add";
+    const apiUrl = "http://localhost:8080/api/fabric/add";
     const requestData = {
       name: newFabricName,
       picture: newFabricPicture,

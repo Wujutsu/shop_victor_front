@@ -20,7 +20,7 @@ const SuccessPayment = () => {
 
   useEffect(() => {
     const createOrder = () => {
-      const apiUrl = "https://mcfabric.netlify.app/api/order/add";
+      const apiUrl = "http://localhost:8080/api/order/add";
 
       const requestData = {
         email: email,
