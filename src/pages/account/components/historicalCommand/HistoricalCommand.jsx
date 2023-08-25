@@ -77,7 +77,12 @@ const HistoricalCommand = () => {
               Commandé le: <span>{order.orderDate}</span>
             </div>
             <div className="cost">
-              Prix total: <span>{order.totalAmount}&nbsp;€</span>
+              Prix total:{" "}
+              <span>
+                {parseFloat(order.totalAmount) +
+                  parseFloat(order.delivery.price)}
+                &nbsp;€
+              </span>
             </div>
           </div>
 
