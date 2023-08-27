@@ -2,6 +2,10 @@
   margin-bottom: 0.4rem;
   position: relative;
 
+  select {
+    width: 200px;
+  }
+
   .btn {
     display: flex;
     align-items: center;
@@ -11,21 +15,21 @@
   .filter2 {
     position: absolute;
     top: 0;
-    left: 185px;
+    left: 210px;
   }
   .filter3 {
     position: absolute;
     top: 41px;
-    left: 185px;
+    left: 210px;
   }
   .filter4 {
     position: absolute;
     top: 0px;
-    left: 275px;
+    left: 300px;
   }
   .filter5 {
     position: absolute;
     top: 41px;
-    left: 275px;
+    left: 300px;
   }
 }

@@ -2,15 +2,12 @@ import React, { useContext, useEffect, useState } from "react";
 import "./NavBar.scss";
 import { NavLink } from "react-router-dom";
 import { CgShoppingCart } from "react-icons/cg";
-import { BiUser } from "react-icons/bi";
+import { BiUser, BiShoppingBag } from "react-icons/bi";
 import logo from "../../assets/logo.webp";
 import { UserContext } from "../../contexts/UserContext";
 import ShowInfoPopup from "../showInfoPopup/ShowInfoPopup";
 
 export const NavBar = () => {
-  const getActiveStyle = ({ isActive }) => {
-    return { color: isActive ? "black" : "grey" };
-  };
   const { isLogged, handleLogout, nbCartItem, role } = useContext(UserContext);
   const [accessCartError, setAccessCartError] = useState(false);
   const [cartIncre, setCartIncre] = useState(false);
@@ -48,14 +45,23 @@ export const NavBar = () => {
         Contact
       </NavLink>
 
-      <NavLink
-        to="/shop"
-        style={getActiveStyle}
-        className="shop"
-        aria-label="redirectShop"
-      >
-        Boutique
-      </NavLink>
+      <div className="shop">
+        <div className="shopping">
+          <BiShoppingBag size={22} />
+          <div className="user-options">
+            <NavLink to="/shop" aria-label="redirectShop">
+              <button className="btn btn-perso btn-dark" aria-label="btnShop">
+                Boutique
+              </button>
+            </NavLink>
+            <NavLink to="/fabric" aria-label="redirectFabric">
+              <button className="btn btn-perso btn-dark" aria-label="btnFabric">
+                Nos tissus
+              </button>
+            </NavLink>
+          </div>
+        </div>
+      </div>
 
       {!isLogged ? (
         <div className="position-cart">

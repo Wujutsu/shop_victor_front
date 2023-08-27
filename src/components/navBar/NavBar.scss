@@ -27,12 +27,20 @@ nav {
 
   .shop {
     position: absolute;
-    right: 13.5rem;
+    top: 15px;
+    right: 7rem;
+    background-color: var(--color-light);
+    border-radius: 50%;
+    border: none;
+
+    svg {
+      margin-top: -1px;
+    }
   }
 
   .contact {
     position: absolute;
-    right: 8rem;
+    right: 11.5rem;
   }
 
   .position-login {
@@ -83,7 +91,8 @@ nav {
     }
   }
 
-  .login {
+  .login,
+  .shopping {
     padding: 12px;
     background-color: var(--color-light);
     border-radius: 50%;
@@ -98,7 +107,8 @@ nav {
       transform: scale(1.1, 1.1);
     }
 
-    .user-options {
+    .user-options,
+    .shop-options {
       position: absolute;
       right: 0px;
       top: 46px;
@@ -116,7 +126,8 @@ nav {
       }
     }
 
-    &:hover .user-options {
+    &:hover .user-options,
+    .shop-options {
       display: block;
     }
   }
