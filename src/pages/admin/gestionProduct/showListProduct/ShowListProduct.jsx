@@ -240,7 +240,11 @@ const ShowListProduct = ({
 
     const dataPicture = event.target.files[0];
     if (dataPicture !== undefined) {
-      reader.readAsArrayBuffer(event.target.files[0]);
+      if (dataPicture.size <= 200 * 1024) {
+        reader.readAsArrayBuffer(event.target.files[0]);
+      } else {
+        alert("L'image est trop volumineuse (plus de 200Ko)");
+      }
     }
   };
 

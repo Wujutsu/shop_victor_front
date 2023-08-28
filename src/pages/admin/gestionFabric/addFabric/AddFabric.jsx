@@ -41,7 +41,7 @@ const AddFabric = ({
       if (dataPicture.size <= 200 * 1024) {
         reader.readAsArrayBuffer(event.target.files[0]);
       } else {
-        alert("L'image est trop volumineuse, merci de la convertir en jpg");
+        alert("L'image est trop volumineuse (plus de 200Ko)");
       }
     }
   };
