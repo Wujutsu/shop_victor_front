@@ -14,6 +14,7 @@ import CartPageTwo from "./pages/cart/cartPageTwo/CartPageTwo";
 import SuccessPayment from "./pages/cart/successPayment/SuccessPayment";
 import ResetPassword from "./pages/resetPassword/ResetPassword";
 import ProductDetails from "./pages/productDetails/ProductDetails";
+import Fabric from "./pages/fabric/Fabric";
 
 const Routing = () => {
   const { isLogged, role, nbCartItem, stripeClientSecret } =
@@ -29,6 +30,7 @@ const Routing = () => {
         <Route path="/account" element={isLogged ? <Account /> : <Login />} />
         <Route path="/shop" element={<Shop />} />
         <Route path="/shop/product/:productId" element={<ProductDetails />} />
+        <Route path="/fabric" element={<Fabric />} />
         <Route path="/cart" element={isLogged ? <CartPageOne /> : <Shop />} />
         <Route
           path="/cart/paiement"
