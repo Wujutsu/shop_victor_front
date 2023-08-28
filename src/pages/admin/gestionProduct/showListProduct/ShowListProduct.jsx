@@ -10,6 +10,7 @@ import "./ShowListProduct.scss";
 import ShowInfoPopup from "../../../../components/showInfoPopup/ShowInfoPopup";
 import { GiCardboardBoxClosed } from "react-icons/gi";
 import { BsCloudDownload } from "react-icons/bs";
+import Compressor from "compressorjs";
 
 const ShowListProduct = ({
   listProduct,
@@ -210,41 +211,56 @@ const ShowListProduct = ({
     }
   };
 
-  const handleFileChangeUpload = (event, id) => {
-    const reader = new FileReader();
+  const handleFileChangeUpload = async (event, id) => {
+    const dataPicture = event.target.files[0];
+    if (dataPicture !== undefined) {
+      // Convertir l'image en blob
+      const blob = new Blob([dataPicture], { type: dataPicture.type });
 
-    reader.onload = (event) => {
-      const fileData = event.target.result;
-      const byteArray = new Uint8Array(fileData);
-      const byteArrayAsArray = Array.from(byteArray);
-
-      // Convertir l'array buffer en un objet Blob
-      const blob = new Blob([byteArray], { type: "image/jpeg" });
       // Créer une URL blob à partir de l'objet Blob
       const imgUrl = URL.createObjectURL(blob);
 
-      const updateProduct = listProduct.map((item) => {
-        if (item.id === id) {
-          return {
-            ...item,
-            listPicture: [byteArrayAsArray],
-            urlPicture: imgUrl,
-          };
-        } else {
-          return item;
-        }
-      });
-
-      setListProduct(updateProduct);
-    };
-
-    const dataPicture = event.target.files[0];
-    if (dataPicture !== undefined) {
-      if (dataPicture.size <= 200 * 1024) {
-        reader.readAsArrayBuffer(event.target.files[0]);
-      } else {
-        alert("L'image est trop volumineuse (plus de 200Ko)");
+      // Déterminer la qualité en fonction de la taille de l'image d'origine
+      let targetQuality = 0.7;
+      const imageSizeKb = blob.size / 1024;
+      if (imageSizeKb > 900) {
+        targetQuality = 0.2; // par exemple, pour les images > 900 Ko
+      } else if (imageSizeKb > 150) {
+        targetQuality = 0.5; // par exemple, pour les images > 150 Ko
       }
+
+      // Compression de l'image
+      new Compressor(blob, {
+        quality: 0.7,
+        maxWidth: 800,
+        maxHeight: 800,
+        success: async (resultBlob) => {
+          const compressedByteArray = await resultBlob.arrayBuffer();
+          const compressedByteArrayAsArray = Array.from(
+            new Uint8Array(compressedByteArray)
+          );
+
+          const updateProduct = listProduct.map((item) => {
+            if (item.id === id) {
+              return {
+                ...item,
+                listPicture: [compressedByteArrayAsArray],
+                urlPicture: imgUrl,
+              };
+            } else {
+              return item;
+            }
+          });
+
+          setListProduct(updateProduct);
+        },
+        error: (error) => {
+          console.error(
+            "Erreur lors de la compression de l'image :",
+            error.message
+          );
+        },
+      });
     }
   };
 

@@ -6,6 +6,7 @@ import { AiOutlineCheckCircle } from "react-icons/ai";
 import { UserContext } from "../../../../contexts/UserContext";
 import axios from "axios";
 import { convertDataImg } from "../../../../utils/functionUtils";
+import Compressor from "compressorjs";
 
 const AddFabric = ({
   setShowModalAdd,
@@ -19,30 +20,45 @@ const AddFabric = ({
   const [newFabricName, setNewFabricName] = useState("");
 
   //Sélectionne une image et la convertie en byte[] et renvoie un lien pour afficher l'image
-  const handleFileChangeUpload = (event) => {
-    const reader = new FileReader();
+  const handleFileChangeUpload = async (event) => {
+    const dataPicture = event.target.files[0];
+    if (dataPicture !== undefined) {
+      // Convertir l'image en blob
+      const blob = new Blob([dataPicture], { type: dataPicture.type });
 
-    reader.onload = (event) => {
-      const fileData = event.target.result;
-      const byteArray = new Uint8Array(fileData);
-      const byteArrayAsArray = Array.from(byteArray);
-
-      setNewFabricPicture(byteArrayAsArray);
-
-      // Convertir l'array buffer en un objet Blob
-      const blob = new Blob([byteArray], { type: "image/jpeg" });
       // Créer une URL blob à partir de l'objet Blob
       const imgUrl = URL.createObjectURL(blob);
       setImg(imgUrl);
-    };
 
-    const dataPicture = event.target.files[0];
-    if (dataPicture !== undefined) {
-      if (dataPicture.size <= 200 * 1024) {
-        reader.readAsArrayBuffer(event.target.files[0]);
-      } else {
-        alert("L'image est trop volumineuse (plus de 200Ko)");
+      // Déterminer la qualité en fonction de la taille de l'image d'origine
+      let targetQuality = 0.7;
+      const imageSizeKb = blob.size / 1024;
+      if (imageSizeKb > 900) {
+        targetQuality = 0.2; // par exemple, pour les images > 900 Ko
+      } else if (imageSizeKb > 150) {
+        targetQuality = 0.5; // par exemple, pour les images > 150 Ko
       }
+
+      // Compression de l'image
+      new Compressor(blob, {
+        quality: 0.7,
+        maxWidth: 800,
+        maxHeight: 800,
+        success: async (resultBlob) => {
+          const compressedByteArray = await resultBlob.arrayBuffer();
+          const compressedByteArrayAsArray = Array.from(
+            new Uint8Array(compressedByteArray)
+          );
+
+          setNewFabricPicture(compressedByteArrayAsArray);
+        },
+        error: (error) => {
+          console.error(
+            "Erreur lors de la compression de l'image :",
+            error.message
+          );
+        },
+      });
     }
   };
 

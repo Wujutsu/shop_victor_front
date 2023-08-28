@@ -9,6 +9,7 @@ import { convertDataImg, formatTarif } from "../../../../utils/functionUtils";
 import ShowInfoPopup from "../../../../components/showInfoPopup/ShowInfoPopup";
 import { BiInfinite } from "react-icons/bi";
 import { GiCardboardBoxClosed } from "react-icons/gi";
+import Compressor from "compressorjs";
 
 const AddProduct = ({
   categories,
@@ -37,32 +38,47 @@ const AddProduct = ({
   const [successAdd, setSuccessAdd] = useState("0");
 
   //Sélectionne une image et la convertie en byte[] et renvoie un lien pour afficher l'image
-  const handleFileChangeUpload = (event) => {
-    const reader = new FileReader();
+  const handleFileChangeUpload = async (event) => {
+    const dataPicture = event.target.files[0];
+    if (dataPicture !== undefined) {
+      // Convertir l'image en blob
+      const blob = new Blob([dataPicture], { type: dataPicture.type });
 
-    reader.onload = (event) => {
-      const fileData = event.target.result;
-      const byteArray = new Uint8Array(fileData);
-      const byteArrayAsArray = Array.from(byteArray);
-
-      // Convertir l'array buffer en un objet Blob
-      const blob = new Blob([byteArray], { type: "image/jpeg" });
       // Créer une URL blob à partir de l'objet Blob
       const imgUrl = URL.createObjectURL(blob);
       setImg(imgUrl);
 
-      const updateProduct = { ...newProduct };
-      updateProduct.listPicture = [byteArrayAsArray];
-      setNewProduct(updateProduct);
-    };
-
-    const dataPicture = event.target.files[0];
-    if (dataPicture !== undefined) {
-      if (dataPicture.size <= 200 * 1024) {
-        reader.readAsArrayBuffer(event.target.files[0]);
-      } else {
-        alert("L'image est trop volumineuse (plus de 200Ko)");
+      // Déterminer la qualité en fonction de la taille de l'image d'origine
+      let targetQuality = 0.7;
+      const imageSizeKb = blob.size / 1024;
+      if (imageSizeKb > 900) {
+        targetQuality = 0.2; // par exemple, pour les images > 900 Ko
+      } else if (imageSizeKb > 150) {
+        targetQuality = 0.5; // par exemple, pour les images > 150 Ko
       }
+
+      // Compression de l'image
+      new Compressor(blob, {
+        quality: 0.7,
+        maxWidth: 800,
+        maxHeight: 800,
+        success: async (resultBlob) => {
+          const compressedByteArray = await resultBlob.arrayBuffer();
+          const compressedByteArrayAsArray = Array.from(
+            new Uint8Array(compressedByteArray)
+          );
+
+          const updateProduct = { ...newProduct };
+          updateProduct.listPicture = [compressedByteArrayAsArray];
+          setNewProduct(updateProduct);
+        },
+        error: (error) => {
+          console.error(
+            "Erreur lors de la compression de l'image :",
+            error.message
+          );
+        },
+      });
     }
   };
 
