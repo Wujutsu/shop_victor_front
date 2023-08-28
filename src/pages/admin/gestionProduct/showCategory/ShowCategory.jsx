@@ -15,15 +15,17 @@ const ShowCategory = ({ categories, setCategories }) => {
   //Ajouter une catégorie
   const handleAddCategory = () => {
     if (newCategory !== "") {
+      let newCategoryReplace = newCategory.replace("/", "&");
+
       //On vérifie que la catégorie n'existe pas déjà
       const verifDoublou = categories.findIndex(
-        (cat) => cat.name === newCategory
+        (cat) => cat.name === newCategoryReplace
       );
 
       if (verifDoublou === -1) {
         const apiUrl = "http://localhost:8080/api/categorie/add";
         const requestData = {
-          name: newCategory,
+          name: newCategoryReplace,
         };
         const config = {
           headers: {

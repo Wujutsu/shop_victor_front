@@ -30,15 +30,6 @@ const AddFabric = ({
       const imgUrl = URL.createObjectURL(blob);
       setImg(imgUrl);
 
-      // Déterminer la qualité en fonction de la taille de l'image d'origine
-      let targetQuality = 0.7;
-      const imageSizeKb = blob.size / 1024;
-      if (imageSizeKb > 900) {
-        targetQuality = 0.2; // par exemple, pour les images > 900 Ko
-      } else if (imageSizeKb > 150) {
-        targetQuality = 0.5; // par exemple, pour les images > 150 Ko
-      }
-
       // Compression de l'image
       new Compressor(blob, {
         quality: 0.7,
