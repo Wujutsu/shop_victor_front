@@ -48,7 +48,6 @@ const AddProduct = ({
       const imgUrl = URL.createObjectURL(blob);
       const saveImg = [...img];
       saveImg.push(imgUrl);
-      console.log("tab", saveImg);
       setImg(saveImg);
 
       // Compression de l'image

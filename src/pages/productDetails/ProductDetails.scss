@@ -6,6 +6,30 @@
   padding: 1rem;
 
   .block-img {
+    .list-picture {
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 8px;
+
+      .select-picture {
+        scale: 0.9;
+        cursor: pointer;
+        height: 100%;
+        border-radius: 5px;
+        width: 50px;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center center;
+      }
+
+      .this-pic {
+        scale: 1.1;
+      }
+    }
+
     .picture {
       margin: auto;
       width: 100%;

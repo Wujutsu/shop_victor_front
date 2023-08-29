@@ -21,6 +21,7 @@ const ProductDetails = () => {
   const [inputName, setInputName] = useState("");
   const [nameFabricSelect, setNameFabricSelect] = useState("");
   const [showError, setShowError] = useState("");
+  const [urlPictureToShow, setUrlPictureToShow] = useState("");
 
   useEffect(() => {
     const dataInfoProduct = () => {
@@ -35,9 +36,14 @@ const ProductDetails = () => {
       axios
         .get(apiUrl, config)
         .then(async (response) => {
+          const finalListPicture = response.data.listPicture.map((pic) => {
+            return convertDataImg(pic);
+          });
+          setUrlPictureToShow({ index: 0, url: finalListPicture[0] });
+
           const updateInfoProduct = {
             ...response.data,
-            listPicture: convertDataImg(response.data.listPicture[0]),
+            listPicture: finalListPicture,
             description: response.data.description.replace(/\n/g, "<br>"),
           };
           setProductInfo(updateInfoProduct);
@@ -176,6 +182,19 @@ const ProductDetails = () => {
     }, 800);
   };
 
+  //Change l'image affichée en gros
+  const handleChangePictureToShow = (indexPic) => {
+    const updatedPictures = productInfo.listPicture.map((pictureUrl, index) =>
+      index === indexPic ? { index: indexPic, url: pictureUrl } : null
+    );
+
+    const updatedPictureToShow = updatedPictures.find(
+      (picture) => picture !== null
+    );
+
+    setUrlPictureToShow(updatedPictureToShow);
+  };
+
   return (
     <>
       {!idProductError ? (
@@ -185,8 +204,22 @@ const ProductDetails = () => {
               <div className="col-lg-4 col-md-5 block-img">
                 <div
                   className="picture"
-                  style={{ backgroundImage: `url(${productInfo.listPicture})` }}
+                  style={{ backgroundImage: `url(${urlPictureToShow.url})` }}
                 ></div>
+                <div className="list-picture">
+                  {productInfo.listPicture.map((picture, index) => (
+                    <div
+                      key={index}
+                      className={`select-picture ${
+                        urlPictureToShow.index === index && "this-pic"
+                      }`}
+                      style={{
+                        backgroundImage: `url(${picture})`,
+                      }}
+                      onClick={() => handleChangePictureToShow(index)}
+                    ></div>
+                  ))}
+                </div>
               </div>
 
               <div className="col-lg-8 col-md-7 block-info">
