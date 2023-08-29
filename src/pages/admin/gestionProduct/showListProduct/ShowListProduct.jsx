@@ -153,7 +153,8 @@ const ShowListProduct = ({
       productToUpdate.description !== "" &&
       productToUpdate.price !== "" &&
       !isNaN(productToUpdate.price) &&
-      productToUpdate.categorie !== ""
+      productToUpdate.categorie !== "" &&
+      productToUpdate.listPicture.length > 0
     ) {
       setLoadingUpdate(true);
 
@@ -233,10 +234,20 @@ const ShowListProduct = ({
 
           const updateProduct = listProduct.map((item) => {
             if (item.id === id) {
+              let finalListPicture = item.listPicture;
+              let finalUrlPicture = item.urlPicture;
+              if (finalListPicture.length === 0) {
+                finalListPicture = [compressedByteArrayAsArray];
+                finalUrlPicture = imgUrl;
+              } else {
+                finalListPicture.push(compressedByteArrayAsArray);
+                finalUrlPicture.push(imgUrl);
+              }
+
               return {
                 ...item,
-                listPicture: [compressedByteArrayAsArray],
-                urlPicture: imgUrl,
+                listPicture: finalListPicture,
+                urlPicture: finalUrlPicture,
               };
             } else {
               return item;
@@ -253,6 +264,29 @@ const ShowListProduct = ({
         },
       });
     }
+  };
+
+  const handleDeletePicture = (idItem, index) => {
+    const finalListProduct = listProduct.map((product, id) => {
+      if (idItem === product.id) {
+        const finalListPicture = product.listPicture.filter(
+          (pic, id) => id !== index
+        );
+        const finalUrlPicture = product.urlPicture.filter(
+          (product, id) => id !== index
+        );
+
+        return {
+          ...product,
+          listPicture: finalListPicture,
+          urlPicture: finalUrlPicture,
+        };
+      } else {
+        return { ...product };
+      }
+    });
+
+    setListProduct(finalListProduct);
   };
 
   return (
@@ -337,10 +371,34 @@ const ShowListProduct = ({
                       </div>
                     )}
 
-                    <div
-                      className="picture"
-                      style={{ backgroundImage: `url(${item.urlPicture})` }}
-                    ></div>
+                    {item.isDisabled ? (
+                      <div
+                        className="picture"
+                        style={{
+                          backgroundImage: `url(${item.urlPicture[0]})`,
+                        }}
+                      ></div>
+                    ) : (
+                      <>
+                        {item.urlPicture.map((picture, key) => (
+                          <div
+                            key={key}
+                            className="picture"
+                            style={{
+                              backgroundImage: `url(${picture})`,
+                            }}
+                          >
+                            <button
+                              className="btn btn-danger"
+                              aria-label="supprime image"
+                              onClick={() => handleDeletePicture(item.id, key)}
+                            >
+                              <RxCrossCircled size={25} />
+                            </button>
+                          </div>
+                        ))}
+                      </>
+                    )}
 
                     <div className="price-quantity">
                       <div className="price">

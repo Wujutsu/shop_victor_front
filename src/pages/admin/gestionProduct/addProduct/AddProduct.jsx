@@ -33,7 +33,7 @@ const AddProduct = ({
     optionPersoFabric: false,
     showHomePage: false,
   });
-  const [img, setImg] = useState("");
+  const [img, setImg] = useState([]);
   const [loadingUpdate, setLoadingUpdate] = useState(false);
   const [successAdd, setSuccessAdd] = useState("0");
 
@@ -46,7 +46,10 @@ const AddProduct = ({
 
       // Créer une URL blob à partir de l'objet Blob
       const imgUrl = URL.createObjectURL(blob);
-      setImg(imgUrl);
+      const saveImg = [...img];
+      saveImg.push(imgUrl);
+      console.log("tab", saveImg);
+      setImg(saveImg);
 
       // Compression de l'image
       new Compressor(blob, {
@@ -60,7 +63,11 @@ const AddProduct = ({
           );
 
           const updateProduct = { ...newProduct };
-          updateProduct.listPicture = [compressedByteArrayAsArray];
+          if (updateProduct.listPicture.length === 0) {
+            updateProduct.listPicture = [compressedByteArrayAsArray];
+          } else {
+            updateProduct.listPicture.push(compressedByteArrayAsArray);
+          }
           setNewProduct(updateProduct);
         },
         error: (error) => {
@@ -175,9 +182,14 @@ const AddProduct = ({
         .post(apiUrl, requestData, config)
         .then((response) => {
           const updateListProduct = [...listProduct];
+
+          const finalUrlPicture = response.data.listPicture.map((pic) => {
+            return convertDataImg(pic);
+          });
+
           const dataNewProduct = {
             ...response.data,
-            urlPicture: convertDataImg(response.data.listPicture[0]),
+            urlPicture: finalUrlPicture,
             price: formatTarif(response.data.price),
             isDisabled: true,
           };
@@ -207,6 +219,16 @@ const AddProduct = ({
         setSuccessAdd("0");
       }, 3000);
     }
+  };
+
+  const handleDeletePicture = (index) => {
+    const finalListPicture = newProduct.listPicture.filter(
+      (pic, id) => id !== index
+    );
+    const showListPicture = img.filter((pic, id) => id !== index);
+
+    setNewProduct({ ...newProduct, listPicture: finalListPicture });
+    setImg(showListPicture);
   };
 
   return (
@@ -276,10 +298,26 @@ const AddProduct = ({
                     )}
                   </div>
 
-                  {img !== "" ? (
-                    <div className="box-img">
-                      <img className="img-fluid" src={img} alt={`item add`} />
-                    </div>
+                  {img.length > 0 ? (
+                    <>
+                      {img.map((item, index) => (
+                        <div
+                          key={index}
+                          className="picture"
+                          style={{
+                            backgroundImage: `url(${item})`,
+                          }}
+                        >
+                          <button
+                            className="btn btn-danger"
+                            aria-label="supprime image"
+                            onClick={() => handleDeletePicture(index)}
+                          >
+                            <RxCrossCircled size={25} />
+                          </button>
+                        </div>
+                      ))}
+                    </>
                   ) : (
                     <div className="img-wait"> </div>
                   )}

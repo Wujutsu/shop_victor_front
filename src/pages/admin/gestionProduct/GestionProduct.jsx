@@ -73,10 +73,14 @@ const GestionProduct = () => {
         .get(apiUrl, config)
         .then((response) => {
           const updatedCartItems = response.data.map((item) => {
+            const finalUrlPicture = item.listPicture.map((pic) => {
+              return convertDataImg(pic);
+            });
+
             return {
               ...item,
               price: formatTarif(item.price),
-              urlPicture: convertDataImg(item.listPicture[0]),
+              urlPicture: finalUrlPicture,
               isDisabled: true,
             };
           });

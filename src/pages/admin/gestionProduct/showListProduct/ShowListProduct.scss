@@ -77,6 +77,17 @@
       background-repeat: no-repeat;
       background-size: cover;
       background-position: center center;
+
+      button {
+        position: absolute;
+        right: 0;
+        border-top-right-radius: 0px;
+        border-bottom-right-radius: 0px;
+        border-top-left-radius: 0px;
+        width: 30px;
+        height: 30px;
+        padding: 0;
+      }
     }
 
     .price-quantity {
@@ -175,12 +186,11 @@
       display: flex;
 
       .file-upload {
-        position: absolute;
-        right: 100px;
         z-index: 10;
       }
 
       .picture {
+        margin-top: 40px;
         width: 180px;
       }
 
