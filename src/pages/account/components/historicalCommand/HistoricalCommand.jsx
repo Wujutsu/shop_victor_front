@@ -7,6 +7,9 @@ import {
   formatTimestamp,
   convertDataImg,
 } from "../../../../utils/functionUtils";
+import FacturePdf from "../facturePdf/FacturePdf";
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import { FaFileInvoice } from "react-icons/fa";
 
 const HistoricalCommand = () => {
   const { token } = useContext(UserContext);
@@ -52,6 +55,8 @@ const HistoricalCommand = () => {
             };
           });
 
+          console.log("Kevn => ", updateListOrder);
+
           setListCommand(updateListOrder);
           setIsLoading(false);
         })
@@ -78,10 +83,19 @@ const HistoricalCommand = () => {
 
       {listCommand.map((order, index) => (
         <div className="command" key={index}>
+          <PDFDownloadLink
+            document={<FacturePdf order={order} />}
+            fileName="facture.pdf"
+          >
+            <button className="btn btn-primary btn-facture">
+              <FaFileInvoice size={18} /> Facture
+            </button>
+          </PDFDownloadLink>
+
           <div>
             <div className="state">
-              {order.state === 0 && <>Commande en attente de traitement</>}
-              {order.state === 1 && <>Commande en attente d'envoi</>}
+              {order.state === 0 && <>En attente de traitement</>}
+              {order.state === 1 && <>En attente d'envoi</>}
               {order.state === 2 && <>Commande envoyée</>}
             </div>
 

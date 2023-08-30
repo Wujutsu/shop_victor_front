@@ -63,6 +63,9 @@ const SuccessPayment = () => {
     <div className="payment-success">
       <h1>Paiement réussi !</h1>
       <p>Merci pour votre achat.</p>
+      <div className="info">
+        (Facture disponible dans votre espace personnel.)
+      </div>
       <div>
         <img src={logo} alt="logo" width={120} />
       </div>
