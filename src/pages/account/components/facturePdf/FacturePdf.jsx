@@ -164,7 +164,7 @@ const FacturePdf = ({ order }) => {
                 </View>
                 <View style={styles.tableCell}>
                   <Text style={styles.textRight}>
-                    {parseFloat(product.price * product.quantity)} €
+                    {parseFloat(product.price * product.quantity).toFixed(2)} €
                   </Text>
                 </View>
               </View>
