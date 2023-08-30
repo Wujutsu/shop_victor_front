@@ -29,14 +29,26 @@ const HistoricalCommand = () => {
         .then((response) => {
           //Permet de formatter les infos
           const updateListOrder = response.data.map((order) => {
-            const updateListProduct = order.productList.map((product) => {
-              return { ...product, picture: convertDataImg(product.picture) };
+            const updateProductList = order.productList.map((product) => {
+              let updateOptionFabric = null;
+              if (product.optionFabric !== null) {
+                updateOptionFabric = {
+                  ...product.optionFabric,
+                  picture: convertDataImg(product.optionFabric.picture),
+                };
+              }
+
+              return {
+                ...product,
+                picture: convertDataImg(product.picture),
+                optionFabric: updateOptionFabric,
+              };
             });
 
             return {
               ...order,
               orderDate: formatTimestamp(order.orderDate),
-              productList: updateListProduct,
+              productList: updateProductList,
             };
           });
 
@@ -88,7 +100,7 @@ const HistoricalCommand = () => {
 
           <div className="row">
             {order.productList.map((product, key) => (
-              <div key={key} className="col-xl-6">
+              <div key={key} className="col-xl-12">
                 <div className="show-product">
                   <div
                     className="picture"
@@ -96,13 +108,28 @@ const HistoricalCommand = () => {
                   ></div>
 
                   <div className="detail">
-                    <div className="info">{product.name}</div>
                     <div className="info">
-                      Quantité: <span>{product.quantity}</span>
+                      {product.name} <span>(x{product.quantity})</span>
                     </div>
                     <div className="info">
                       Prix: <span>{product.price}&nbsp;€</span>
                     </div>
+                    {product.optionName !== null && (
+                      <div className="info">
+                        Prénom: <span>{product.optionName}</span>
+                      </div>
+                    )}
+                    {product.optionFabric !== null && (
+                      <div className="option-fabric">
+                        <div
+                          className="picture-fabric"
+                          style={{
+                            backgroundImage: `url(${product.optionFabric.picture})`,
+                          }}
+                        ></div>
+                        <div>{product.optionFabric.name}</div>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>

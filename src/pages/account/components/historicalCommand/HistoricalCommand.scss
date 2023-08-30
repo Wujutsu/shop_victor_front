@@ -34,8 +34,12 @@
 
       .detail {
         position: absolute;
-        top: 10px;
+        top: 0;
         left: 90px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: 100%;
       }
     }
 
@@ -48,6 +52,23 @@
 
       span {
         font-weight: normal;
+      }
+    }
+
+    .option-fabric {
+      display: flex;
+      align-items: center;
+      justify-content: left;
+      gap: 5px;
+      font-size: 0.8rem;
+
+      .picture-fabric {
+        width: 20px;
+        height: 20px;
+        border-radius: 50px;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center center;
       }
     }
   }
