@@ -13,7 +13,7 @@
     .picture {
       width: 100%;
       margin: auto;
-      height: 270px;
+      height: 340px;
       position: relative;
       background-repeat: no-repeat;
       background-size: cover;
@@ -21,6 +21,14 @@
       border-top-left-radius: 10px;
       border-top-right-radius: 10px;
       cursor: pointer;
+
+      @media screen and (max-width: 1200px) {
+        height: 300px;
+      }
+
+      @media screen and (max-width: 768px) {
+        height: 340px;
+      }
 
       &:hover .show-product {
         background-color: rgba($color: #000000, $alpha: 0.3);
