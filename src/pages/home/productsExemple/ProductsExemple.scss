@@ -2,18 +2,39 @@
   padding: 50px 0;
 
   .product-box {
-    height: 325px;
+    height: 400px;
     margin-bottom: 1.5rem;
 
+    @media screen and (max-width: 1400px) {
+      height: 350px;
+    }
+
+    @media screen and (max-width: 1200px) {
+      height: 300px;
+    }
+
     @media screen and (max-width: 992px) {
-      height: 250px;
+      height: 220px;
+    }
+
+    @media screen and (max-width: 768px) {
+      height: 360px;
+      padding: 0 30px;
+    }
+
+    @media screen and (max-width: 637px) {
+      padding: 0 0px;
     }
 
     @media screen and (max-width: 576px) {
-      padding: 0 40px;
+      padding: 0 130px;
     }
 
-    @media screen and (max-width: 400px) {
+    @media screen and (max-width: 540px) {
+      padding: 0 110px;
+    }
+
+    @media screen and (max-width: 510px) {
       padding: 0 0px;
     }
 
@@ -47,9 +68,30 @@
         .text {
           position: absolute;
           bottom: 1.1rem;
-          font-size: 1.5rem;
+          font-size: 1.4rem;
           text-shadow: 0 0 10px rgb(174, 173, 173);
           color: white;
+          text-align: center;
+
+          @media screen and (max-width: 1400px) {
+            font-size: 1.3rem;
+          }
+
+          @media screen and (max-width: 1200px) {
+            font-size: 1.1rem;
+          }
+
+          @media screen and (max-width: 992px) {
+            font-size: 1rem;
+          }
+
+          @media screen and (max-width: 768px) {
+            font-size: 1.3rem;
+          }
+
+          @media screen and (max-width: 510px) {
+            font-size: 1.4rem;
+          }
         }
       }
     }
