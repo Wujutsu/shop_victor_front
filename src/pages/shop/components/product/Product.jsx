@@ -4,7 +4,6 @@ import { UserContext } from "../../../../contexts/UserContext";
 import { convertDataImg } from "../../../../utils/functionUtils";
 import { NavLink } from "react-router-dom";
 import { CgShoppingCart } from "react-icons/cg";
-import { BsFillEyeFill } from "react-icons/bs";
 
 const Product = ({ info }) => {
   const [img, setImg] = useState("");
@@ -39,16 +38,12 @@ const Product = ({ info }) => {
           <div
             className="picture"
             style={{ backgroundImage: `url(${img})` }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundImage = `url(${imgBis})`;
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundImage = `url(${img})`;
-            }}
+          ></div>
+          <div
+            className="pictureBis"
+            style={{ backgroundImage: `url(${imgBis})` }}
           >
-            <div className="show-product">
-              <BsFillEyeFill size={40} />
-            </div>
+            <div className="show-product"></div>
           </div>
         </NavLink>
         <div className="infos">
