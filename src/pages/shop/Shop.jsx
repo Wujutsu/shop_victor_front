@@ -85,12 +85,12 @@ const Shop = () => {
     };
 
     const urlContentParam = paramUrlUpdate();
-    if (!urlContentParam) {
+    if (urlContentParam === undefined) {
       getAllProductsWithStock();
     }
 
     //eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [token, filterPage, filterCategorie]);
+  }, [filterPage, filterCategorie]);
 
   return (
     <div className="page-shop">

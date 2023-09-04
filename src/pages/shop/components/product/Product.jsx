@@ -8,11 +8,18 @@ import { BsFillEyeFill } from "react-icons/bs";
 
 const Product = ({ info }) => {
   const [img, setImg] = useState("");
+  const [imgBis, setImgBis] = useState("");
   const { handleAddCartItem } = useContext(UserContext);
   const [animationAddCart, setAnimationAddCart] = useState(false);
 
   useEffect(() => {
-    setImg(convertDataImg(info.listPicture[0]));
+    const img1 = convertDataImg(info.listPicture[0]);
+    setImg(img1);
+    if (info.listPicture[1]) {
+      setImgBis(convertDataImg(info.listPicture[1]));
+    } else {
+      setImgBis(img1);
+    }
   }, [info.listPicture]);
 
   const handleAnimationAddCart = () => {
@@ -29,7 +36,16 @@ const Product = ({ info }) => {
           to={`/shop/product/${info.id}`}
           aria-label="redirectInfoProduct"
         >
-          <div className="picture" style={{ backgroundImage: `url(${img})` }}>
+          <div
+            className="picture"
+            style={{ backgroundImage: `url(${img})` }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundImage = `url(${imgBis})`;
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundImage = `url(${img})`;
+            }}
+          >
             <div className="show-product">
               <BsFillEyeFill size={40} />
             </div>
