@@ -6,11 +6,13 @@ import ProductsExemple from "./productsExemple/ProductsExemple";
 import FormContact from "./formContact/FormContact";
 import { useLocation } from "react-router-dom";
 import Footer from "./footer/Footer";
+import About from "./about/About";
 
 export const Home = () => {
   const location = useLocation();
   const [recupParamUrl, setRecupParamUrl] = useState(false);
 
+  //Permet de rediriger sur formulaire contact
   useEffect(() => {
     const redirectBottomPageForAccesFormContact = () => {
       const urlSearchParams = new URLSearchParams(location.search);
@@ -49,6 +51,7 @@ export const Home = () => {
     <div className="mc-fabric-home-page">
       <Hero />
       <ProductsExemple />
+      <About />
       <FormContact />
       <Footer />
     </div>

@@ -55,8 +55,6 @@ const HistoricalCommand = () => {
             };
           });
 
-          console.log("Kevn => ", updateListOrder);
-
           setListCommand(updateListOrder);
           setIsLoading(false);
         })
