@@ -1,22 +1,22 @@
 import React from "react";
 import "./About.scss";
-import margaux from "../../../assets/margaux.jpg";
+import pictureMCFabric from "../../../assets/pictureMCFabric.png";
 
 const About = () => {
   return (
     <div className="about">
       <div className="row">
-        <div className="col-md-4 ">
+        <div className="col-lg-4 col-md-5">
           <div className="box-picture">
             <div
               className="picture"
               style={{
-                backgroundImage: `url(${margaux})`,
+                backgroundImage: `url(${pictureMCFabric})`,
               }}
             ></div>
           </div>
         </div>
-        <div className="col-md-8">
+        <div className="col-lg-8 col-md-7">
           <div className="info">
             <div className="title">À propos de moi:</div>
 

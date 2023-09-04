@@ -18,6 +18,7 @@ const ProductsExemple = () => {
             return {
               ...prod,
               picture: convertDataImg(prod.listPicture[0]),
+              pictureBis: convertDataImg(prod.listPicture[1]),
             };
           });
           setListProducts(updateListProducts);
@@ -52,7 +53,7 @@ const ProductsExemple = () => {
                         e.currentTarget.style.backgroundImage = `linear-gradient(
                     rgba(0, 0, 0, 0.1),
                     rgba(0, 0, 0, 0.1)
-                  ), url(${product.picture})`;
+                  ), url(${product.pictureBis})`;
                       }}
                       onMouseLeave={(e) => {
                         e.currentTarget.style.backgroundImage = `linear-gradient(

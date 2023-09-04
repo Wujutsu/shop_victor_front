@@ -10,7 +10,8 @@
   padding-right: 2rem;
 
   .box-picture {
-    height: calc(100% - 5px);
+    height: 100%;
+    padding-right: 1rem;
 
     .picture {
       width: 100%;
@@ -25,22 +26,12 @@
 
     @media screen and (max-width: 992px) {
       .picture {
-        height: 300px;
       }
     }
 
     @media screen and (max-width: 768px) {
       .picture {
-        margin-bottom: 2rem;
-        width: 350px;
-        height: 300px;
-      }
-    }
-
-    @media screen and (max-width: 576px) {
-      .picture {
-        width: 100%;
-        height: 320px;
+        display: none;
       }
     }
   }
@@ -48,11 +39,12 @@
   .info {
     .title {
       font-weight: bold;
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       margin-bottom: 1rem;
     }
 
     .text {
+      font-size: 0.9rem;
       line-height: 1.6rem;
     }
 
