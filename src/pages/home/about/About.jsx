@@ -31,7 +31,7 @@ const About = () => {
               </div>
             </div>
 
-            <div className="title mt-4">Pourquoi choisir M&C fabric ?</div>
+            <div className="title mt-5">Pourquoi choisir M&C fabric ?</div>
             <div className="text">
               Les créations sont faites à la main, soignées et avec des
               finitions raffinées. Nos conceptions sont personnalisables grâce à
